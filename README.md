@@ -1,5 +1,4 @@
 cellsociety
 ===========
-
-Dumb changes.
+ changes.
 Empty repository for CellSociety project

@@ -1,15 +1,10 @@
 package cellsociety_team08;
 
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 
-public class State extends Rectangle {
-
-	private double myWidth;
-	private double myHeight;
-	private Color myColor;
+public class State {
 
 	public String myName;
+	public int myIndex;
 
 	/*
 	 * Bounds is the maximum size the shape can fit into For a rectangle, this
@@ -17,31 +12,9 @@ public class State extends Rectangle {
 	 * indicate its diameter
 	 */
 
-	public State(String name, Color color) {
+	public State(String name, int index) {
 		myName = name;
-		myColor = color;
-		
-		super.setFill(myColor);
-	}
-	
-	public State(String name, Color color, int width, int height, int cols, int rows) {
-		myWidth = (double) width / cols;
-		myHeight = (double) height / rows;
-		myColor = color;
-		myName = name;
-
-		super.setWidth(myWidth);
-		super.setHeight(myHeight);
-		super.setFill(myColor);
-	}
-
-	public void setColor(Color color) {
-		myColor = color;
-		super.setFill(myColor);
-	}
-
-	public Color getColor() {
-		return myColor;
+		myIndex = index;
 	}
 
 	public boolean equals(State other) {

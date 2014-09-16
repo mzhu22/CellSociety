@@ -1,7 +1,7 @@
 package cellsociety_team08;
 
 
-public abstract class RuleSet {
+public abstract class  RuleSet {
 	
 	private String myDescription;
 	public static State[] myPossibleStates;
@@ -15,6 +15,8 @@ public abstract class RuleSet {
 		return myDescription;
 	}
 	
-	public abstract State getNext(Site[][] neighborhood);
+	public abstract State getState(Cell[][] neighborhood);
+	
+	public abstract int[] getLocation(Cell[][] neighborhood);
 	
 }

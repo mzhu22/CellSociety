@@ -5,6 +5,7 @@ public class State {
 
 	public String myName;
 	public int myIndex;
+	private Object[] myParams;
 
 	/*
 	 * Bounds is the maximum size the shape can fit into For a rectangle, this
@@ -12,13 +13,22 @@ public class State {
 	 * indicate its diameter
 	 */
 
-	public State(String name, int index) {
+	public State(String name, int index, Object[] params) {
 		myName = name;
 		myIndex = index;
+		myParams = params;
 	}
 
 	public boolean equals(State other) {
-		return (myName.equals(other.myName));
+		return (myIndex == other.myIndex);
+	}
+	
+	public Object[] getParams() {
+		return myParams;
+	}
+	
+	public void setParams(Object[] o) {
+		myParams = o;
 	}
 
 }

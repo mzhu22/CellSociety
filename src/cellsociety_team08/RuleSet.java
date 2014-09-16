@@ -11,7 +11,7 @@ public abstract class  RuleSet {
 		myPossibleStates = possibleStates;
 	}
 	
-	public String getDescription() {
+	public String getDescription(Object[] params) {
 		return myDescription;
 	}
 	

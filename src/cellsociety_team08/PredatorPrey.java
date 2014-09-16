@@ -5,13 +5,13 @@ public class PredatorPrey extends RuleSet {
 	private static final String PREDATOR_PREY = "Predator Prey";
 	
 	private static final State[] possibleStates = new State[] {
-		new State("Water", 0), // index 0
-		new State("Fish", 1), // index 1
-		new State("Shark", 2) // index 2
+		new State("Fish", 0, null), // index 0
+		new State("Shark", 1, null) // index 1
 	};
 	
-	public PredatorPrey() {
+	public PredatorPrey(Object[] params) {
 		super(PREDATOR_PREY, possibleStates);
+		// do stuff with parameters
 	}
 
 	@Override

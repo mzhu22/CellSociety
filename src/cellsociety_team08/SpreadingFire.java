@@ -6,9 +6,8 @@ public class SpreadingFire extends RuleSet {
 	private static final String SPREADING_FIRE = "Spreading of Fire";
 	
 	private static final State[] possibleStates = new State[] {
-		new State("Empty", 0), // index 0
-		new State("Tree", 1), // index 1
-		new State("Burning", 2) // index 2
+		new State("Tree", 0, null), // index 1
+		new State("Burning", 1, null) // index 2
 	};
 
 	public SpreadingFire() {
@@ -18,28 +17,31 @@ public class SpreadingFire extends RuleSet {
 	@Override
 	public State getState(Cell[][] neighborhood) {
 		
-		State currState = neighborhood[1][1].getState();
+		Cell curr = neighborhood[1][1];
 		Cell north = neighborhood[0][1];
 		Cell south = neighborhood[2][1];
 		Cell west = neighborhood[1][0];
 		Cell east = neighborhood[1][2];
 		
-		// If it's already burning or empty, it will be empty on the next iteration
-		if (!currState.equals(possibleStates[1])) return possibleStates[0];
+		// If it's already burning, it will be empty on the next iteration
+		if (curr.getState().equals(possibleStates[1])) {
+			curr.isEmpty = true;
+			return null;
+		}
 		
-		if (isBurning(north) || isBurning(south) || isBurning(west) || isBurning(east)) return possibleStates[2];
+		if (isBurning(north) || isBurning(south) || isBurning(west) || isBurning(east)) return possibleStates[1];
 		
-		return possibleStates[1];
+		return possibleStates[0];
+	}
+	
+	private boolean isBurning(Cell cell) {
+		if (cell == null) return false;
+		return (possibleStates[1].equals(cell.getState()));
 	}
 	
 	@Override
 	public int[] getLocation(Cell[][] neighborhood) {
 		return neighborhood[1][1].getLocation();
-	}
-	
-	private boolean isBurning(Cell cell) {
-		if (cell == null) return false;
-		return (possibleStates[2].equals(cell.getState()));
 	}
 
 }

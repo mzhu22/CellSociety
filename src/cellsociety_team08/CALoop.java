@@ -16,6 +16,21 @@ import javafx.util.Duration;
 
 
 public class CALoop {
+	
+	/* 
+	 * These constants constants are set when the XML file is read, specifying the size of the CA sim board.
+	 * They will be used to determine the size of each Cell in the grid.
+	 */
+	
+	//In pixels
+	private int windowWidth;
+	private int windowHeight;
+	
+	//In number of cells
+	private int gridHeight;
+	private int gridWidth;
+	
+	
 	/**
 	 *  Function to do each game frame
 	 */
@@ -37,6 +52,12 @@ public class CALoop {
 	 * Create the game's scene
 	 */
 	public Scene init (Stage s, int width, int height) {
+		windowHeight = height-65;
+		windowWidth = width;
+		
+		gridHeight = 14;
+		gridWidth = 14;
+		
 		// Create a scene graph to organize the scene
 		VBox root = new VBox();
 		GridPane grid = new GridPane();
@@ -60,13 +81,16 @@ public class CALoop {
 		menuHelp.getItems().addAll(help);
 	
 		menu.getMenus().addAll(menuFile, menuSimulation, menuHelp);
-		grid.setVgap(10);
-		grid.setHgap(10);
+		grid.setVgap(1);
+		grid.setHgap(1);
+				
+		double cellHeight = windowWidth/gridWidth; 
+		double cellWidth = windowHeight/gridHeight;
 		
 		grid.setGridLinesVisible(true);
-		for(int i=0; i<5; i++){
-			for(int j=0; j<5; j++){
-				Rectangle cell = new Rectangle(80, 80, Color.RED);
+		for(int i=0; i<gridWidth; i++){
+			for(int j=0; j<gridHeight; j++){
+				Rectangle cell = new Rectangle(cellHeight, cellWidth, Color.RED);
 				grid.add(cell, i, j);
 			}
 		}

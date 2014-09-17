@@ -7,7 +7,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /***
@@ -16,44 +15,50 @@ import org.w3c.dom.NodeList;
  *
  */
 public class XMLReader {
-	
-	private int rows;
-	private int columns;
-	
+		
 	public XMLReader(){
 		
 	}
 	
-	public void read(File XMLFile){
+	public CASettings read(File XMLFile){
 		
-		try{
+		try
+		{
+			DocumentBuilderFactory dbfactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder dBuilder = dbfactory.newDocumentBuilder();
+			Document initDoc = dBuilder.parse(XMLFile);
 			
-		
-		DocumentBuilderFactory dbfactory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder dBuilder = dbfactory.newDocumentBuilder();
-		Document initDoc = dBuilder.parse(XMLFile);
-		
-		initDoc.getDocumentElement().normalize();
-		System.out.println("Root element :" + initDoc.getDocumentElement().getNodeName());
-		
-		NodeList nList = initDoc.getElementsByTagName("grid");
-		
-		System.out.println("-----------------------");
-		
-		for(int i=0; i<nList.getLength(); i++){
-			Node nNode = nList.item(i);
-			Element elem = (Element) nNode;
+			initDoc.getDocumentElement().normalize();
 			
-			rows = Integer.parseInt(elem.getAttribute("rows"));
-			columns = Integer.parseInt(elem.getAttribute("columns"));
+			String description = initDoc.getDocumentElement().getAttribute("type");
 			
-			System.out.println(rows);
-		
-			}
+			NodeList nList = initDoc.getElementsByTagName("grid");
+						
+			Element elem = (Element) nList.item(0);
+			
+			int rows = Integer.parseInt(elem.getAttribute("rows"));
+			int columns = Integer.parseInt(elem.getAttribute("columns"));
+			String gridString = elem.getFirstChild().getNodeValue();
+			
+			String[] tempArray = gridString.split("\n");
+			String[][] grid = new String[columns][rows];
+			
+			int i=-1;
+			for(String s: tempArray){
+				s = s.trim();
+				if(s.length()>0){
+					i++;
+					String[] row = s.split(" ");
+					grid[i] = row;
+				}
+			}				
+			
+			CASettings settings = new CASettings(description, rows, columns, grid);
+			return settings;
 		}
 		catch (Exception e){
 			e.printStackTrace();
 		}
-		
+		return null;
 	}
 }

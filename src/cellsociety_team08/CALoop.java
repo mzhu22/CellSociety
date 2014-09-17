@@ -23,12 +23,12 @@ public class CALoop {
 	 */
 	
 	//In pixels
-	private int windowWidth;
-	private int windowHeight;
+	private int myWindowHeight;
+	private int myWindowWidth;
 	
 	//In number of cells
-	private int gridRows;
-	private int gridCols;
+	private int myGridRows;
+	private int myGridColumns;
 	
 	
 	/**
@@ -51,40 +51,39 @@ public class CALoop {
 	/**
 	 * Create the game's scene
 	 */
-	public Scene init (Stage s, int width, int height) {
-		windowHeight = height-65;
-		windowWidth = width;
+	public GridPane initGrid (int width, int height, int gridRows, int gridCols, String[][] gridArray) {
+		myWindowWidth = width;
+		myWindowHeight = height-65;
 		
-		gridRows = 14;
-		gridCols = 14;
+		myGridRows = gridRows;
+		myGridColumns = gridCols;
+		
+		System.out.println("width: " + myWindowWidth + " height: " + myWindowHeight);
+		System.out.println("rows: " + myGridRows + " colums: " + myGridColumns);
 		
 		// Create a scene graph to organize the scene
-		VBox root = new VBox();
 		GridPane grid = new GridPane();
 		grid.setVgap(1);
 		grid.setHgap(1);
-		// Create a place to see the shapes
-		Scene scene = new Scene(root, width, height, Color.WHITE);
 		// Make some shapes and set their properties
+						
+		addCellsToGridPane(grid, gridArray);
 		
-		MenuBar menu = makeMenu();
-				
-		addCellsToGridPane(grid);
-		
-		root.getChildren().add(menu);
-		root.getChildren().add(grid);
-		return scene;
+		return grid;
 	}
 
-	private void addCellsToGridPane(GridPane grid) {
-		double cellHeight = windowWidth/gridCols; 
-		double cellWidth = windowHeight/gridRows;
+	private void addCellsToGridPane(GridPane grid, String[][] gridArray) {
+		double cellHeight = myWindowWidth/myGridColumns; 
+		double cellWidth = myWindowHeight/myGridRows;
+		System.out.println(cellHeight + " : " + cellWidth);
 		
 		grid.setGridLinesVisible(true);
-		for(int i=0; i<gridCols; i++){
-			for(int j=0; j<gridRows; j++){
-				Rectangle cell = new Rectangle(cellHeight, cellWidth, Color.RED);
-				grid.add(cell, i, j);
+		for(int i=0; i<myGridColumns; i++){
+			for(int j=0; j<myGridRows; j++){
+				if(gridArray[i][j].equals("0")){
+					Rectangle cell = new Rectangle(cellHeight, cellWidth, Color.RED);
+					grid.add(cell, i, j);
+				}
 			}
 		}
 	}

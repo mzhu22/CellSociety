@@ -23,6 +23,8 @@ public class Main extends Application {
 	
 	private Stage myStage;
 	private CALoop myLoop;
+	private CASettings mySettings;
+	private VBox myRoot;
 	
 	private FileChooser fileChooser = new FileChooser();
 	private File XMLFile;
@@ -36,19 +38,15 @@ public class Main extends Application {
 				
 		//Create a VBox to place the menu, then the grid in a vertical column. 
 		//Create the GridPane used to hold all rectangular cells
-		VBox root = new VBox();
-		GridPane grid = new GridPane();
-		grid.setVgap(1);
-		grid.setHgap(1);
+		myRoot = new VBox();
 		
 		//Initialize Scene
-		Scene scene = new Scene(root, WIDTH, HEIGHT, Color.WHITE);
+		Scene scene = new Scene(myRoot, WIDTH, HEIGHT, Color.WHITE);
 
 		//Initialize the menu
 		MenuBar menu = makeMenu();
 						
-		root.getChildren().add(grid);
-		root.getChildren().add(menu);
+		myRoot.getChildren().add(menu);
 		
 		myStage.setScene(scene);
 		myStage.show();
@@ -71,18 +69,20 @@ public class Main extends Application {
 		Menu menuSimulation = new Menu("Simulation");
 		Menu menuHelp = new Menu("Help");
 		
+		//This allows you to load XML files. A class XMLReader handles this task, returns a CASettings object containing 
 		MenuItem open = new MenuItem("Open");
 		open.setOnAction(new EventHandler<ActionEvent>(){
-
 			@Override
 			public void handle(ActionEvent press) {
 				XMLFile = fileChooser.showOpenDialog(myStage);
 				XMLReader test = new XMLReader();
-				test.read(XMLFile);
+				mySettings = test.read(XMLFile);
+				GridPane grid = myLoop.initGrid(WIDTH, HEIGHT, mySettings.getRows(), mySettings.getColumns(), mySettings.getGrid());
+				myRoot.getChildren().add(grid);
 			}
 			
 		});
-		
+				
 		MenuItem exit = new MenuItem("Exit");
 		menuFile.getItems().addAll(open, exit);
 		

@@ -16,6 +16,8 @@ import javafx.util.Duration;
 
 
 public class CALoop {
+	public static final int MENU_HEIGHT = 105;
+	public static final int GRID_BORDER_WIDTH = 1;
 	
 	/* 
 	 * These constants constants are set when the XML file is read, specifying the size of the CA sim board.
@@ -23,12 +25,12 @@ public class CALoop {
 	 */
 	
 	//In pixels
-	private int myWindowHeight;
-	private int myWindowWidth;
+	private int myHeight;
+	private int myWidth;
 	
 	//In number of cells
-	private int myGridRows;
-	private int myGridColumns;
+	private int myRows;
+	private int myCols;
 	
 	
 	/**
@@ -52,19 +54,16 @@ public class CALoop {
 	 * Create the game's scene
 	 */
 	public GridPane initGrid (int width, int height, int gridRows, int gridCols, String[][] gridArray) {
-		myWindowWidth = width;
-		myWindowHeight = height-65;
+		myWidth = width;
+		myHeight = height-MENU_HEIGHT;
 		
-		myGridRows = gridRows;
-		myGridColumns = gridCols;
-		
-		System.out.println("width: " + myWindowWidth + " height: " + myWindowHeight);
-		System.out.println("rows: " + myGridRows + " colums: " + myGridColumns);
-		
+		myRows = gridRows;
+		myCols = gridCols;
+				
 		// Create a scene graph to organize the scene
 		GridPane grid = new GridPane();
-		grid.setVgap(1);
-		grid.setHgap(1);
+		grid.setVgap(GRID_BORDER_WIDTH);
+		grid.setHgap(GRID_BORDER_WIDTH);
 		// Make some shapes and set their properties
 						
 		addCellsToGridPane(grid, gridArray);
@@ -73,39 +72,22 @@ public class CALoop {
 	}
 
 	private void addCellsToGridPane(GridPane grid, String[][] gridArray) {
-		double cellHeight = myWindowWidth/myGridColumns; 
-		double cellWidth = myWindowHeight/myGridRows;
-		System.out.println(cellHeight + " : " + cellWidth);
+		double cellHeight = myWidth/myCols; 
+		double cellWidth = myHeight/myRows;
 		
 		grid.setGridLinesVisible(true);
-		for(int i=0; i<myGridColumns; i++){
-			for(int j=0; j<myGridRows; j++){
+		for(int i=0; i<myCols; i++){
+			for(int j=0; j<myRows; j++){
 				if(gridArray[i][j].equals("0")){
 					Rectangle cell = new Rectangle(cellHeight, cellWidth, Color.RED);
 					grid.add(cell, i, j);
 				}
+				else{
+					Rectangle patch = new Rectangle(cellHeight, cellWidth, Color.WHITE);
+					grid.add(patch, i, j);
+				}
 			}
 		}
-	}
-
-	private MenuBar makeMenu() {
-		MenuBar menu = 	new MenuBar();
-		Menu menuFile = new Menu("File");
-		Menu menuSimulation = new Menu("Simulation");
-		Menu menuHelp = new Menu("Help");
-		
-		MenuItem open = new MenuItem("Open");
-		MenuItem exit = new MenuItem("Exit");
-		menuFile.getItems().addAll(open, exit);
-		
-		MenuItem playPause = new MenuItem("Play/Pause");
-		menuSimulation.getItems().addAll(playPause);
-		
-		MenuItem help = new MenuItem("Help");
-		menuHelp.getItems().addAll(help);
-	
-		menu.getMenus().addAll(menuFile, menuSimulation, menuHelp);
-		return menu;
 	}
 
 	/**

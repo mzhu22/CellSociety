@@ -31,7 +31,8 @@ public class CALoop {
 	public static final int MENU_HEIGHT = 105;
 	public static final int GRID_BORDER_WIDTH = 1;
 	
-	private GridPane myGrid;
+	private Grid myGrid;
+	private GridPane myGridPane;
 	private List<Rectangle> myCells = new ArrayList<>();
 		
 	/* 
@@ -98,14 +99,14 @@ public class CALoop {
 		myCols = gridCols;
 				
 		// Create a scene graph to organize the scene
-		myGrid = new GridPane();
-		myGrid.setVgap(GRID_BORDER_WIDTH);
-		myGrid.setHgap(GRID_BORDER_WIDTH);
+		myGridPane = new GridPane();
+		myGridPane.setVgap(GRID_BORDER_WIDTH);
+		myGridPane.setHgap(GRID_BORDER_WIDTH);
 		// Make some shapes and set their properties
 						
 		addCellsToGridPane(gridArray);
 		
-		return myGrid;
+		return myGridPane;
 	}
 
 	private GridPane addCellsToGridPane(String[][] gridArray) {
@@ -114,30 +115,31 @@ public class CALoop {
 		
 		myCells = new ArrayList<>();
 		
-		myGrid.setGridLinesVisible(true);
+		myGridPane.setGridLinesVisible(true);
 		for(int i=0; i<myRows; i++){
 			for(int j=0; j<myCols; j++){
 				if(gridArray[i][j].equals("0")){
 					Rectangle cell = new Rectangle(cellWidth, cellHeight, Color.RED);
-					myGrid.add(cell, j, i);
+					myGridPane.add(cell, j, i);
 					myCells.add(cell);
 				}
 				else{
 					Rectangle patch = new Rectangle(cellWidth, cellHeight, Color.WHITE);
-					myGrid.add(patch, j, i);
+					myGridPane.add(patch, j, i);
 					myCells.add(patch);
 				}
 			}
 		}
-		return myGrid;
+		return myGridPane;
 	}
 	
 	public GridPane readXML(File XMLFile) {
-		XMLReader test = new XMLReader();
-		CASettings settings = test.read(XMLFile);
-		myGrid = initGrid(settings.getRows(), settings.getColumns(), settings.getGrid());
+		XMLReader reader = new XMLReader();
+		CASettings settings = reader.read(XMLFile);
+		myGridPane = initGrid(settings.getRows(), settings.getColumns(), settings.getGrid());
 		
-		return myGrid;
+		myGrid = new Grid(settings.getType(), settings.getRows(), settings.getColumns());
+		return myGridPane;
 	}
 
 }

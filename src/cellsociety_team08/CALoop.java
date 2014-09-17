@@ -27,8 +27,8 @@ public class CALoop {
 	private int windowHeight;
 	
 	//In number of cells
-	private int gridHeight;
-	private int gridWidth;
+	private int gridRows;
+	private int gridCols;
 	
 	
 	/**
@@ -55,16 +55,41 @@ public class CALoop {
 		windowHeight = height-65;
 		windowWidth = width;
 		
-		gridHeight = 14;
-		gridWidth = 14;
+		gridRows = 14;
+		gridCols = 14;
 		
 		// Create a scene graph to organize the scene
 		VBox root = new VBox();
 		GridPane grid = new GridPane();
+		grid.setVgap(1);
+		grid.setHgap(1);
 		// Create a place to see the shapes
 		Scene scene = new Scene(root, width, height, Color.WHITE);
 		// Make some shapes and set their properties
 		
+		MenuBar menu = makeMenu();
+				
+		addCellsToGridPane(grid);
+		
+		root.getChildren().add(menu);
+		root.getChildren().add(grid);
+		return scene;
+	}
+
+	private void addCellsToGridPane(GridPane grid) {
+		double cellHeight = windowWidth/gridCols; 
+		double cellWidth = windowHeight/gridRows;
+		
+		grid.setGridLinesVisible(true);
+		for(int i=0; i<gridCols; i++){
+			for(int j=0; j<gridRows; j++){
+				Rectangle cell = new Rectangle(cellHeight, cellWidth, Color.RED);
+				grid.add(cell, i, j);
+			}
+		}
+	}
+
+	private MenuBar makeMenu() {
 		MenuBar menu = 	new MenuBar();
 		Menu menuFile = new Menu("File");
 		Menu menuSimulation = new Menu("Simulation");
@@ -81,23 +106,7 @@ public class CALoop {
 		menuHelp.getItems().addAll(help);
 	
 		menu.getMenus().addAll(menuFile, menuSimulation, menuHelp);
-		grid.setVgap(1);
-		grid.setHgap(1);
-				
-		double cellHeight = windowWidth/gridWidth; 
-		double cellWidth = windowHeight/gridHeight;
-		
-		grid.setGridLinesVisible(true);
-		for(int i=0; i<gridWidth; i++){
-			for(int j=0; j<gridHeight; j++){
-				Rectangle cell = new Rectangle(cellHeight, cellWidth, Color.RED);
-				grid.add(cell, i, j);
-			}
-		}
-		
-		root.getChildren().add(menu);
-		root.getChildren().add(grid);
-		return scene;
+		return menu;
 	}
 
 	/**

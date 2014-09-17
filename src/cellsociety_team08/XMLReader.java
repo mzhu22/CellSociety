@@ -21,7 +21,6 @@ public class XMLReader {
 	}
 	
 	public CASettings read(File XMLFile){
-		
 		try
 		{
 			DocumentBuilderFactory dbfactory = DocumentBuilderFactory.newInstance();
@@ -51,7 +50,7 @@ public class XMLReader {
 					String[] row = s.split(" ");
 					grid[i] = row;
 				}
-			}				
+			}
 			
 			CASettings settings = new CASettings(description, rows, columns, grid);
 			return settings;

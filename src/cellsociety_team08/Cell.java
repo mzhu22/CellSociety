@@ -3,20 +3,44 @@ package cellsociety_team08;
 import java.util.List;
 import java.util.Stack;
 
+import javafx.scene.Node;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
+
 public class Cell {
 	
 	public boolean isEmpty = false;
 	private List<State> myHistory = new Stack<State>();
 	private int[] myLocation; //This is the replacement for patch (I think...)
+	private int mySize;
+	public Node myNode;
+	public Color myColor;
+	public Rectangle myRectangle;
 	
-	public Cell(State s, int[] location) {
-		((Stack<State>) myHistory).push(s); //Can I just make this add???
+	public Cell(State s, int[] location, int size) {
+		
+		//This is sortof ugly but you said you hadn't implemented size or 
+		double convertedSize = size;
+		double doubleX = location[0];
+		double doubleY = location[1];
+		myRectangle = new Rectangle(doubleX, doubleY, convertedSize, convertedSize);
+		myNode = myRectangle;
+		mySize = size;
+		
+		((Stack<State>) myHistory).push(s);
 		myLocation = location;
+		
 	}
 	
 	public void remove() {
 		isEmpty = true;
 		myHistory.clear();
+	}
+	
+	//new method
+	public void setColor(Color color) {
+		myRectangle.setFill(color);
+		myColor = color;
 	}
 	
 	public State getState() {
@@ -29,6 +53,7 @@ public class Cell {
 	
 	public void setLocation(int[] location) {
 		myLocation = location;
+		
 	}
 	
 	public void setState(State s) {

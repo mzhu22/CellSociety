@@ -8,10 +8,8 @@ public class Patch {
 	private static int[] myLocation;
 	private static int mySize;
 	
-	public Patch(State state, RuleSet rules, int[] location, int size, boolean empty) {
+	public Patch(int[] location, int size, boolean empty) {
 		isEmpty = empty;
-		myState = state;
-		myRules = rules;
 		myLocation = location;
 		mySize = size;
 	}

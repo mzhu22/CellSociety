@@ -6,11 +6,11 @@ public class CASettings {
 	private int myColumns;
 	private String[][] myGrid;
 	
-	public CASettings(String type, int r, int c, String[][] grid){
+	public CASettings(String type, int row, int column, String[][] grid){
 		myType = type;
 		myGrid = grid;
-		myRows = r;
-		myColumns = c;
+		myRows = row;
+		myColumns = column;
 	}
 	
 	public String getType(){

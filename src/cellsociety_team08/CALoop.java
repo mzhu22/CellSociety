@@ -1,5 +1,6 @@
 package cellsociety_team08;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -46,6 +47,15 @@ public class CALoop {
 	private int myRows;
 	private int myCols;
 	
+	/**
+	 * Constructor
+	 * @param width = width of stage in pixels
+	 * @param height = height of stage MINUS height of the menu on the top
+	 */
+	public CALoop(int width, int height){
+		myWidth = width;
+		myHeight = height-MENU_HEIGHT;
+	}
 	
 	/**
 	 *  Function to do each game frame
@@ -64,6 +74,7 @@ public class CALoop {
 	 * Note, there are more sophisticated ways to animate shapes, 
 	 * but these simple ways work too.
 	 */
+	//TODO: GET RID OF SOME OF THIS TESTING SHIT 
 	private void updateGUICells () {
 		Random r = new Random();
 		for(Shape s: myCells){
@@ -79,17 +90,10 @@ public class CALoop {
 		return new KeyFrame(Duration.millis(1000), oneFrame);
 	}
 	
-	public void useControls(){		
-		
-	}
-	
 	/**
 	 * Create the game's scene
 	 */
-	public GridPane initGrid (int width, int height, int gridRows, int gridCols, String[][] gridArray) {
-		myWidth = width;
-		myHeight = height-MENU_HEIGHT;
-		
+	public GridPane initGrid (int gridRows, int gridCols, String[][] gridArray) {
 		myRows = gridRows;
 		myCols = gridCols;
 				
@@ -125,6 +129,14 @@ public class CALoop {
 				}
 			}
 		}
+		return myGrid;
+	}
+	
+	public GridPane readXML(File XMLFile) {
+		XMLReader test = new XMLReader();
+		CASettings settings = test.read(XMLFile);
+		myGrid = initGrid(settings.getRows(), settings.getColumns(), settings.getGrid());
+		
 		return myGrid;
 	}
 

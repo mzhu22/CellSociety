@@ -31,11 +31,11 @@ public class Main extends Application {
 	public static final int HEIGHT = 950;
 	public static final int WIDTH = 950;
 	
-	public static final int CONTROL_BOX_SPACING = 5;
-	public static final int SLIDER_WIDTH = 400;
-	public static final int SLIDER_MAX_VALUE = 60;
+	public static final int SLIDER_MAX_VALUE = 100;
+	public static final int SLIDER_WIDTH = 350;
 	public static final int SLIDER_DEFAULT_VALUE = 10;
 	public static final int TEXTFIELD_WIDTH = 100;
+	public static final int CONTROL_BOX_SPACING = 5;
 	
 	//All GUI parents
 	private Stage myStage;
@@ -54,14 +54,13 @@ public class Main extends Application {
 	
 	//All XML file reading components
 	private FileChooser fileChooser = new FileChooser();
-	private File XMLFile;
 	
 	@Override
 	public void start(Stage mainStage){
 		myStage = new Stage();
 		myStage.setTitle("Visual Automata");
 		
-		myLoop = new CALoop();
+		myLoop = new CALoop(WIDTH, HEIGHT);
 				
 		//Create a VBox to place the menu, then the grid in a vertical column. 
 		//Create the GridPane used to hold all rectangular cells
@@ -102,7 +101,6 @@ public class Main extends Application {
 	private void makeMenu() {
 		myMenuBar = new MenuBar();
 		Menu menuFile = new Menu("File");
-		Menu menuSimulation = new Menu("Simulation");
 		Menu menuHelp = new Menu("Help");
 		
 		//This allows you to load XML files. A class XMLReader handles this task, returns a CASettings object containing 
@@ -116,25 +114,11 @@ public class Main extends Application {
 				
 		MenuItem exit = new MenuItem("Exit");
 		menuFile.getItems().addAll(open, exit);
-		
-		MenuItem playPause = new MenuItem("Play/Pause");
-		menuSimulation.getItems().addAll(playPause);
-		
+				
 		MenuItem help = new MenuItem("Help");
 		menuHelp.getItems().addAll(help);
 	
-		myMenuBar.getMenus().addAll(menuFile, menuSimulation, menuHelp);
-	}
-	
-	private void readXML() {
-		XMLFile = fileChooser.showOpenDialog(myStage);
-		XMLReader test = new XMLReader();
-		mySettings = test.read(XMLFile);
-		myGrid = myLoop.initGrid(WIDTH, HEIGHT, mySettings.getRows(), mySettings.getColumns(), mySettings.getGrid());
-		
-		//Always remove the last element of myRoot's children (the grid). Then readd it. This means new grids are made when new XML files are loaded
-		myRoot.getChildren().remove(myRoot.getChildren().size()-1);
-		myRoot.getChildren().add(myGrid);
+		myMenuBar.getMenus().addAll(menuFile, menuHelp);
 	}
 	
 	public void makeControlBox() {
@@ -148,8 +132,8 @@ public class Main extends Application {
 		mySlider.setShowTickMarks(true);
 		mySlider.setShowTickLabels(true);
 		mySlider.setSnapToTicks(true);
-		mySlider.setMajorTickUnit(5f);
-		mySlider.setBlockIncrement(5f);
+		mySlider.setMajorTickUnit(10f);
+		mySlider.setBlockIncrement(10f);
 		mySlider.setPrefWidth(SLIDER_WIDTH);
 		Label sliderLabel = new Label(" Sim speed (rounds/second)");
 		
@@ -167,19 +151,20 @@ public class Main extends Application {
 	
 	/**
 	 * Handles controlBox controls (button, slider, textField)
+	 * Pressing button plays/pauses the simulation
+	 * Dragging the slider increases/decreases animation speed
+	 * Entering a number into the TextField currently does nothing
 	 */
 	public void useControls() {
 		myPauseButton.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
 			public void handle(ActionEvent e){
 				playPauseSim();
-				System.out.println("a");
 			}
 		});
 		mySlider.valueProperty().addListener(new ChangeListener<Number>() {			 
 			@Override
 			public void changed(ObservableValue<? extends Number> ov, Number oldVal, Number newVal) {
-				System.out.println(myAnimation.getRate());
 				myAnimation.setRate((double)newVal);
 			}
 	      });
@@ -196,8 +181,16 @@ public class Main extends Application {
 			myAnimation.play();
 		}
 	}
+	
 	public static void main(String[] args) {
 		launch(args);
 	}
 
+	private void readXML() {
+		File XMLFile = fileChooser.showOpenDialog(myStage);
+		myGrid = myLoop.readXML(XMLFile);
+		//Always remove the last element of myRoot's children (the grid). Then readd it. This means new grids are made when new XML files are loaded
+		myRoot.getChildren().remove(myRoot.getChildren().size()-1);
+		myRoot.getChildren().add(myGrid);
+	}
 }

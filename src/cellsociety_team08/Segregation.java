@@ -29,14 +29,14 @@ public class Segregation extends RuleSet {
 				setSatisfied(currCell);
 				return currCell.getState();
 			} else {
-				// move somewhere else...
+				currCell.setLocation(getNewLocation(currCell));
 			}
 		} else { // Agent B
 			if (currSat >= myMinSatB) {
 				setSatisfied(currCell);
 				return currCell.getState();
 			} else {
-				
+				currCell.setLocation(getNewLocation(currCell));
 			}
 		}
 		
@@ -48,8 +48,20 @@ public class Segregation extends RuleSet {
 		
 		Cell currCell = neighborhood[1][1];
 		double newSat = 0;
+		double total = 0;
 		
-		// Do calculation...
+		for (int i = -1; i < 2; i++) {
+			for (int j = -1; j < 2; j++) {
+				if (neighborhood[i][j] != null && !neighborhood[i][j].isEmpty) {
+					if (neighborhood[i][j].getState().equals(currCell.getState())) {
+						newSat++;
+					}
+					total++;
+				}
+			}
+		}
+		
+		newSat = newSat/total;
 		
 		return newSat;
 	}
@@ -57,10 +69,20 @@ public class Segregation extends RuleSet {
 	private void setSatisfied(Cell c) {
 		c.getState().setParams(new Object[]{true});
 	}
+	
+	private boolean isSatisfied(Cell c) {
+		return (boolean) c.getState().getParams()[0];
+	}
 
 	@Override
 	public int[] getLocation(Cell[][] neighborhood) {
 		return neighborhood[1][1].getLocation(); // TO DO
+	}
+	
+	public int[] getNewLocation(Cell c) {
+		// Gunna be tuff...
+		// May need a method in Grid for this
+		return null;
 	}
 
 }

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<cellularautomata type = "conwaylife">
+	<parameters>
+		<parameter key="probability" value=".5"/>
+		<parameter key="spawnrate" value=".3"/>
+	</parameters>
+	<grid rows="11" columns = "11">
+		0 0 0 0 1 1 1 0 0 0 1
+		1 0 1 0 1 0 0 0 0 0 1
+		1 1 1 0 0 0 1 1 1 1 1
+		1 0 0 0 0 0 0 1 1 0 1
+		1 0 1 0 0 1 0 1 1 0 1
+		1 1 1 1 0 0 0 0 1 0 1
+		0 0 0 0 1 0 0 1 0 1 1
+		0 0 1 0 1 0 0 1 0 0 1
+		1 1 1 0 0 0 1 1 1 1 1
+		1 0 0 0 0 0 0 1 1 0 1
+		0 1 0 0 0 1 0 0 1 0 1 
+	</grid>
+</cellularautomata>

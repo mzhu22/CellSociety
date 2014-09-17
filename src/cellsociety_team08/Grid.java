@@ -1,5 +1,8 @@
 package cellsociety_team08;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Grid {
 
 	/*
@@ -16,20 +19,35 @@ public class Grid {
 	 * do not have color or size of the cells stored ANYWHERE yet. Let me know
 	 * what you want to do about this.
 	 */
-
-	private static int myHeight, myWidth, myRows, myCols;
+	private Map<String, RuleSet> myImplementedRulesets;	
+	
+	private static int myRows, myCols;
 	private Cell[][] myCells;
 	private static RuleSet myRuleSet;
 
-	public Grid(RuleSet ruleSet, int rows, int cols, int height, int width) {
-		myRuleSet = ruleSet;
+	/**
+	 * Use this method to fill up myPossibleRules with all implemented simulation rulesets. These rulesets then accessed by 
+	 * the constructor and put into myRuleSet.
+	 */
+	private void makeMyPossibleRules() {
+		myImplementedRulesets = new HashMap<>();
+		myImplementedRulesets.put("SpreadingFire", new SpreadingFire());
+		myImplementedRulesets.put("Segregation", new Segregation());
+		myImplementedRulesets.put("PredatorPrey", new PredatorPrey());
+	}
+	
+	public Grid(String type, int rows, int cols) {
+		makeMyPossibleRules();
+		
+		myRuleSet = myImplementedRulesets.get(type);
 		myRows = rows;
 		myCols = cols;
-		myHeight = height;
-		myWidth = width;
 
 		myCells = new Cell[myRows][myCols];
-
+	}
+	
+	public void initialize(RuleSet rules, int[] size) {
+		
 	}
 
 	public void update() {

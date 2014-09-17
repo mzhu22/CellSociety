@@ -10,6 +10,9 @@ public class Segregation extends RuleSet {
 		new State("Agent A", 0, null), // index 0
 		new State("Agent B", 1, null) // index 1
 	};
+	public Segregation(){
+		super(SEGREGATION, possibleStates);
+	}
 	
 	public Segregation(Object[] params) {
 		super(SEGREGATION, possibleStates);

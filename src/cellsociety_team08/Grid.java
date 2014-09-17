@@ -1,5 +1,6 @@
 package cellsociety_team08;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Grid {
@@ -29,6 +30,7 @@ public class Grid {
 	 * the constructor and put into myRuleSet.
 	 */
 	private void makeMyPossibleRules() {
+		myImplementedRulesets = new HashMap<>();
 		myImplementedRulesets.put("SpreadingFire", new SpreadingFire());
 		myImplementedRulesets.put("Segregation", new Segregation());
 		myImplementedRulesets.put("PredatorPrey", new PredatorPrey());

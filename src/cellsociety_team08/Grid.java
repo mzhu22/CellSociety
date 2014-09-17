@@ -17,11 +17,11 @@ public class Grid {
 	 * what you want to do about this.
 	 */
 
-	private static int myHeight, myWidth, myRows, myCols;
+	private static int myHeight, myWidth, myRows, myCols, mySize;
 	private Cell[][] myCells;
 	private static RuleSet myRuleSet;
 
-	public Grid(RuleSet ruleSet, int rows, int cols, int height, int width) {
+	public Grid(RuleSet ruleSet, int rows, int cols, int height, int width, int size) {
 		myRuleSet = ruleSet;
 		myRows = rows;
 		myCols = cols;
@@ -30,6 +30,10 @@ public class Grid {
 
 		myCells = new Cell[myRows][myCols];
 
+	}
+	
+	public void initialize(RuleSet rules, int[] size) {
+		
 	}
 
 	public void update() {

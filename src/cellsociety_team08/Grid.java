@@ -24,6 +24,7 @@ public class Grid {
 
 	private static int myRows, myCols;
 	private Cell[][] myCells;
+	private Patch[][] myPatches;
 	private static RuleSet myRuleSet;
 
 	/**
@@ -51,30 +52,80 @@ public class Grid {
 		myCols = cols;
 
 		myCells = new Cell[myRows][myCols];
+		myPatches = new Patch[myRows][myCols];
 	}
 
 	public void initialize(RuleSet rules, int size, State state) {
 		
+		if (rules instanceof Segregation) {
+			initializeSegregation();
+		}
 		
-		Random rand = new Random();		
-		for (i = 0; i < myRows; i++) {
-			for (j = 0; j < myCols; j++) {
-				myPatches[i][j] = new Patch([i, j], size/myRows, true)
-				int oddsOfCell = rand.nextInt(100) + 1;
-				if (oddsOfCell > 50) {
-					myPatches[i][j].isEmpty = false;
-					myCells[i][j] = new Cell(state, [i, j])
+		if (rules instanceof SpreadingFire) {
+			initializeSpreadingFire();
+		}
+		
+		if (rules instanceof PredatorPrey) {
+			initializePredatorPrey();
+		}
+		
+		if (rules instanceof GameOfLife) {
+			initializeGameOfLife();
+		}
+	}
+	
+	public void initializePatches() {
+		for (int i = 0; i < myCells.length; i++) {
+			for (int j = 0; j < myCells[0].length; j++) {
+				myPatches[i][j] = new Patch([i, j], size/myCells.length, true);
+			}
+		}
+	}
+	
+	public void putCellInPatchSegregation(int i, int j, int whichState) {
+		myPatches[i][i].myLocation = [i, j]
+		myCells[i][j] = new Cell(rules.possibleStates[whichState], [i, j])
+		myPatches[i][j].isEmpty = false;
+	}
+	
+	public void initializeSegregation() {
+		Random rand = new Random();
+		initializePatches();
+		for (int i = 0; i < myPatches.length; i++) {
+			for (int j = 0; j < myPatches[0].length; j++) {
+				if ((rand.nextInt(100) + 1) > 66) {
+					putCellInPatchSegregation(i, j, 0); //initialize one type of agent
+				}
+				if ((rand.nextInt(100) + 1) < 66) && ((rand.nextInt(100) + 1) > 33) {
+					putCellInPatchSegregation(i, j, 1); //initialize the other
 				}
 			}
 		}
+		
+	}
+	
+
+	public void initializeSpreadingFire() {
+		
+	}
+	public void initializePredatorPrey() {
+	
+	}
+	public void initializeGameOfLife() {
+		
+	}
+	
+	
+	public void setCellStateAndNeighborHood() {
+		Cell[][] neighborhood = getNeighborhood(myCells[i][j]);
+		myCells[i][j].setState(myRuleSet.getState(neighborhood));
+		myCells[i][j].setLocation(myRuleSet.getLocation(neighborhood));
 	}
 
 	public void update() {
 		for (int i = 0; i < myCells.length; i++) {
 			for (int j = 0; j < myCells[0].length; j++) {
-				Cell[][] neighborhood = getNeighborhood(myCells[i][j]);
-				myCells[i][j].setState(myRuleSet.getState(neighborhood));
-				myCells[i][j].setLocation(myRuleSet.getLocation(neighborhood));
+				setCellStateAndNeighborHood();
 			}
 		}
 	}

@@ -58,7 +58,7 @@ public class Grid {
 		myPatches = new Patch[myRows][myCols];
 	}
 
-	public void initialize(RuleSet rules, int size, State state) {
+	public void initialize(RuleSet rules, State state) {
 		
 		if (rules instanceof Segregation) {
 			initializeSegregation(rules, state);

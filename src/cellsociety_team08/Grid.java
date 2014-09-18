@@ -58,46 +58,45 @@ public class Grid {
 	public void initialize(RuleSet rules, int size, State state) {
 		
 		if (rules instanceof Segregation) {
-			initializeSegregation();
+			initializeSegregation(rules, state);
 		}
 		
 		if (rules instanceof SpreadingFire) {
-			initializeSpreadingFire();
+			initializeSpreadingFire(rules, state);
 		}
 		
 		if (rules instanceof PredatorPrey) {
-			initializePredatorPrey();
+			initializePredatorPrey(rules, state);
 		}
 		
 		if (rules instanceof GameOfLife) {
-			initializeGameOfLife();
+			initializeGameOfLife(rules, state);
 		}
 	}
 	
 	public void initializePatches() {
 		for (int i = 0; i < myCells.length; i++) {
 			for (int j = 0; j < myCells[0].length; j++) {
-				myPatches[i][j] = new Patch([i, j], size/myCells.length, true);
+				int[] location = {i,j};
+				myPatches[i][j] = new Patch(location, true);
 			}
 		}
 	}
 	
-	public void putCellInPatchSegregation(int i, int j, int whichState) {
-		myPatches[i][i].myLocation = [i, j]
-		myCells[i][j] = new Cell(rules.possibleStates[whichState], [i, j])
-		myPatches[i][j].isEmpty = false;
-	}
 	
-	public void initializeSegregation() {
+	public void initializeSegregation(RuleSet rules, State state) {
 		Random rand = new Random();
 		initializePatches();
 		for (int i = 0; i < myPatches.length; i++) {
 			for (int j = 0; j < myPatches[0].length; j++) {
+				int[] location = {i,j};
 				if ((rand.nextInt(100) + 1) > 66) {
-					putCellInPatchSegregation(i, j, 0); //initialize one type of agent
+					myCells[i][j] = new Cell(state, location, 5); //placeholder here not sure what to do about size
+					myPatches[i][j].fill(myCells[i][j]);
 				}
-				if ((rand.nextInt(100) + 1) < 66) && ((rand.nextInt(100) + 1) > 33) {
-					putCellInPatchSegregation(i, j, 1); //initialize the other
+				if (((rand.nextInt(100) + 1) < 66) && ((rand.nextInt(100) + 1) > 33)) {
+					myCells[i][j] = new Cell(state, location, 5); //5 is a placeholder here not sure what to do about size
+					myPatches[i][j].fill(myCells[i][j]);
 				}
 			}
 		}
@@ -105,27 +104,23 @@ public class Grid {
 	}
 	
 
-	public void initializeSpreadingFire() {
+	public void initializeSpreadingFire(RuleSet rules, State state) {
 		
 	}
-	public void initializePredatorPrey() {
+	public void initializePredatorPrey(RuleSet rules, State state) {
 	
 	}
-	public void initializeGameOfLife() {
+	public void initializeGameOfLife(RuleSet rules, State state) {
 		
 	}
 	
-	
-	public void setCellStateAndNeighborHood() {
-		Cell[][] neighborhood = getNeighborhood(myCells[i][j]);
-		myCells[i][j].setState(myRuleSet.getState(neighborhood));
-		myCells[i][j].setLocation(myRuleSet.getLocation(neighborhood));
-	}
 
 	public void update() {
 		for (int i = 0; i < myCells.length; i++) {
 			for (int j = 0; j < myCells[0].length; j++) {
-				setCellStateAndNeighborHood();
+				Cell[][] neighborhood = getNeighborhood(myCells[i][j]);
+				myCells[i][j].setState(myRuleSet.getState(neighborhood));
+				myCells[i][j].setLocation(myRuleSet.getLocation(neighborhood));
 			}
 		}
 	}

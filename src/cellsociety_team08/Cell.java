@@ -10,13 +10,13 @@ import javafx.scene.shape.Rectangle;
 public class Cell {
 	
 	private List<State> myHistory = new Stack<State>();
-	private int[] myLocation; //This is the replacement for patch (I think...)
+	public int[] myLocation; //This is the replacement for patch (I think...)
 	private int mySize;
 	public Node myNode;
 	public Color myColor;
 	public Rectangle myRectangle;
 	
-	public Cell(State s, int[] location) {      /* maybe add this too I'm not sure: int size*/
+	public Cell(State s, int[] location, int size) {      /* maybe add this too I'm not sure: int size*/
 		
 		//This is sortof ugly but you said you hadn't implemented size or 
 		double convertedSize = size;

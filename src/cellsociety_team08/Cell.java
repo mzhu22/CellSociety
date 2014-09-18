@@ -53,7 +53,6 @@ public class Cell {
 	
 	public void setLocation(int[] location) {
 		myLocation = location;
-		
 	}
 	
 	public void setState(State s) {

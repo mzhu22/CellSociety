@@ -9,12 +9,8 @@ public class PredatorPrey extends RuleSet {
 		new State("Shark", 1, null) // index 1
 	};
 	
-	public PredatorPrey(){
-		super(PREDATOR_PREY, possibleStates);
-	}
-	
 	public PredatorPrey(Object[] params) {
-		super(PREDATOR_PREY, possibleStates);
+		super(PREDATOR_PREY, possibleStates, params);
 		// do stuff with parameters
 	}
 

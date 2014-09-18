@@ -37,7 +37,7 @@ public class SpreadingFire extends RuleSet {
 		if (isBurning(north) || isBurning(south) || isBurning(west) || isBurning(east)){
 			Random rand = new Random();
 			float randFloat = rand.nextFloat();
-			if (randFloat >= probCatch) return possibleStates[1];
+			if (randFloat <= probCatch) return possibleStates[1];
 			return possibleStates[0];
 		}
 		

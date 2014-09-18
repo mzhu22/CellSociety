@@ -19,35 +19,41 @@ public class Grid {
 	 * do not have color or size of the cells stored ANYWHERE yet. Let me know
 	 * what you want to do about this.
 	 */
-	private Map<String, RuleSet> myImplementedRulesets;	
-	
+	private Map<String, RuleSet> myImplementedRulesets;
+
 	private static int myRows, myCols;
 	private Cell[][] myCells;
 	private static RuleSet myRuleSet;
 
 	/**
-	 * Use this method to fill up myPossibleRules with all implemented simulation rulesets. These rulesets then accessed by 
-	 * the constructor and put into myRuleSet.
+	 * Use this method to fill up myPossibleRules with all implemented
+	 * simulation rulesets. These rulesets then accessed by the constructor and
+	 * put into myRuleSet.
 	 */
 	private void makeMyPossibleRules() {
 		myImplementedRulesets = new HashMap<>();
-		myImplementedRulesets.put("SpreadingFire", new SpreadingFire(new Object[]{0.2}));
-		myImplementedRulesets.put("Segregation", new Segregation(new Object[]{0.3, 0.4}));
-		myImplementedRulesets.put("PredatorPrey", new PredatorPrey());
+		// We need to implement passing parameters for the rulesets via the XML
+		// file
+		myImplementedRulesets.put("SpreadingFire", new SpreadingFire(
+				new Object[] { (float) 0.9 }));
+		myImplementedRulesets.put("Segregation", new Segregation(new Object[] {
+				0.3, 0.4 }));
+		myImplementedRulesets.put("PredatorPrey", new PredatorPrey(
+				new Object[] { 5 })); // Still needs work
 	}
-	
+
 	public Grid(String type, int rows, int cols) {
 		makeMyPossibleRules();
-		
+
 		myRuleSet = myImplementedRulesets.get(type);
 		myRows = rows;
 		myCols = cols;
 
 		myCells = new Cell[myRows][myCols];
 	}
-	
+
 	public void initialize(RuleSet rules, int[] size) {
-		
+
 	}
 
 	public void update() {

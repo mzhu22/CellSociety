@@ -49,8 +49,8 @@ public class Segregation extends RuleSet {
 		double newSat = 0;
 		double total = 0;
 
-		for (int i = -1; i < 2; i++) {
-			for (int j = -1; j < 2; j++) {
+		for (int i = 0; i < neighborhood.length; i++) {
+			for (int j = 0; j < neighborhood[0].length; j++) {
 				if (neighborhood[i][j] != null && !neighborhood[i][j].isEmpty) {
 					if (neighborhood[i][j].getState().equals(
 							currCell.getState())) {
@@ -82,8 +82,10 @@ public class Segregation extends RuleSet {
 	}
 
 	public int[] getNewLocation(Cell c) {
-		// Gunna be tuff...
-		// May need a method in Grid for this
+		/*
+		 * Not sure how to implement this yet. May have to work with Justin to
+		 * do this
+		 */
 		return null;
 	}
 

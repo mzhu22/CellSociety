@@ -5,13 +5,15 @@ public abstract class  RuleSet {
 	
 	private String myDescription;
 	public static State[] myPossibleStates;
+	public static Object[] myParams;
 	
-	public RuleSet(String description, State[] possibleStates) {
+	public RuleSet(String description, State[] possibleStates, Object[] params) {
 		myDescription = description;
 		myPossibleStates = possibleStates;
+		myParams = params;
 	}
 	
-	public String getDescription(Object[] params) {
+	public String getDescription() {
 		return myDescription;
 	}
 	

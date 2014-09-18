@@ -1,17 +1,21 @@
 package cellsociety_team08;
 
+import java.util.Random;
+
 
 public class SpreadingFire extends RuleSet {
 	
 	private static final String SPREADING_FIRE = "Spreading of Fire";
-	
 	private static final State[] possibleStates = new State[] {
-		new State("Tree", 0, null), // index 1
-		new State("Burning", 1, null) // index 2
+		new State("Tree", 0, null), // index 0
+		new State("Burning", 1, null) // index 1
 	};
+	
+	private static float probCatch;
 
-	public SpreadingFire() {
-		super(SPREADING_FIRE, possibleStates);
+	public SpreadingFire(Object[] params) {
+		super(SPREADING_FIRE, possibleStates, params);
+		probCatch = (float) params[0];
 	}
 
 	@Override
@@ -29,7 +33,13 @@ public class SpreadingFire extends RuleSet {
 			return null;
 		}
 		
-		if (isBurning(north) || isBurning(south) || isBurning(west) || isBurning(east)) return possibleStates[1];
+		// Implemented randomness in the catching fire algorithm
+		if (isBurning(north) || isBurning(south) || isBurning(west) || isBurning(east)){
+			Random rand = new Random();
+			float randFloat = rand.nextFloat();
+			if (randFloat >= probCatch) return possibleStates[1];
+			return possibleStates[0];
+		}
 		
 		return possibleStates[0];
 	}

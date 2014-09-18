@@ -19,7 +19,7 @@ public class Cell {
 	
 	public Cell(State s, int[] location, int size) {
 		
-		//This is sortof ugly but you said you hadn't implemented size or 
+		//This is sort of ugly but you said you hadn't implemented size or 
 		double convertedSize = size;
 		double doubleX = location[0];
 		double doubleY = location[1];

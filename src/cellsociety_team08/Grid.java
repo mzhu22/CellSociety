@@ -31,8 +31,8 @@ public class Grid {
 	 */
 	private void makeMyPossibleRules() {
 		myImplementedRulesets = new HashMap<>();
-		myImplementedRulesets.put("SpreadingFire", new SpreadingFire());
-		myImplementedRulesets.put("Segregation", new Segregation());
+		myImplementedRulesets.put("SpreadingFire", new SpreadingFire(new Object[]{0.2}));
+		myImplementedRulesets.put("Segregation", new Segregation(new Object[]{0.3, 0.4}));
 		myImplementedRulesets.put("PredatorPrey", new PredatorPrey());
 	}
 	

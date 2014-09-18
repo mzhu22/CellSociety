@@ -14,12 +14,17 @@ public class Patch {
 		mySize = size;
 	}
 	
-	public void empty() {
+	public void clear() {
 		isEmpty = true;
 	}
 	
-	public void fill() {
+	public void fill(Cell cell) {
 		isEmpty = false;
+		cell.myLocation = this.myLocation
+	}
+	
+	public boolean containsCell() {
+		return (isEmpty = false);
 	}
 	
 

@@ -10,24 +10,19 @@ import javafx.scene.shape.Rectangle;
 public class Cell {
 	
 	private List<State> myHistory = new Stack<State>();
-	private int[] myLocation; //This is the replacement for patch (I think...)
+	public Patch myPatch; //This is the replacement for patch (I think...)
+	public int[] myDimensions;
 	public Node myNode;
 	public Color myColor;
 	public Rectangle myRectangle;
 	
-	public Cell(State s, int[] location) {      /* maybe add this too I'm not sure: int size*/
-		
-		//This is sortof ugly but you said you hadn't implemented size or 
-		double convertedSize = size;
-		double doubleX = location[0];
-		double doubleY = location[1];
-		myRectangle = new Rectangle(doubleX, doubleY, convertedSize, convertedSize);
-		myNode = myRectangle;
-		//mySize = size;
+	public Cell(State s, Patch patch) {      /* maybe add this too I'm not sure: int size*/
 		
 		((Stack<State>) myHistory).push(s);
-		myLocation = location;
-		
+		myPatch = patch;
+		myDimensions = myPatch.myDimensions;
+		myRectangle = new Rectangle(myDimensions[0],myDimensions[1]);
+		myRectangle.setFill(myColor);
 	}
 	
 	public void remove() {

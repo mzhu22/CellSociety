@@ -2,24 +2,27 @@ package cellsociety_team08;
 
 public class Patch {
 	
-	private boolean isEmpty;
-	private State myState;
-	private static RuleSet myRules;
-	private static int[] myLocation;
-	private static int mySize;
+	public boolean isEmpty;
+	public static int[] myLocation;
+	public static int[] myDimensions;
 	
-	public Patch(int[] location, int size, boolean empty) {
-		isEmpty = empty;
+	public Patch(int[] dimensions, int[] location, boolean empty) {
+		myDimensions = dimensions;
 		myLocation = location;
-		mySize = size;
+		isEmpty = empty;
+
 	}
 	
-	public void empty() {
+	public void clear() {
 		isEmpty = true;
 	}
 	
-	public void fill() {
+	public void fill(Cell cell) {
 		isEmpty = false;
+	}
+	
+	public boolean containsCell() {
+		return (isEmpty = false);
 	}
 	
 

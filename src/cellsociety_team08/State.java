@@ -1,10 +1,13 @@
 package cellsociety_team08;
 
+import javafx.scene.paint.Color;
+
 
 public class State {
 
 	public String myName;
 	public int myIndex;
+	public Color myColor;
 	private Object[] myParams;
 
 	/*

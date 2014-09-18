@@ -57,9 +57,9 @@ public class Grid {
 		
 		
 		Random rand = new Random();		
-		for (i = 0; i < myRows; i++) {
-			for (j = 0; j < myCols; j++) {
-				myPatches[i][j] = new Patch([i, j], size/myRows, true)
+		for (int i = 0; i < myRows; i++) {
+			for (int j = 0; j < myCols; j++) {
+				myPatches[i][j] = new Patch(new int[]{i, j}, size/myRows, true);
 				int oddsOfCell = rand.nextInt(100) + 1;
 				if (oddsOfCell > 50) {
 					myPatches[i][j].isEmpty = false;

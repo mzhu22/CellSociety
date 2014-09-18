@@ -11,7 +11,6 @@ public class Cell {
 	
 	private List<State> myHistory = new Stack<State>();
 	private int[] myLocation; //This is the replacement for patch (I think...)
-	private int mySize;
 	public Node myNode;
 	public Color myColor;
 	public Rectangle myRectangle;

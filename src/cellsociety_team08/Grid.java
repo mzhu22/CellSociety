@@ -46,8 +46,17 @@ public class Grid {
 		myCells = new Cell[myRows][myCols];
 	}
 	
-	public void initialize(RuleSet rules, int[] size) {
-		
+	public void initialize(RuleSet rules, int[] size, State state) {
+		Random rand = new Random();		
+		for (i = 0; i < myRows; i++) {
+			for (j = 0; j < myCols; j++) {
+				int oddsOfCell = rand.nextInt(100) + 1;
+				if (oddsOfCell > 50) {
+					myCells[i][j] = new Cell(state, [i, j])
+				}
+			}
+		}
+
 	}
 
 	public void update() {

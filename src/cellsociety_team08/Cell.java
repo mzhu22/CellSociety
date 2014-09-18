@@ -17,15 +17,15 @@ public class Cell {
 	public Color myColor;
 	public Rectangle myRectangle;
 	
-	public Cell(State s, int[] location, int size) {
+	public Cell(State s, int[] location) {      /* maybe add this too I'm not sure: int size*/
 		
-		//This is sort of ugly but you said you hadn't implemented size or 
+		//This is sortof ugly but you said you hadn't implemented size or 
 		double convertedSize = size;
 		double doubleX = location[0];
 		double doubleY = location[1];
 		myRectangle = new Rectangle(doubleX, doubleY, convertedSize, convertedSize);
 		myNode = myRectangle;
-		mySize = size;
+		//mySize = size;
 		
 		((Stack<State>) myHistory).push(s);
 		myLocation = location;

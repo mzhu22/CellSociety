@@ -2,6 +2,7 @@ package cellsociety_team08;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class Grid {
 
@@ -52,8 +53,16 @@ public class Grid {
 		myCells = new Cell[myRows][myCols];
 	}
 
-	public void initialize(RuleSet rules, int[] size) {
-
+	public void initialize(RuleSet rules, int[] size, State state) {
+		Random rand = new Random();		
+		for (int i = 0; i < myRows; i++) {
+			for (int j = 0; j < myCols; j++) {
+				int oddsOfCell = rand.nextInt(100) + 1;
+				if (oddsOfCell > 50) {
+					myCells[i][j] = new Cell(state, new int[]{i, j});
+				}
+			}
+		}
 	}
 
 	public void update() {

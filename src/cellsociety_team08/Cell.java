@@ -3,8 +3,6 @@ package cellsociety_team08;
 import java.util.List;
 import java.util.Stack;
 
-import javafx.scene.Node;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class Cell {
@@ -12,8 +10,6 @@ public class Cell {
 	private List<State> myHistory = new Stack<State>();
 	public Patch myPatch; //This is the replacement for patch (I think...)
 	public int[] myDimensions;
-	public Node myNode;
-	public Color myColor;
 	public Rectangle myRectangle;
 	
 	public Cell(State s, Patch patch) {      /* maybe add this too I'm not sure: int size*/
@@ -22,17 +18,12 @@ public class Cell {
 		myPatch = patch;
 		myDimensions = myPatch.myDimensions;
 		myRectangle = new Rectangle(myDimensions[0],myDimensions[1]);
-		myRectangle.setFill(myColor);
+		myRectangle.setFill(s.myColor);
 	}
 	
 	public void remove() {
 		myHistory.clear();
-	}
-	
-	//new method
-	public void setColor(Color color) {
-		myRectangle.setFill(color);
-		myColor = color;
+		myRectangle.setVisible(false);
 	}
 	
 	public State getState() {
@@ -44,17 +35,22 @@ public class Cell {
 	}
 	
 	public void setLocation(int[] location) {
-		myLocation = location;
-		
+		// Needs work!!!
+		myPatch.myLocation = location;
 	}
 	
 	public void setState(State s) {
-		if (s == null) remove();
+		if (s == null) { //empty...
+			remove();
+			
+		}
 		((Stack<State>) myHistory).push(s);
+		myRectangle.setFill(s.myColor);
+		
 	}
 	
 	public int[] getLocation() {
-		return myLocation;
+		return myPatch.myLocation;
 	}
 
 }

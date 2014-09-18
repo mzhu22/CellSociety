@@ -9,7 +9,6 @@ import javafx.scene.shape.Rectangle;
 
 public class Cell {
 	
-	public boolean isEmpty = false;
 	private List<State> myHistory = new Stack<State>();
 	private int[] myLocation; //This is the replacement for patch (I think...)
 	private int mySize;
@@ -33,7 +32,6 @@ public class Cell {
 	}
 	
 	public void remove() {
-		isEmpty = true;
 		myHistory.clear();
 	}
 	

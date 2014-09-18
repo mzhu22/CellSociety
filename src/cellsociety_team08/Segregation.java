@@ -51,7 +51,7 @@ public class Segregation extends RuleSet {
 
 		for (int i = 0; i < neighborhood.length; i++) {
 			for (int j = 0; j < neighborhood[0].length; j++) {
-				if (neighborhood[i][j] != null && !neighborhood[i][j].isEmpty) {
+				if (neighborhood[i][j] != null && !neighborhood[i][j].isEmpty) { 
 					if (neighborhood[i][j].getState().equals(
 							currCell.getState())) {
 						newSat++;

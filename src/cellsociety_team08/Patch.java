@@ -6,12 +6,13 @@ public class Patch {
 	private State myState;
 	private static RuleSet myRules;
 	public static int[] myLocation;
-	private static int mySize;
+	private static int[] myDimensions;
 	
-	public Patch(int[] location, boolean empty) {
-		isEmpty = empty;
+	public Patch(int[] dimensions, int[] location, boolean empty) {
+		myDimensions = dimensions;
 		myLocation = location;
-		//mySize = size;
+		isEmpty = empty;
+
 	}
 	
 	public void clear() {
@@ -20,7 +21,7 @@ public class Patch {
 	
 	public void fill(Cell cell) {
 		isEmpty = false;
-		cell.myLocation = this.myLocation;
+		cell.myLocation = Patch.myLocation;
 	}
 	
 	public boolean containsCell() {

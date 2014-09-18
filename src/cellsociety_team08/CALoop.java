@@ -138,7 +138,7 @@ public class CALoop {
 		CASettings settings = reader.read(XMLFile);
 		myGridPane = initGrid(settings.getRows(), settings.getColumns(), settings.getGrid());
 		
-		myGrid = new Grid(settings.getType(), settings.getRows(), settings.getColumns());
+		myGrid = new Grid(settings.getType(), settings.getRows(), settings.getColumns(), myHeight, myWidth);
 		return myGridPane;
 	}
 

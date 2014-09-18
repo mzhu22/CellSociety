@@ -22,7 +22,7 @@ public class Grid {
 	 */
 	private Map<String, RuleSet> myImplementedRulesets;
 
-	private static int myRows, myCols;
+	private static int myRows, myCols, myHeight, myWidth;
 	private Cell[][] myCells;
 	private Patch[][] myPatches;
 	private static RuleSet myRuleSet;
@@ -44,13 +44,16 @@ public class Grid {
 				new Object[] { 5 })); // Still needs work
 	}
 
-	public Grid(String type, int rows, int cols) {
+	public Grid(String type, int rows, int cols, int height, int width) {
+		
 		makeMyPossibleRules();
 
 		myRuleSet = myImplementedRulesets.get(type);
 		myRows = rows;
 		myCols = cols;
-
+		myHeight = height;
+		myWidth = width;
+		
 		myCells = new Cell[myRows][myCols];
 		myPatches = new Patch[myRows][myCols];
 	}
@@ -77,8 +80,10 @@ public class Grid {
 	public void initializePatches() {
 		for (int i = 0; i < myCells.length; i++) {
 			for (int j = 0; j < myCells[0].length; j++) {
+				
 				int[] location = {i,j};
-				myPatches[i][j] = new Patch(location, true);
+				int[] dimensions = {myHeight/myRows, myWidth/myCols};
+				myPatches[i][j] = new Patch(dimensions, location, true);
 			}
 		}
 	}
@@ -90,17 +95,17 @@ public class Grid {
 		for (int i = 0; i < myPatches.length; i++) {
 			for (int j = 0; j < myPatches[0].length; j++) {
 				int[] location = {i,j};
+				int[] dimensions = {myHeight/myRows, myWidth/myCols};
 				if ((rand.nextInt(100) + 1) > 66) {
-					myCells[i][j] = new Cell(state, location, 5); //placeholder here not sure what to do about size
+					myCells[i][j] = new Cell(state, location, dimensions); //placeholder here not sure what to do about size
 					myPatches[i][j].fill(myCells[i][j]);
 				}
 				if (((rand.nextInt(100) + 1) < 66) && ((rand.nextInt(100) + 1) > 33)) {
-					myCells[i][j] = new Cell(state, location, 5); //5 is a placeholder here not sure what to do about size
+					myCells[i][j] = new Cell(state, location, dimensions); //5 is a placeholder here not sure what to do about size
 					myPatches[i][j].fill(myCells[i][j]);
 				}
 			}
 		}
-		
 	}
 	
 
@@ -108,7 +113,7 @@ public class Grid {
 		
 	}
 	public void initializePredatorPrey(RuleSet rules, State state) {
-	
+		initializeSegregation(rules, state); //is there a significant difference?
 	}
 	public void initializeGameOfLife(RuleSet rules, State state) {
 		

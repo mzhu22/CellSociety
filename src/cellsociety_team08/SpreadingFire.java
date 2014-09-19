@@ -17,7 +17,7 @@ public class SpreadingFire extends RuleSet {
 	private static float probCatch;
 
 	public SpreadingFire(Map<String, Object> params) {
-		super(SPREADING_FIRE, possibleStates, params);
+		super(params);
 		probCatch = (float) params.get(PROB_CATCH);
 	}
 

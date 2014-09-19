@@ -23,7 +23,7 @@ public class Segregation extends RuleSet {
 	};
 
 	public Segregation(Map<String, Object> params) {
-		super(SEGREGATION, possibleStates, params);
+		super(params);
 		myMinSatA = (double) myParams.get(MIN_SAT_A);
 		myMinSatB = (double) myParams.get(MIN_SAT_B);
 	}
@@ -37,7 +37,8 @@ public class Segregation extends RuleSet {
 			return patch;
 
 		double currSat = getSatisfaction(patch, neighborhood);
-
+		
+		// check for empty patches!!!!!!!
 		if ((patch.myCell.getState().myIndex == 0 && currSat >= myMinSatA)
 				|| (patch.myCell.getState().myIndex == 1 && currSat >= myMinSatB)) {
 			return satisfiedPatch(patch);

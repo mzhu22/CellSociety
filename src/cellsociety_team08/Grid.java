@@ -73,33 +73,6 @@ public class Grid {
 		}
 	}
 	
-	
-	public void initializeSegregation() {
-		Random rand = new Random();
-		for (int i = 0; i < myPatches.length; i++) {
-			for (int j = 0; j < myPatches[0].length; j++) {
-				int[] dimensions = {myHeight/myRows, myWidth/myCols};
-				if ((rand.nextInt(100) + 1) > 66) { // Read from XML file later
-					myPatches[i][j].fill(new Cell(myRuleSet.myPossibleStates[0], dimensions));
-				}
-				if (((rand.nextInt(100) + 1) < 66) && ((rand.nextInt(100) + 1) > 33)) {
-					myPatches[i][j].fill(new Cell(myRuleSet.myPossibleStates[1], dimensions));
-				}
-			}
-		}
-	}
-	
-
-	public void initializeSpreadingFire(RuleSet rules, State state) {
-		
-	}
-	public void initializePredatorPrey(RuleSet rules, State state) {
-		//initializeSegregation(rules, state); //is there a significant difference?
-	}
-	public void initializeGameOfLife(RuleSet rules, State state) {
-		
-	}
-	
 
 	public Patch[][] update() {
 		for (int i = 0; i < myPatches.length; i++) {

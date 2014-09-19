@@ -1,5 +1,7 @@
 package cellsociety_team08;
 
+import java.util.Map;
+
 public class PredatorPrey extends RuleSet {
 	
 	private static final String PREDATOR_PREY = "Predator Prey";
@@ -9,8 +11,8 @@ public class PredatorPrey extends RuleSet {
 		new State("Shark", 1, null) // index 1
 	};
 	
-	public PredatorPrey(Object[] params) {
-		super(PREDATOR_PREY, possibleStates, params);
+	public PredatorPrey(Map<String, Object> params) {
+		super(params);
 		// do stuff with parameters
 	}
 

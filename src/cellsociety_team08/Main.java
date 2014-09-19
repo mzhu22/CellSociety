@@ -40,7 +40,6 @@ public class Main extends Application {
 	//All GUI parents
 	private Stage myStage;
 	private AnimatorLoop myLoop;
-	private CASettings mySettings;
 	private VBox myRoot;
 	private HBox myControls;
 	private MenuBar myMenuBar;

@@ -1,9 +1,6 @@
 package cellsociety_team08;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 
 import javafx.animation.KeyFrame;
 import javafx.event.ActionEvent;
@@ -11,7 +8,6 @@ import javafx.event.EventHandler;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Shape;
 import javafx.util.Duration;
 
 

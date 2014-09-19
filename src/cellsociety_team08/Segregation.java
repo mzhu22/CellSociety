@@ -11,18 +11,21 @@ public class Segregation extends RuleSet {
 	private static final String MIN_SAT_A = "minSatA";
 	private static final String MIN_SAT_B = "minSatB";
 
-	private static double myMinSatA, myMinSatB;
+	private static float myMinSatA, myMinSatB;
 
 	public Segregation(Map<String, Object> params) {
-		super(params);	myPossibleStates = new State[] {
-				new State("Agent A", 0, Color.BLUE, null), // index 0
-				new State("Agent B", 1, Color.RED, null) // index 1
+		
+		super(params);
+		
+		myPossibleStates = new State[] {
+				new State("Agent A", 0, Color.BLUE, new Object[]{false}), // index 0
+				new State("Agent B", 1, Color.RED, new Object[]{false}) // index 1
 		};
-		
+
 		myDescription = SEGREGATION;
-		
-		myMinSatA = (double) myParams.get(MIN_SAT_A);
-		myMinSatB = (double) myParams.get(MIN_SAT_B);
+
+		myMinSatA = Float.parseFloat((String) myParams.get(MIN_SAT_A));
+		myMinSatB = Float.parseFloat((String) myParams.get(MIN_SAT_B));
 	}
 
 	@Override
@@ -30,10 +33,10 @@ public class Segregation extends RuleSet {
 
 		// If the current cell is satisfied with its neighbors, return its
 		// current state!
-		if (isSatisfied(patch) || patch.flagged)
+		if (patch.myCell == null || patch.isEmpty || isSatisfied(patch) || patch.flagged)
 			return patch;
 
-		double currSat = getSatisfaction(patch, neighborhood);
+		float currSat = getSatisfaction(patch, neighborhood);
 
 		// check for empty patches!!!!!!!
 		if ((patch.myCell.getState().myIndex == 0 && currSat >= myMinSatA)
@@ -66,10 +69,10 @@ public class Segregation extends RuleSet {
 		}
 	}
 
-	private double getSatisfaction(Patch patch, List<Patch> neighborhood) {
+	private float getSatisfaction(Patch patch, List<Patch> neighborhood) {
 
-		double newSat = 0;
-		double total = 0;
+		float newSat = 0;
+		float total = 0;
 
 		for (Patch p : neighborhood) {
 			if (p.containsCell()) {
@@ -99,7 +102,10 @@ public class Segregation extends RuleSet {
 	}
 
 	private boolean isSatisfied(Patch p) {
-		return (boolean) p.myCell.getState().getParams()[0];
+		Cell c = p.myCell;
+		State s = c.getState();
+		boolean b = (boolean) s.getParams()[0];
+		return b;
 	}
 
 	public int[] getNewLocation(Cell c) {

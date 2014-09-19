@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 public class Grid {
 
@@ -47,8 +46,8 @@ public class Grid {
 		// file
 		myImplementedRulesets.put("SpreadingFire", new SpreadingFire(
 				parametersMap));
-		// myImplementedRulesets.put("Segregation", new
-		// Segregation(parametersMap));
+		// myImplementedRulesets
+		// .put("Segregation", new Segregation(parametersMap));
 		// myImplementedRulesets.put("PredatorPrey", new
 		// PredatorPrey(parametersMap)); // Still needs work
 	}
@@ -69,14 +68,14 @@ public class Grid {
 						neighborhood);
 			}
 		}
-		
+
 		for (int i = 0; i < myPatches.length; i++) {
 			for (int j = 0; j < myPatches[0].length; j++) {
 				myPatches[i][j].flagged = false;
+				nextPatches[i][j].flagged = false;
 			}
 		}
-		
-		System.out.println("a");
+
 		myPatches = nextPatches.clone();
 		return myPatches;
 	}

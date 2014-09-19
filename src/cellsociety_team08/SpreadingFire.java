@@ -32,44 +32,46 @@ public class SpreadingFire extends RuleSet {
 	@Override
 	public Patch getNext(Patch curr, List<Patch> neighborhood) {
 		// If it's already empty, do nothing
-		if (curr.isEmpty)
+
+		if (curr.isEmpty || curr.myCell == null
+				|| curr.myCell.getState() == null) {
 			return curr;
+		}
+
+		// New patch with empty cell
+		Patch ret = new Patch(curr.myRow, curr.myCol, true);
 
 		// If it's already burning, it will be empty on the next iteration
 		if (curr.myCell.getState().equals(myPossibleStates[1])) {
-			curr.clear();
+			ret.flagged = true;
+			return ret;
 		}
 
-		// If it's already burning, it will be empty on the next iteration
 		for (Patch p : neighborhood) {
 			if ((p.myRow == curr.myRow || p.myCol == curr.myCol)
 					&& isBurning(p)) {
 				Random rand = new Random();
 				float randFloat = rand.nextFloat();
 				if (randFloat <= probCatch) {
-					curr.myCell.setState(myPossibleStates[1]);
-				} else {
-					curr.myCell.setState(myPossibleStates[0]);
+					// Start burning!!!
+					ret.fill(new Cell(myPossibleStates[1]));
+					ret.flagged = true;
+					return ret;
 				}
 			}
 		}
-
-		if (curr.myCell.getState().equals(myPossibleStates[1])) {
-			curr.clear();
-		}
-
-		return curr;
-	}
-
-	private boolean isBurning(Cell cell) {
-		return (myPossibleStates[1].equals(cell.getState()));
+		ret.fill(curr.myCell);
+		return ret;
 	}
 
 	private boolean isBurning(Patch p) {
+		// If it just burnt down...
+		if (p.flagged && p.isEmpty) return true;
+		
 		if (p.getCell() == null) {
 			return false;
 		}
-		return (myPossibleStates[1].equals(p.getCell().getState()));
+		return (myPossibleStates[1].equals(p.getCell().getState()) && !p.flagged);
 	}
 
 }

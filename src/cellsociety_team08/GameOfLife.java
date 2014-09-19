@@ -15,6 +15,7 @@ public class GameOfLife extends RuleSet {
 
 	public GameOfLife(Map<String, Object> params) {
 		super(params);
+		myDescription = GAME_OF_LIFE;
 	}
 
 	@Override

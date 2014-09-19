@@ -20,11 +20,11 @@ public abstract class  RuleSet {
 	
 	public Patch initializePatch(int row, int column, String s){
 		Patch patch;
-		if(s.equals(" .")){
+		int choice = Integer.parseInt(s);
+		if(choice == 9){
 			patch = new Patch(row, column, true);
 		}
 		else{
-			int choice = Integer.parseInt(s);
 			patch = new Patch(row, column, false);
 			patch.fill(new Cell(myPossibleStates[choice]));
 		}

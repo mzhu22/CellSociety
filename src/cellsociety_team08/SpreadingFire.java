@@ -31,8 +31,8 @@ public class SpreadingFire extends RuleSet {
 
 	@Override
 	public Patch getNext(Patch curr, List<Patch> neighborhood) {
+		
 		// If it's already empty, do nothing
-
 		if (curr.isEmpty || curr.myCell == null
 				|| curr.myCell.getState() == null) {
 			return curr;
@@ -40,6 +40,10 @@ public class SpreadingFire extends RuleSet {
 
 		// New patch with empty cell
 		Patch ret = new Patch(curr.myRow, curr.myCol, true);
+		// If it's already empty, do nothing		
+		if (curr.isEmpty){
+			return curr;
+		}
 
 		// If it's already burning, it will be empty on the next iteration
 		if (curr.myCell.getState().equals(myPossibleStates[1])) {
@@ -47,6 +51,8 @@ public class SpreadingFire extends RuleSet {
 			return ret;
 		}
 
+		
+		// If it's already burning, it will be empty on the next iteration
 		for (Patch p : neighborhood) {
 			if ((p.myRow == curr.myRow || p.myCol == curr.myCol)
 					&& isBurning(p)) {
@@ -72,6 +78,7 @@ public class SpreadingFire extends RuleSet {
 			return false;
 		}
 		return (myPossibleStates[1].equals(p.getCell().getState()) && !p.flagged);
+
 	}
 
 }

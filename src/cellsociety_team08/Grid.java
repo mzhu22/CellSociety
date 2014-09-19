@@ -76,6 +76,7 @@ public class Grid {
 			}
 		}
 
+
 		myPatches = nextPatches.clone();
 		return myPatches;
 	}

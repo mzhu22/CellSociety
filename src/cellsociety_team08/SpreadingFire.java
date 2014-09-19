@@ -34,13 +34,8 @@ public class SpreadingFire extends RuleSet {
 		}
 		
 		// If it's already burning, it will be empty on the next iteration
-		if (curr.myCell.getState().equals(myPossibleStates[1])) {
-			curr.clear();
-			return curr;
-		}
-
 		for (Patch p : neighborhood) {
-			if ((p.myRow == curr.myRow || p.myCol == curr.myCol) && isBurning(p.myCell)) {
+			if ((p.myRow == curr.myRow || p.myCol == curr.myCol) && isBurning(p)) {
 				Random rand = new Random();
 				float randFloat = rand.nextFloat();
 				if (randFloat <= probCatch) {
@@ -49,14 +44,20 @@ public class SpreadingFire extends RuleSet {
 					curr.myCell.setState(myPossibleStates[0]);
 				}
 			}
+		}	
+		
+		if (curr.myCell.getState().equals(myPossibleStates[1])) {
+			curr.clear();
 		}
-			
+		
 		return curr;
 	}
 	
-	private boolean isBurning(Cell cell) {
-		return (myPossibleStates[1].equals(cell.getState()));
-//		return true;
+	private boolean isBurning(Patch p) {
+		if(p.getCell()==null){
+			return false;
+		}
+		return (myPossibleStates[1].equals(p.getCell().getState()));
 	}
 
 }

@@ -20,12 +20,12 @@ public abstract class  RuleSet {
 	
 	public abstract Patch getNext(Patch curr, List<Patch> neighborhood);
 	
-	public void move(Patch patch, List<Patch> emptyPatches) {
+	public void move(Patch curr, List<Patch> emptyPatches) {
 		return;
 	}
 	
-	public void addPatch(List<Patch> emptyPatches) {
-		
+	public void addPatch(Patch from, Patch to) {
+		return;
 	}
 		
 }

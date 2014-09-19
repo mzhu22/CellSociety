@@ -1,8 +1,15 @@
 package cellsociety_team08;
 
+import java.util.List;
+import java.util.Map;
+
+import javafx.scene.paint.Color;
+
 public class Segregation extends RuleSet {
 
 	private static final String SEGREGATION = "Segregation";
+	private static final String MIN_SAT_A = "minSatA";
+	private static final String MIN_SAT_B = "minSatB";
 
 	private static double myMinSatA, myMinSatB;
 
@@ -11,74 +18,68 @@ public class Segregation extends RuleSet {
 	 * which will be a boolean value
 	 */
 	private static final State[] possibleStates = new State[] {
-			new State("Agent A", 0, null), // index 0
-			new State("Agent B", 1, null) // index 1
+			new State("Agent A", 0, Color.BLUE, null), // index 0
+			new State("Agent B", 1, Color.RED, null) // index 1
 	};
 
-	public Segregation(Object[] params) {
+	public Segregation(Map<String, Object> params) {
 		super(SEGREGATION, possibleStates, params);
-		myMinSatA = (double) params[0];
-		myMinSatB = (double) params[1];
+		myMinSatA = (double) myParams.get(MIN_SAT_A);
+		myMinSatB = (double) myParams.get(MIN_SAT_B);
 	}
 
 	@Override
-	public State getState(Cell[][] neighborhood) {
-
-		Cell currCell = neighborhood[1][1];
+	public Patch getNext(Patch patch, List<Patch> neighborhood) {
 
 		// If the current cell is satisfied with its neighbors, return its
 		// current state!
-		if (isSatisfied(currCell))
-			return currCell.getState();
+		if (isSatisfied(patch))
+			return patch;
 
-		double currSat = getSatisfaction(neighborhood);
+		double currSat = getSatisfaction(patch, neighborhood);
 
-		if ((currCell.getState().myIndex == 0 && currSat >= myMinSatA)
-				|| (currCell.getState().myIndex == 1 && currSat >= myMinSatB)) {
-			return satisfiedCell(currCell);
+		if ((patch.myCell.getState().myIndex == 0 && currSat >= myMinSatA)
+				|| (patch.myCell.getState().myIndex == 1 && currSat >= myMinSatB)) {
+			return satisfiedPatch(patch);
 		} else {
-			currCell.setLocation(getNewLocation(currCell));
+			return notSatisfiedPatch(patch);
 		}
-
-		return null;
 	}
 
-	private double getSatisfaction(Cell[][] neighborhood) {
+	private double getSatisfaction(Patch patch, List<Patch> neighborhood) {
 
-		Cell currCell = neighborhood[1][1];
 		double newSat = 0;
 		double total = 0;
 
-		for (int i = 0; i < neighborhood.length; i++) {
-			for (int j = 0; j < neighborhood[0].length; j++) {
-				if (neighborhood[i][j] != null && !neighborhood[i][j].isEmpty) { 
-					if (neighborhood[i][j].getState().equals(
-							currCell.getState())) {
-						newSat++;
-					}
-					total++;
+		for (Patch p : neighborhood) {
+			if (p.containsCell()) {
+				if (p.myCell.getState().equals(patch.myCell.getState())) {
+					newSat++;
 				}
+				total++;
 			}
 		}
-
 		newSat = newSat / total;
 
 		return newSat;
 	}
 
-	private State satisfiedCell(Cell c) {
-		State s = c.getState();
+	private Patch satisfiedPatch(Patch p) {
+		State s = p.myCell.getState();
 		s.setParams(new Object[] { true });
-		return s;
+		p.myCell.setState(s);
+		return p;
+	}
+	
+	private Patch notSatisfiedPatch(Patch p) {
+		State s = p.myCell.getState();
+		s.setParams(new Object[] { false });
+		p.myCell.setState(s);
+		return p;
 	}
 
-	private boolean isSatisfied(Cell c) {
-		return (boolean) c.getState().getParams()[0];
-	}
-
-	@Override
-	public int[] getLocation(Cell[][] neighborhood) {
-		return neighborhood[1][1].getLocation(); // TO DO
+	private boolean isSatisfied(Patch p) {
+		return (boolean) p.myCell.getState().getParams()[0];
 	}
 
 	public int[] getNewLocation(Cell c) {

@@ -67,9 +67,8 @@ public class Grid {
 	public void initializePatches() {
 		for (int i = 0; i < myPatches.length; i++) {
 			for (int j = 0; j < myPatches[0].length; j++) {	
-				int[] location = {i,j};
 				int[] dimensions = {myHeight/myRows, myWidth/myCols};
-				myPatches[i][j] = new Patch(dimensions, location, true);
+				myPatches[i][j] = new Patch(dimensions, i, j, true);
 			}
 		}
 	}
@@ -95,7 +94,7 @@ public class Grid {
 		
 	}
 	public void initializePredatorPrey(RuleSet rules, State state) {
-		initializeSegregation(rules, state); //is there a significant difference?
+		//initializeSegregation(rules, state); //is there a significant difference?
 	}
 	public void initializeGameOfLife(RuleSet rules, State state) {
 		
@@ -111,6 +110,8 @@ public class Grid {
 			}
 		}
 		
+		
+		
 		myPatches = nextPatches.clone();
 		
 	}
@@ -118,8 +119,8 @@ public class Grid {
 	public List<Patch> getNeighborhood(Patch p) {
 
 		List<Patch> ret = new ArrayList<Patch>();
-		int row = p.myLocation[0];
-		int col = p.myLocation[1];
+		int row = p.myRow;
+		int col = p.myCol;
 
 		for (int i = row-1; i < row + 2; i++) {
 			for (int j = col-1; j < col+2; j++) {

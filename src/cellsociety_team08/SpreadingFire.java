@@ -1,16 +1,18 @@
 package cellsociety_team08;
 
+import java.util.List;
 import java.util.Random;
+
+import javafx.scene.paint.Color;
 
 
 public class SpreadingFire extends RuleSet {
 	
 	private static final String SPREADING_FIRE = "Spreading of Fire";
 	private static final State[] possibleStates = new State[] {
-		new State("Tree", 0, null), // index 0
-		new State("Burning", 1, null) // index 1
-	};
-	
+		new State("Tree", 0, Color.GREEN, null), // index 0
+		new State("Burning", 1, Color.ORANGERED, null) // index 1
+	};	
 	private static float probCatch;
 
 	public SpreadingFire(Object[] params) {
@@ -19,39 +21,32 @@ public class SpreadingFire extends RuleSet {
 	}
 
 	@Override
-	public State getState(Cell[][] neighborhood) {
-		
-		Cell curr = neighborhood[1][1];
-		Cell north = neighborhood[0][1];
-		Cell south = neighborhood[2][1];
-		Cell west = neighborhood[1][0];
-		Cell east = neighborhood[1][2];
+	public Patch getNext(Patch curr, List<Patch> neighborhood) {
 		
 		// If it's already burning, it will be empty on the next iteration
-		if (curr.getState().equals(possibleStates[1])) {
+		if (curr.myCell.getState().equals(possibleStates[1])) {
 			curr.isEmpty = true;
-			return null;
+			return curr;
 		}
-		
-		// Implemented randomness in the catching fire algorithm
-		if (isBurning(north) || isBurning(south) || isBurning(west) || isBurning(east)){
-			Random rand = new Random();
-			float randFloat = rand.nextFloat();
-			if (randFloat <= probCatch) return possibleStates[1];
-			return possibleStates[0];
+
+		for (Patch p : neighborhood) {
+			if ((p.myRow == curr.myRow || p.myCol == curr.myCol) && isBurning(p.myCell)) {
+				Random rand = new Random();
+				float randFloat = rand.nextFloat();
+				if (randFloat <= probCatch) {
+					curr.myCell.setState(possibleStates[1]);
+				} else {
+					curr.myCell.setState(possibleStates[0]);
+				}
+			}
 		}
-		
-		return possibleStates[0];
+			
+		return curr;
 	}
 	
 	private boolean isBurning(Cell cell) {
 		if (cell == null) return false;
 		return (possibleStates[1].equals(cell.getState()));
-	}
-	
-	@Override
-	public int[] getLocation(Cell[][] neighborhood) {
-		return neighborhood[1][1].getLocation();
 	}
 
 }

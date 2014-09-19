@@ -1,5 +1,7 @@
 package cellsociety_team08;
 
+import java.util.List;
+
 
 public abstract class  RuleSet {
 	
@@ -17,8 +19,6 @@ public abstract class  RuleSet {
 		return myDescription;
 	}
 	
-	public abstract State getState(Cell[][] neighborhood);
-	
-	public abstract int[] getLocation(Cell[][] neighborhood);
-	
+	public abstract Patch getNext(Patch curr, List<Patch> neighborhood);
+		
 }

@@ -11,7 +11,7 @@ public class Grid {
 	private Map<String, RuleSet> myImplementedRulesets;
 
 	private static int myRows, myCols, myHeight, myWidth;
-	private Patch[][] myPatches;
+	private Patch[][] myPatches, nextPatches;
 	private static RuleSet myRuleSet;
 
 
@@ -26,6 +26,7 @@ public class Grid {
 		myWidth = width;
 		
 		myPatches = new Patch[myRows][myCols];
+		nextPatches = new Patch[myRows][myCols];
 	}
 	
 	/**
@@ -106,10 +107,11 @@ public class Grid {
 		for (int i = 0; i < myPatches.length; i++) {
 			for (int j = 0; j < myPatches[0].length; j++) {
 				List<Patch> neighborhood = getNeighborhood(myPatches[i][j]);
-				myPatches[i][j].setState(myRuleSet.getState(neighborhood));
-				myPatches[i][j].setLocation(myRuleSet.getLocation(neighborhood));
+				nextPatches[i][j] = myRuleSet.getNext(myPatches[i][j], neighborhood);
 			}
 		}
+		
+		myPatches = nextPatches.clone();
 		
 	}
 

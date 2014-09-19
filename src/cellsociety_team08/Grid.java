@@ -99,7 +99,7 @@ public class Grid {
 	}
 	
 
-	public void update() {
+	public Patch[][] update() {
 		
 		for (int i = 0; i < myPatches.length; i++) {
 			for (int j = 0; j < myPatches[0].length; j++) {
@@ -107,7 +107,9 @@ public class Grid {
 				nextPatches[i][j] = myRuleSet.getNext(myPatches[i][j], neighborhood);
 			}
 		}
+
 		myPatches = nextPatches.clone();
+		return myPatches;
 		
 	}
 

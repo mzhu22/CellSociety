@@ -4,17 +4,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 public class Grid {
 
 	private Map<String, RuleSet> myImplementedRulesets;
 
-	private static int myRows, myCols, myHeight, myWidth;
+	private static int myRows, myCols;
 	private Patch[][] myPatches, nextPatches;
-	private static RuleSet myRuleSet;
+	private RuleSet myRuleSet;
 
 	public Grid(String type, Map<String, Object> parametersMap, int rows,
-			int cols) {
+			int cols, String[][] grid) {
 		makeMyPossibleRules(parametersMap);
 
 		myRuleSet = myImplementedRulesets.get(type);
@@ -24,7 +25,7 @@ public class Grid {
 		myPatches = new Patch[myRows][myCols];
 		nextPatches = new Patch[myRows][myCols];
 
-		initialize();
+		initialize(grid);
 	}
 
 	/**
@@ -52,15 +53,10 @@ public class Grid {
 		// PredatorPrey(parametersMap)); // Still needs work
 	}
 
-	public void initialize() {
-
-		initializePatches();
-	}
-
-	public void initializePatches() {
+	public void initialize(String[][] grid) {
 		for (int i = 0; i < myPatches.length; i++) {
 			for (int j = 0; j < myPatches[0].length; j++) {
-				myPatches[i][j] = new Patch(i, j, true);
+				myPatches[i][j] = myRuleSet.initializePatch(i, j, grid[i][j]);
 			}
 		}
 	}
@@ -73,7 +69,14 @@ public class Grid {
 						neighborhood);
 			}
 		}
-
+		
+		for (int i = 0; i < myPatches.length; i++) {
+			for (int j = 0; j < myPatches[0].length; j++) {
+				myPatches[i][j].flagged = false;
+			}
+		}
+		
+		System.out.println("a");
 		myPatches = nextPatches.clone();
 		return myPatches;
 	}

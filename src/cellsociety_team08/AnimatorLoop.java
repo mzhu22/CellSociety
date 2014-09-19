@@ -71,12 +71,11 @@ public class AnimatorLoop {
 	/**
 	 * Change the colors of the Rectangle representations of Cells to animate them
 	 */
-	//TODO: GET RID OF SOME OF THIS TESTING SHIT 
 	private void updateGUICells() {
 		for(int i=0; i<myPatches.length; i++){
 			for(int j=0; j<myPatches[i].length; j++){
 				if(myPatches[i][j].getCell()==null){
-					myGUICells[i][j].setFill(Color.YELLOW);
+					myGUICells[i][j].setFill(Color.WHITE);
 				}
 				else{
 					Color color = myPatches[i][j].getCell().getState().getColor(); //We should make this shorter one day @Mike Zhu
@@ -134,7 +133,7 @@ public class AnimatorLoop {
 		myGUICells = new Rectangle[settings.getRows()][settings.getColumns()];
 
 		myGridPane = initGrid(settings.getRows(), settings.getColumns(), settings.getGrid());
-		myGrid = new Grid(settings.getType(), settings.getParameters(), settings.getRows(), settings.getColumns());
+		myGrid = new Grid(settings.getType(), settings.getParameters(), settings.getRows(), settings.getColumns(), settings.getGrid());
 		initialized = true;
 		return myGridPane;
 	}

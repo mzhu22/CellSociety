@@ -12,7 +12,7 @@ public class Grid {
 
 	private static int myRows, myCols, myHeight, myWidth;
 	private Patch[][] myPatches, nextPatches;
-	private static RuleSet myRuleSet;
+	private RuleSet myRuleSet;
 
 	public Grid(String type, Map<String,Object> parametersMap, int rows, int cols) {
 		makeMyPossibleRules(parametersMap);
@@ -48,15 +48,19 @@ public class Grid {
 //		myImplementedRulesets.put("PredatorPrey", new PredatorPrey(parametersMap)); // Still needs work
 	}
 
-	public void initialize() {
-		
-		initializePatches();
-	}
 	
-	public void initializePatches() {
+	public void initialize() {
+		Random rand = new Random();
 		for (int i = 0; i < myPatches.length; i++) {
 			for (int j = 0; j < myPatches[0].length; j++) {	
 				myPatches[i][j] = new Patch(i, j, true);
+				State defaultState = myRuleSet.getDefaultState();
+				myPatches[i][j].fill (new Cell(defaultState));
+				
+				if(rand.nextInt(10)==1){
+					State onFire = myRuleSet.getFire();
+					myPatches[i][j].getCell().setState(onFire);
+				}
 			}
 		}
 	}
@@ -68,7 +72,13 @@ public class Grid {
 				nextPatches[i][j] = myRuleSet.getNext(myPatches[i][j], neighborhood);
 			}
 		}
-
+		
+		for (int i = 0; i < myPatches.length; i++) {
+			for (int j = 0; j < myPatches[0].length; j++) {
+				myPatches[i][j].flagged = false;
+			}
+		}
+		
 		myPatches = nextPatches.clone();
 		return myPatches;
 	}

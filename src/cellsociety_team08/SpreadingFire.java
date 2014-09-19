@@ -10,27 +10,31 @@ public class SpreadingFire extends RuleSet {
 	
 	private static final String SPREADING_FIRE = "Spreading of Fire";
 	private static final String PROB_CATCH = "probCatch";
-	private static final State[] possibleStates = new State[] {
-		new State("Tree", 0, Color.GREEN, null), // index 0
-		new State("Burning", 1, Color.ORANGERED, null) // index 1
-	};	
+	
 	private static float probCatch;
 
 	public SpreadingFire(Map<String, Object> params) {
 		super(params);
-		
+
 		myDescription = SPREADING_FIRE;
 		//TODO: Fix this stupid casting and parsing craziness
 		probCatch = Float.parseFloat((String) params.get(PROB_CATCH));
+
+		myPossibleStates = new State[] {
+				new State("Tree", 0, Color.GREEN, null), // index 0
+				new State("Burning", 1, Color.ORANGERED, null) // index 1
+		};	
 	}
 
 	@Override
 	public Patch getNext(Patch curr, List<Patch> neighborhood) {
 		// If it's already empty, do nothing
-		if (curr.isEmpty) return curr;
+		if (curr.isEmpty){
+			return curr;
+		}
 		
 		// If it's already burning, it will be empty on the next iteration
-		if (curr.myCell.getState().equals(possibleStates[1])) {
+		if (curr.myCell.getState().equals(myPossibleStates[1])) {
 			curr.clear();
 			return curr;
 		}
@@ -40,9 +44,9 @@ public class SpreadingFire extends RuleSet {
 				Random rand = new Random();
 				float randFloat = rand.nextFloat();
 				if (randFloat <= probCatch) {
-					curr.myCell.setState(possibleStates[1]);
+					curr.myCell.setState(myPossibleStates[1]);
 				} else {
-					curr.myCell.setState(possibleStates[0]);
+					curr.myCell.setState(myPossibleStates[0]);
 				}
 			}
 		}
@@ -51,7 +55,8 @@ public class SpreadingFire extends RuleSet {
 	}
 	
 	private boolean isBurning(Cell cell) {
-		return (possibleStates[1].equals(cell.getState()));
+		return (myPossibleStates[1].equals(cell.getState()));
+//		return true;
 	}
 
 }

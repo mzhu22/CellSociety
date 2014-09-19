@@ -14,6 +14,15 @@ public abstract class  RuleSet {
 		myParams = params;
 	}
 	
+	public State getDefaultState(){
+		return myPossibleStates[0];
+	}
+	
+	//TODO: Tester code. Remove later
+	public State getFire(){
+		return myPossibleStates[1];
+	}
+	
 	public String getDescription() {
 		return myDescription;
 	}

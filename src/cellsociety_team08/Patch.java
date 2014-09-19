@@ -20,7 +20,8 @@ public class Patch {
 	
 	public void clear() {
 		isEmpty = true;
-		myCell.remove();
+		myCell = null;
+//		myCell.remove();
 		flagged = false;
 	}
 	

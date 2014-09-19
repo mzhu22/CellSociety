@@ -2,6 +2,7 @@ package cellsociety_team08;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javafx.scene.paint.Color;
 
@@ -12,7 +13,7 @@ public class GameOfLife extends RuleSet {
 			"Alive", 0, Color.GREEN, null) };
 	// No extra parameters!
 
-	public GameOfLife(Object[] params) {
+	public GameOfLife(Map<String, Object> params) {
 		super(GAME_OF_LIFE, possibleStates, params);
 	}
 

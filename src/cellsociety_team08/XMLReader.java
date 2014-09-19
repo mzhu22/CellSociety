@@ -1,6 +1,8 @@
 package cellsociety_team08;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -31,38 +33,57 @@ public class XMLReader {
 			
 			String description = initDoc.getDocumentElement().getAttribute("type");
 			
-			NodeList nList = initDoc.getElementsByTagName("grid");
-						
-			Element elem = (Element) nList.item(0);
+			NodeList paramNodes = initDoc.getElementsByTagName("parameters");
+			Element paramNode = (Element) paramNodes.item(0);
+			NodeList params = paramNode.getElementsByTagName("parameter");
+			Map<String, Object> parametersMap = readParameters(params);
 			
-			int rows = Integer.parseInt(elem.getAttribute("rows"));
-			int columns = Integer.parseInt(elem.getAttribute("columns"));
-			String gridString = elem.getFirstChild().getNodeValue();
+			NodeList gridNodes = initDoc.getElementsByTagName("grid");
+			Element gridElem = (Element) gridNodes.item(0);
+			int rows = Integer.parseInt(gridElem.getAttribute("rows"));
+			int columns = Integer.parseInt(gridElem.getAttribute("columns"));
+			String[][] grid = readGrid(gridElem, rows, columns);
 			
-			/*
-			 * Code below handles reading of the XML grid layout. This is liable to change b/c the grid format 
-			 * is not set in stone
-			 */
-			
-			String[] tempArray = gridString.split("\n");
-			String[][] grid = new String[columns][rows];
-			
-			int i=-1;
-			for(String s: tempArray){
-				s = s.trim();
-				if(s.length()>0){
-					i++;
-					String[] row = s.split(" ");
-					grid[i] = row;
-				}
-			}
-			
-			CASettings settings = new CASettings(description, rows, columns, grid);
+			CASettings settings = new CASettings(description, parametersMap, rows, columns, grid);
 			return settings;
 		}
 		catch (Exception e){
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	private String[][] readGrid(Element gridElem, int rows, int columns) {
+		String gridString = gridElem.getFirstChild().getNodeValue();
+		
+		/*
+		 * Code below handles reading of the XML grid layout. This is liable to change b/c the grid format 
+		 * is not set in stone
+		 */
+		
+		String[] tempArray = gridString.split("\n");
+		String[][] grid = new String[columns][rows];
+		
+		int i=-1;
+		for(String s: tempArray){
+			s = s.trim();
+			if(s.length()>0){
+				i++;
+				String[] row = s.split(" ");
+				grid[i] = row;
+			}
+		}
+		return grid;
+	}
+
+	private Map<String, Object> readParameters(NodeList params) {
+		Map<String, Object> parametersMap = new HashMap<>();
+		for(int i=0; i<params.getLength(); i++){
+			Element param = (Element) params.item(i);
+			String key = param.getAttribute("key");
+			Object value = param.getAttribute("value");
+			parametersMap.put(key, value);
+		}
+		return parametersMap;
 	}
 }

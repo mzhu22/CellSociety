@@ -101,7 +101,7 @@ public class AnimatorLoop {
 		
 		return myGridPane;
 	}
-
+	
 	private GridPane addCellsToGridPane(String[][] gridArray) {
 		double cellHeight = myHeight/myCols; 
 		double cellWidth = myWidth/myRows;
@@ -130,7 +130,7 @@ public class AnimatorLoop {
 		myGUICells = new Rectangle[settings.getRows()][settings.getColumns()];
 
 		myGridPane = initGrid(settings.getRows(), settings.getColumns(), settings.getGrid());
-//		myGrid = new Grid(settings.getType(), settings.getRows(), settings.getColumns(), myHeight, myWidth);
+//		myGrid = new Grid(settings.getType(), settings.getRows(), settings.getColumns());
 		return myGridPane;
 	}
 

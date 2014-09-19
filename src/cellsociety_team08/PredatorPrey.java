@@ -1,37 +1,43 @@
 package cellsociety_team08;
 
+import java.util.List;
 import java.util.Map;
 
 import javafx.scene.paint.Color;
 
 public class PredatorPrey extends RuleSet {
 	
-	private static final String PREDATOR_PREY = "Predator Prey";
-	
-	private static final State[] possibleStates = new State[] {
-		new State("Fish", 0, Color.CHARTREUSE, null), // index 0
-		new State("Shark", 1, Color.GREY, null) // index 1
-	};
-	
+	private static final String SHARK_BREED_TIME = "sharkBreedTime";
+	private static final String SHARK_STARVE_TIME = "sharkStarveTime";
+	private static final String FISH_BREED_TIME = "fishBreedTime";
+	private static int sharkBreedTime, sharkStarveTime, fishBreedTime;
+
 	public PredatorPrey(Map<String, Object> params) {
 		super(params);
-		// do stuff with parameters
+		
+		sharkBreedTime = Integer.parseInt((String) params.get(SHARK_BREED_TIME));
+		sharkStarveTime = Integer.parseInt((String) params.get(SHARK_STARVE_TIME));
+		fishBreedTime = Integer.parseInt((String) params.get(FISH_BREED_TIME));
+		
+		myPossibleStates = new State[] {
+				new State("Fish", 0, Color.CHARTREUSE, new Object[]{fishBreedTime}), // index 0
+				new State("Shark", 1, Color.GREY, new Object[]{sharkBreedTime, sharkStarveTime}) // index 1
+		};
+		
 	}
 
 	@Override
-	public State getState(Cell[][] neighborhood) {
+	public Patch getNext(Patch patch, List<Patch> neighborhood) {
+
+		if (patch.isEmpty || patch.flagged)
+			return patch;
 		
-		State currState = neighborhood[1][1].getState();
-		Cell north = neighborhood[0][1];
-		Cell south = neighborhood[2][1];
-		Cell west = neighborhood[1][0];
-		Cell east = neighborhood[1][2];
-		
-		return null;
-	}
-	
-	@Override
-	public int[] getLocation(Cell[][] neighboorhood) {
+		if (patch.myCell.getState().equals(myPossibleStates[0])) { // FISH
+			patch.myCell.getState().setParams(o);
+		} else {
+			
+		}
+
 		return null;
 	}
 

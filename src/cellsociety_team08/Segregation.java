@@ -1,6 +1,5 @@
 package cellsociety_team08;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -14,17 +13,14 @@ public class Segregation extends RuleSet {
 
 	private static double myMinSatA, myMinSatB;
 
-	/*
-	 * States accessed by this class will have the a parameter for isSatisfied
-	 * which will be a boolean value
-	 */
-	private static final State[] possibleStates = new State[] {
-			new State("Agent A", 0, Color.BLUE, null), // index 0
-			new State("Agent B", 1, Color.RED, null) // index 1
-	};
-
 	public Segregation(Map<String, Object> params) {
 		super(params);
+		
+		myPossibleStates = new State[] {
+				new State("Agent A", 0, Color.BLUE, null), // index 0
+				new State("Agent B", 1, Color.RED, null) // index 1
+		};
+		
 		myMinSatA = (double) myParams.get(MIN_SAT_A);
 		myMinSatB = (double) myParams.get(MIN_SAT_B);
 	}
@@ -38,7 +34,7 @@ public class Segregation extends RuleSet {
 			return patch;
 
 		double currSat = getSatisfaction(patch, neighborhood);
-		
+
 		// check for empty patches!!!!!!!
 		if ((patch.myCell.getState().myIndex == 0 && currSat >= myMinSatA)
 				|| (patch.myCell.getState().myIndex == 1 && currSat >= myMinSatB)) {
@@ -48,29 +44,23 @@ public class Segregation extends RuleSet {
 			return notSatisfiedPatch(patch);
 		}
 	}
-	
-	/*public List<Patch> getAvaliableNeighbors(List<Patch> neighborhood) {
-		List<Patch> availableNeighbors = new ArrayList<Patch>();
-		for (Patch patch: neighborhood) {
-			if (patch.isEmpty) {
-				availableNeighbors.add(patch);
-			}
-		}
-		return availableNeighbors;
-	}*/
-	
+
+	/*
+	 * public List<Patch> getAvaliableNeighbors(List<Patch> neighborhood) {
+	 * List<Patch> availableNeighbors = new ArrayList<Patch>(); for (Patch
+	 * patch: neighborhood) { if (patch.isEmpty) {
+	 * availableNeighbors.add(patch); } } return availableNeighbors; }
+	 */
+
 	public void move(Patch patch, List<Patch> neighborhood) {
-		
+
 		if (neighborhood.size() > 0) {
-			int patchesLeft = 1;
-			for(Patch p: neighborhood) {
+			for (Patch p : neighborhood) {
 				if (p.isEmpty && !patch.flagged) {
-					if (patchesLeft == 1) { //only move once
-						p.myCell = patch.myCell;
-						patch.clear();
-						p.flagged = true;
-						patchesLeft--;
-					}	
+					p.myCell = patch.myCell;
+					patch.clear();
+					p.flagged = true;
+					return;
 				}
 			}
 		}
@@ -100,7 +90,7 @@ public class Segregation extends RuleSet {
 		p.myCell.setState(s);
 		return p;
 	}
-	
+
 	private Patch notSatisfiedPatch(Patch p) {
 		State s = p.myCell.getState();
 		s.setParams(new Object[] { false });

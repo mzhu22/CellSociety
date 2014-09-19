@@ -23,6 +23,8 @@ public class Grid {
 		
 		myPatches = new Patch[myRows][myCols];
 		nextPatches = new Patch[myRows][myCols];
+		
+		initialize();
 	}
 	
 	/**
@@ -41,65 +43,23 @@ public class Grid {
 		myImplementedRulesets = new HashMap<>();
 		// We need to implement passing parameters for the rulesets via the XML
 		// file
-		myImplementedRulesets.put("SpreadingFire", new SpreadingFire(parametersMap);
-		myImplementedRulesets.put("Segregation", new Segregation(parametersMap);
-		myImplementedRulesets.put("PredatorPrey", new PredatorPrey(parametersMap); // Still needs work
+		myImplementedRulesets.put("SpreadingFire", new SpreadingFire(parametersMap));
+//		myImplementedRulesets.put("Segregation", new Segregation(parametersMap));
+//		myImplementedRulesets.put("PredatorPrey", new PredatorPrey(parametersMap)); // Still needs work
 	}
 
-	public void initialize(RuleSet rules, State state) {
+	public void initialize() {
 		
 		initializePatches();
-		
-		if (rules instanceof Segregation) {
-			initializeSegregation();
-		}
-		
-		if (rules instanceof SpreadingFire) {
-			initializeSpreadingFire(rules, state);
-		}
-		
-		if (rules instanceof GameOfLife) {
-			initializeGameOfLife(rules, state);
-		}
-		
 	}
 	
 	public void initializePatches() {
 		for (int i = 0; i < myPatches.length; i++) {
 			for (int j = 0; j < myPatches[0].length; j++) {	
-				int[] dimensions = {myHeight/myRows, myWidth/myCols};
-				myPatches[i][j] = new Patch(dimensions, i, j, true);
+				myPatches[i][j] = new Patch(i, j, true);
 			}
 		}
 	}
-	
-	
-	public void initializeSegregation() {
-		Random rand = new Random();
-		for (int i = 0; i < myPatches.length; i++) {
-			for (int j = 0; j < myPatches[0].length; j++) {
-				int[] dimensions = {myHeight/myRows, myWidth/myCols};
-				if ((rand.nextInt(100) + 1) > 66) { // Read from XML file later
-					myPatches[i][j].fill(new Cell(myRuleSet.myPossibleStates[0], dimensions));
-				}
-				if (((rand.nextInt(100) + 1) < 66) && ((rand.nextInt(100) + 1) > 33)) {
-					myPatches[i][j].fill(new Cell(myRuleSet.myPossibleStates[1], dimensions));
-				}
-			}
-		}
-	}
-	
-
-	public void initializeSpreadingFire(RuleSet rules, State state) {
-		
-	}
-	public void initializePredatorPrey(RuleSet rules, State state) {
-		//initializeSegregation(rules, state); //is there a significant difference?
-	}
-	public void initializeGameOfLife(RuleSet rules, State state) {
-		
-	}
-	
 
 	public Patch[][] update() {
 		for (int i = 0; i < myPatches.length; i++) {
@@ -111,7 +71,6 @@ public class Grid {
 
 		myPatches = nextPatches.clone();
 		return myPatches;
-		
 	}
 
 	public List<Patch> getNeighborhood(Patch p) {

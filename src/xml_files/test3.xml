@@ -1,8 +1,7 @@
 <?xml version="1.0"?>
-<cellularautomata type = "conwaylife">
+<cellularautomata type = "SpreadingFire">
 	<parameters>
-		<parameter key="probability" value=".5"/>
-		<parameter key="spawnrate" value=".3"/>
+		<parameter key="probCatch" value=".5"/>
 	</parameters>
 	<grid rows="40" columns = "40">
 		0 0 0 0 1 1 1 0 0 0 1 0 0 0 0 1 1 1 0 0 0 1 0 0 0 0 1 1 1 0 0 0 1 0 0 0 0 1 1 1 0 0 0 1

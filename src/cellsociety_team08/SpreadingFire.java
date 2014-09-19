@@ -17,13 +17,15 @@ public class SpreadingFire extends RuleSet {
 	private static float probCatch;
 
 	public SpreadingFire(Map<String, Object> params) {
-		super(SPREADING_FIRE, possibleStates, params);
-		probCatch = (float) params.get(PROB_CATCH);
+		super(params);
+		
+		myDescription = SPREADING_FIRE;
+		//TODO: Fix this stupid casting and parsing craziness
+		probCatch = Float.parseFloat((String) params.get(PROB_CATCH));
 	}
 
 	@Override
 	public Patch getNext(Patch curr, List<Patch> neighborhood) {
-		
 		// If it's already empty, do nothing
 		if (curr.isEmpty) return curr;
 		

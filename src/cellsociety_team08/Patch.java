@@ -8,12 +8,14 @@ public class Patch {
 	public static int[] myDimensions;
 	public Cell myCell;
 	
-	public Patch(int[] dimensions, int row, int col, boolean empty) {
-		myDimensions = dimensions;
+	public Patch(int row, int col, boolean empty) {
 		myRow = row;
 		myCol = col;
 		isEmpty = empty;
 		flagged = false;
+	}
+	public Cell getCell(){
+		return myCell;
 	}
 	
 	public void clear() {
@@ -30,6 +32,4 @@ public class Patch {
 	public boolean containsCell() {
 		return (isEmpty = false);
 	}
-	
-
 }

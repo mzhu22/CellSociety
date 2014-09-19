@@ -15,12 +15,12 @@ public class Segregation extends RuleSet {
 
 	public Segregation(Map<String, Object> params) {
 		super(params);
-		
+
 		myPossibleStates = new State[] {
 				new State("Agent A", 0, Color.BLUE, null), // index 0
 				new State("Agent B", 1, Color.RED, null) // index 1
 		};
-		
+
 		myMinSatA = (double) myParams.get(MIN_SAT_A);
 		myMinSatB = (double) myParams.get(MIN_SAT_B);
 	}
@@ -56,7 +56,7 @@ public class Segregation extends RuleSet {
 
 		if (neighborhood.size() > 0) {
 			for (Patch p : neighborhood) {
-				if (p.isEmpty && !patch.flagged) {
+				if (p.isEmpty && !p.flagged) {
 					p.myCell = patch.myCell;
 					patch.clear();
 					p.flagged = true;

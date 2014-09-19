@@ -10,17 +10,14 @@ public class Cell {
 	private List<State> myHistory = new Stack<State>();
 	public Rectangle myRectangle;
 	
-	public Cell(State s, int[] dimensions) {      /* maybe add this too I'm not sure: int size*/
+	public Cell(State s) {      /* maybe add this too I'm not sure: int size*/
 		
 		((Stack<State>) myHistory).push(s);
-		myRectangle = new Rectangle(dimensions[0], dimensions[1]);
-		myRectangle.setFill(s.getColor());
 		
 	}
 	
 	public void remove() {
 		myHistory.clear();
-		myRectangle.setVisible(false);
 	}
 	
 	public State getState() {
@@ -36,7 +33,6 @@ public class Cell {
 			remove();
 		}
 		((Stack<State>) myHistory).push(s);
-		myRectangle.setFill(s.getColor());	
 	}
 
 }

@@ -100,7 +100,6 @@ public class Grid {
 	
 
 	public Patch[][] update() {
-		
 		for (int i = 0; i < myPatches.length; i++) {
 			for (int j = 0; j < myPatches[0].length; j++) {
 				List<Patch> neighborhood = getNeighborhood(myPatches[i][j]);

@@ -15,15 +15,13 @@ public class Grid {
 	private static RuleSet myRuleSet;
 
 
-	public Grid(String type, int rows, int cols, int height, int width) {
+	public Grid(String type, int rows, int cols) {
 		
 		makeMyPossibleRules();
 
 		myRuleSet = myImplementedRulesets.get(type);
 		myRows = rows;
 		myCols = cols;
-		myHeight = height;
-		myWidth = width;
 		
 		myPatches = new Patch[myRows][myCols];
 		nextPatches = new Patch[myRows][myCols];
@@ -109,9 +107,6 @@ public class Grid {
 				nextPatches[i][j] = myRuleSet.getNext(myPatches[i][j], neighborhood);
 			}
 		}
-		
-		
-		
 		myPatches = nextPatches.clone();
 		
 	}

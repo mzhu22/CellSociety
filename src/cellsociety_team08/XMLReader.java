@@ -39,6 +39,11 @@ public class XMLReader {
 			int columns = Integer.parseInt(elem.getAttribute("columns"));
 			String gridString = elem.getFirstChild().getNodeValue();
 			
+			/*
+			 * Code below handles reading of the XML grid layout. This is liable to change b/c the grid format 
+			 * is not set in stone
+			 */
+			
 			String[] tempArray = gridString.split("\n");
 			String[][] grid = new String[columns][rows];
 			

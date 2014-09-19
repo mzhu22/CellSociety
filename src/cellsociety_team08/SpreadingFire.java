@@ -28,14 +28,15 @@ public class SpreadingFire extends RuleSet {
 
 	@Override
 	public Patch getNext(Patch curr, List<Patch> neighborhood) {
-		// If it's already empty, do nothing
+		// If it's already empty, do nothing		
 		if (curr.isEmpty){
 			return curr;
 		}
 		
-		// If it's already burning, it will be empty on the next iteration
 		for (Patch p : neighborhood) {
 			if ((p.myRow == curr.myRow || p.myCol == curr.myCol) && isBurning(p)) {
+				System.out.println(neighborhood.size());
+
 				Random rand = new Random();
 				float randFloat = rand.nextFloat();
 				if (randFloat <= probCatch) {
@@ -45,7 +46,8 @@ public class SpreadingFire extends RuleSet {
 				}
 			}
 		}	
-		
+
+		// If it's already burning, it will be empty on the next iteration
 		if (curr.myCell.getState().equals(myPossibleStates[1])) {
 			curr.clear();
 		}
@@ -57,7 +59,8 @@ public class SpreadingFire extends RuleSet {
 		if(p.getCell()==null){
 			return false;
 		}
-		return (myPossibleStates[1].equals(p.getCell().getState()));
+		//TODO: CHECK WHY THIS COMPARISON DOESNT FUCKING WORK
+		return (myPossibleStates[1].myName.equals(p.getCell().getState().myName));
 	}
 
 }

@@ -69,13 +69,13 @@ public class Grid {
 						neighborhood);
 			}
 		}
-		
+
 		for (int i = 0; i < myPatches.length; i++) {
 			for (int j = 0; j < myPatches[0].length; j++) {
 				myPatches[i][j].flagged = false;
 			}
 		}
-		
+
 		System.out.println("a");
 		myPatches = nextPatches.clone();
 		return myPatches;

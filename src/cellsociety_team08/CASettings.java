@@ -32,7 +32,7 @@ public class CASettings {
 		return myType;
 	}
 	
-	public Map<String, Object> getParamters(){
+	public Map<String, Object> getParameters(){
 		return myParameters;
 	}
 	

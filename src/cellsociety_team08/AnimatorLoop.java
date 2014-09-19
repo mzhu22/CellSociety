@@ -130,7 +130,7 @@ public class AnimatorLoop {
 		myGUICells = new Rectangle[settings.getRows()][settings.getColumns()];
 
 		myGridPane = initGrid(settings.getRows(), settings.getColumns(), settings.getGrid());
-//		myGrid = new Grid(settings.getType(), settings.getRows(), settings.getColumns());
+		myGrid = new Grid(settings.getType(), settings.getParameters(), settings.getRows(), settings.getColumns());
 		return myGridPane;
 	}
 

@@ -14,11 +14,9 @@ public class Grid {
 	private Patch[][] myPatches, nextPatches;
 	private static RuleSet myRuleSet;
 
-
-	public Grid(String type, int rows, int cols) {
+	public Grid(String type, Map<String,Object> parametersMap, int rows, int cols) {
+		makeMyPossibleRules(parametersMap);
 		
-		makeMyPossibleRules();
-
 		myRuleSet = myImplementedRulesets.get(type);
 		myRows = rows;
 		myCols = cols;
@@ -31,17 +29,21 @@ public class Grid {
 	 * Use this method to fill up myPossibleRules with all implemented
 	 * simulation rulesets. These rulesets then accessed by the constructor and
 	 * put into myRuleSet.
+	 * 
+	 * 9/19 12:40 am: Currently sketchy implementation. All implemented RuleSets are created
+	 * with the single parametersMap input. While this puts parameters of a single simulation into 
+	 * all RuleSets (e.g., spawnRate into SpreadingFire), this should never cause an error because:
+	 * i. No RuleSets other than the one specified by type should be called
+	 * ii. If i. isn't true, then calling on a parameter that doesn't exist would return null, hopefully 
+	 * program just errors out then.
 	 */
-	private void makeMyPossibleRules() {
+	private void makeMyPossibleRules(Map<String, Object> parametersMap) {
 		myImplementedRulesets = new HashMap<>();
 		// We need to implement passing parameters for the rulesets via the XML
 		// file
-		myImplementedRulesets.put("SpreadingFire", new SpreadingFire(
-				new Object[] { (float) 0.9 }));
-		myImplementedRulesets.put("Segregation", new Segregation(new Object[] {
-				0.3, 0.4 }));
-		myImplementedRulesets.put("PredatorPrey", new PredatorPrey(
-				new Object[] { 5 })); // Still needs work
+		myImplementedRulesets.put("SpreadingFire", new SpreadingFire(parametersMap);
+		myImplementedRulesets.put("Segregation", new Segregation(parametersMap);
+		myImplementedRulesets.put("PredatorPrey", new PredatorPrey(parametersMap); // Still needs work
 	}
 
 	public void initialize(RuleSet rules, State state) {

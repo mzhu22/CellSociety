@@ -10,9 +10,7 @@ public abstract class  RuleSet {
 	public static State[] myPossibleStates;
 	public static Map<String, Object> myParams;
 	
-	public RuleSet(String description, State[] possibleStates, Map<String,Object> params) {
-		myDescription = description;
-		myPossibleStates = possibleStates;
+	public RuleSet(Map<String,Object> params) {
 		myParams = params;
 	}
 	

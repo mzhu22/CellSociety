@@ -23,9 +23,12 @@ public class SpreadingFire extends RuleSet {
 	@Override
 	public Patch getNext(Patch curr, List<Patch> neighborhood) {
 		
+		// If it's already empty, do nothing
+		if (curr.isEmpty) return curr;
+		
 		// If it's already burning, it will be empty on the next iteration
 		if (curr.myCell.getState().equals(possibleStates[1])) {
-			curr.isEmpty = true;
+			curr.clear();
 			return curr;
 		}
 
@@ -45,7 +48,6 @@ public class SpreadingFire extends RuleSet {
 	}
 	
 	private boolean isBurning(Cell cell) {
-		if (cell == null) return false;
 		return (possibleStates[1].equals(cell.getState()));
 	}
 

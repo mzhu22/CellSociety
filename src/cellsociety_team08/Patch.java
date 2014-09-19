@@ -16,6 +16,7 @@ public class Patch {
 	
 	public void clear() {
 		isEmpty = true;
+		myCell.remove();
 	}
 	
 	public void fill(Cell cell) {

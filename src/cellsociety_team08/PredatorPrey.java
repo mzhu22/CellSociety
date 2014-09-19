@@ -2,13 +2,15 @@ package cellsociety_team08;
 
 import java.util.Map;
 
+import javafx.scene.paint.Color;
+
 public class PredatorPrey extends RuleSet {
 	
 	private static final String PREDATOR_PREY = "Predator Prey";
 	
 	private static final State[] possibleStates = new State[] {
-		new State("Fish", 0, null), // index 0
-		new State("Shark", 1, null) // index 1
+		new State("Fish", 0, Color.CHARTREUSE, null), // index 0
+		new State("Shark", 1, Color.GREY, null) // index 1
 	};
 	
 	public PredatorPrey(Map<String, Object> params) {

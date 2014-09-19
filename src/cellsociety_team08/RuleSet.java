@@ -6,9 +6,9 @@ import java.util.Map;
 
 public abstract class  RuleSet {
 	
-	private String myDescription;
-	public static State[] myPossibleStates;
-	public static Map<String, Object> myParams;
+	protected String myDescription;
+	protected static State[] myPossibleStates;
+	protected static Map<String, Object> myParams;
 	
 	public RuleSet(Map<String,Object> params) {
 		myParams = params;

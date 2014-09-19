@@ -21,11 +21,12 @@ public class AnimatorLoop {
 	public static final int GRID_BORDER_WIDTH = 1;
 	
 	private GridPane myGridPane;
+	
+	private boolean initialized = false;
 
 	private Grid myGrid;
 	private Rectangle[][] myGUICells;
 	private Patch[][] myPatches;
-	
 		
 	/* 
 	 * These constants constants are set when the XML file is read, specifying the size of the CA sim board.
@@ -56,25 +57,33 @@ public class AnimatorLoop {
     private EventHandler<ActionEvent> oneFrame = new EventHandler<ActionEvent>() {
 		@Override
 		public void handle(ActionEvent evt) {
-			updateGUICells();
+			updateCells();
 		}
 	};
 	
 	private void updateCells(){
-		
+		if(initialized){
+			myPatches = myGrid.update();
+			updateGUICells();
+		}
 	}
 
 	/**
 	 * Change the colors of the Rectangle representations of Cells to animate them
 	 */
 	//TODO: GET RID OF SOME OF THIS TESTING SHIT 
-	private void updateGUICells () {
-//		myGrid.update();
-		Random r = new Random();
-//		for(Shape s: myGUICells){
-//			if(r.nextInt(100)==1)
-//			s.setFill(Color.BLACK);
-//		}
+	private void updateGUICells() {
+		for(int i=0; i<myPatches.length; i++){
+			for(int j=0; j<myPatches[i].length; j++){
+				if(myPatches[i][j].getCell()==null){
+					myGUICells[i][j].setFill(Color.YELLOW);
+				}
+				else{
+					Color color = myPatches[i][j].getCell().getState().getColor(); //We should make this shorter one day @Mike Zhu
+					myGUICells[i][j].setFill(color);
+				}
+			}
+		}
 	}
 	
 	/**
@@ -105,24 +114,19 @@ public class AnimatorLoop {
 	private GridPane addCellsToGridPane(String[][] gridArray) {
 		double cellHeight = myHeight/myCols; 
 		double cellWidth = myWidth/myRows;
-				
+
 		myGridPane.setGridLinesVisible(true);
 		for(int i=0; i<myRows; i++){
 			for(int j=0; j<myCols; j++){
-				if(gridArray[i][j].equals("0")){
-					Rectangle cell = new Rectangle(cellWidth, cellHeight, Color.RED);
-					myGridPane.add(cell, j, i);
-					myGUICells[j][i] = cell;
-				}
-				else{
-					Rectangle patch = new Rectangle(cellWidth, cellHeight, Color.WHITE);
-					myGridPane.add(patch, j, i);
-					myGUICells[i][j] = patch;
-				}
+				Rectangle patch = new Rectangle(cellWidth, cellHeight, Color.WHITE);
+				myGridPane.add(patch, j, i);
+				myGUICells[i][j] = patch;
 			}
 		}
+
 		return myGridPane;
 	}
+	
 	
 	public GridPane readXMLAndInitializeGrid(File XMLFile) {
 		XMLReader reader = new XMLReader();
@@ -131,6 +135,7 @@ public class AnimatorLoop {
 
 		myGridPane = initGrid(settings.getRows(), settings.getColumns(), settings.getGrid());
 		myGrid = new Grid(settings.getType(), settings.getParameters(), settings.getRows(), settings.getColumns());
+		initialized = true;
 		return myGridPane;
 	}
 

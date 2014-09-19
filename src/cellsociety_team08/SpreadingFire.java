@@ -19,11 +19,14 @@ public class SpreadingFire extends RuleSet {
 	public SpreadingFire(Map<String, Object> params) {
 		super(params);
 		probCatch = (float) params.get(PROB_CATCH);
+		
+		myDescription = SPREADING_FIRE;
+		//TODO: Fix this stupid casting and parsing craziness
+		probCatch = Float.parseFloat((String) params.get(PROB_CATCH));
 	}
 
 	@Override
 	public Patch getNext(Patch curr, List<Patch> neighborhood) {
-		
 		// If it's already empty, do nothing
 		if (curr.isEmpty) return curr;
 		

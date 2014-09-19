@@ -64,14 +64,12 @@ public class Segregation extends RuleSet {
 		if (neighborhood.size() > 0) {
 			int patchesLeft = 1;
 			for(Patch p: neighborhood) {
-				if (p.isEmpty && !patch.flagged) {
-					if (patchesLeft == 1) { //only move once
-						p.myCell = patch.myCell;
-						patch.clear();
-						p.flagged = true;
-						patchesLeft--;
-					}	
-				}
+				if (patchesLeft == 1) { //only move once
+					p.myCell = patch.myCell;
+					patch.clear();
+					p.flagged = true;
+					return;
+				}		
 			}
 		}
 	}

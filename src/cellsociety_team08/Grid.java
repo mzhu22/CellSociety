@@ -1,6 +1,8 @@
 package cellsociety_team08;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -9,10 +11,23 @@ public class Grid {
 	private Map<String, RuleSet> myImplementedRulesets;
 
 	private static int myRows, myCols, myHeight, myWidth;
-	private Cell[][] myCells;
 	private Patch[][] myPatches;
 	private static RuleSet myRuleSet;
 
+
+	public Grid(String type, int rows, int cols, int height, int width) {
+		
+		makeMyPossibleRules();
+
+		myRuleSet = myImplementedRulesets.get(type);
+		myRows = rows;
+		myCols = cols;
+		myHeight = height;
+		myWidth = width;
+		
+		myPatches = new Patch[myRows][myCols];
+	}
+	
 	/**
 	 * Use this method to fill up myPossibleRules with all implemented
 	 * simulation rulesets. These rulesets then accessed by the constructor and
@@ -30,24 +45,12 @@ public class Grid {
 				new Object[] { 5 })); // Still needs work
 	}
 
-	public Grid(String type, int rows, int cols, int height, int width) {
-		
-		makeMyPossibleRules();
-
-		myRuleSet = myImplementedRulesets.get(type);
-		myRows = rows;
-		myCols = cols;
-		myHeight = height;
-		myWidth = width;
-		
-		myCells = new Cell[myRows][myCols];
-		myPatches = new Patch[myRows][myCols];
-	}
-
 	public void initialize(RuleSet rules, State state) {
 		
+		initializePatches();
+		
 		if (rules instanceof Segregation) {
-			initializeSegregation(rules, state);
+			initializeSegregation();
 		}
 		
 		if (rules instanceof SpreadingFire) {
@@ -57,11 +60,12 @@ public class Grid {
 		if (rules instanceof GameOfLife) {
 			initializeGameOfLife(rules, state);
 		}
+		
 	}
 	
 	public void initializePatches() {
-		for (int i = 0; i < myCells.length; i++) {
-			for (int j = 0; j < myCells[0].length; j++) {	
+		for (int i = 0; i < myPatches.length; i++) {
+			for (int j = 0; j < myPatches[0].length; j++) {	
 				int[] location = {i,j};
 				int[] dimensions = {myHeight/myRows, myWidth/myCols};
 				myPatches[i][j] = new Patch(dimensions, location, true);
@@ -70,20 +74,16 @@ public class Grid {
 	}
 	
 	
-	public void initializeSegregation(RuleSet rules, State state) {
+	public void initializeSegregation() {
 		Random rand = new Random();
-		initializePatches();
 		for (int i = 0; i < myPatches.length; i++) {
 			for (int j = 0; j < myPatches[0].length; j++) {
-				int[] location = {i,j};
 				int[] dimensions = {myHeight/myRows, myWidth/myCols};
-				if ((rand.nextInt(100) + 1) > 66) {
-					myCells[i][j] = new Cell(state); //placeholder here not sure what to do about size
-					myPatches[i][j].fill(myCells[i][j]);
+				if ((rand.nextInt(100) + 1) > 66) { // Read from XML file later
+					myPatches[i][j].fill(new Cell(myRuleSet.myPossibleStates[0], dimensions));
 				}
 				if (((rand.nextInt(100) + 1) < 66) && ((rand.nextInt(100) + 1) > 33)) {
-					myCells[i][j] = new Cell(state, location, dimensions); //5 is a placeholder here not sure what to do about size
-					myPatches[i][j].fill(myCells[i][j]);
+					myPatches[i][j].fill(new Cell(myRuleSet.myPossibleStates[1], dimensions));
 				}
 			}
 		}
@@ -102,26 +102,28 @@ public class Grid {
 	
 
 	public void update() {
-		for (int i = 0; i < myCells.length; i++) {
-			for (int j = 0; j < myCells[0].length; j++) {
-				Cell[][] neighborhood = getNeighborhood(myCells[i][j]);
-				myCells[i][j].setState(myRuleSet.getState(neighborhood));
-				myCells[i][j].setLocation(myRuleSet.getLocation(neighborhood));
+		
+		for (int i = 0; i < myPatches.length; i++) {
+			for (int j = 0; j < myPatches[0].length; j++) {
+				List<Patch> neighborhood = getNeighborhood(myPatches[i][j]);
+				myPatches[i][j].setState(myRuleSet.getState(neighborhood));
+				myPatches[i][j].setLocation(myRuleSet.getLocation(neighborhood));
 			}
 		}
+		
 	}
 
-	public Cell[][] getNeighborhood(Cell c) {
+	public List<Patch> getNeighborhood(Patch p) {
 
-		Cell[][] ret = new Cell[3][3];
+		List<Patch> ret = new ArrayList<Patch>();
+		int row = p.myLocation[0];
+		int col = p.myLocation[1];
 
-		for (int i = -1; i < 2; i++) {
-			for (int j = -1; j < 2; j++) {
-				if (isOutside(i, j)) {
-					ret[i][j] = null;
-				} else {
-					ret[i][j] = myCells[i][j];
-				}
+		for (int i = row-1; i < row + 2; i++) {
+			for (int j = col-1; j < col+2; j++) {
+				if (!isOutside(i, j) && !(i==row && j==col)) {
+					ret.add(myPatches[i][j]);
+				} 
 			}
 		}
 

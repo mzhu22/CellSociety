@@ -3,8 +3,9 @@ package cellsociety_team08;
 public class Patch {
 	
 	public boolean isEmpty;
-	public static int[] myLocation;
+	public int[] myLocation;
 	public static int[] myDimensions;
+	public Cell myCell;
 	
 	public Patch(int[] dimensions, int[] location, boolean empty) {
 		myDimensions = dimensions;
@@ -18,6 +19,7 @@ public class Patch {
 	}
 	
 	public void fill(Cell cell) {
+		myCell = cell;
 		isEmpty = false;
 	}
 	

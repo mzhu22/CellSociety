@@ -5,9 +5,9 @@ import javafx.scene.paint.Color;
 
 public class State {
 
-	public String myName;
+	public static String myName;
 	public int myIndex;
-	public Color myColor;
+	private Color myColor;
 	private Object[] myParams;
 
 	/*
@@ -16,9 +16,10 @@ public class State {
 	 * indicate its diameter
 	 */
 
-	public State(String name, int index, Object[] params) {
+	public State(String name, int index, Color color, Object[] params) {
 		myName = name;
 		myIndex = index;
+		setColor(color);
 		myParams = params;
 	}
 
@@ -32,6 +33,14 @@ public class State {
 	
 	public void setParams(Object[] o) {
 		myParams = o;
+	}
+
+	public Color getColor() {
+		return myColor;
+	}
+
+	public void setColor(Color myColor) {
+		this.myColor = myColor;
 	}
 
 }

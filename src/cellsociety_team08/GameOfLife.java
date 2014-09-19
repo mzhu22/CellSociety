@@ -35,7 +35,7 @@ public class GameOfLife extends RuleSet {
 
 		if (!patch.containsCell()) {
 			if (directNeighbors.size() == 3) {
-				patch.fill(new Cell(possibleStates[0], patch.myDimensions));
+				patch.fill(new Cell(possibleStates[0]));
 			}
 		}
 

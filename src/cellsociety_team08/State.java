@@ -8,7 +8,7 @@ public class State {
 	public static String myName;
 	public int myIndex;
 	private Color myColor;
-	private Object[] myParams;
+	public Object[] myParams;
 
 	/*
 	 * Bounds is the maximum size the shape can fit into For a rectangle, this

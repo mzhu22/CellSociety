@@ -41,13 +41,5 @@ public abstract class  RuleSet {
 	}
 	
 	public abstract Patch getNext(Patch curr, List<Patch> neighborhood);
-	
-	public void move(Patch curr, List<Patch> emptyPatches) {
-		return;
-	}
-	
-	public void addPatch(Patch from, Patch to) {
-		return;
-	}
 		
 }

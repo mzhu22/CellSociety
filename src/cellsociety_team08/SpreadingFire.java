@@ -7,23 +7,26 @@ import java.util.Random;
 import javafx.scene.paint.Color;
 
 public class SpreadingFire extends RuleSet {
-	
+
 	private static final String SPREADING_FIRE = "Spreading of Fire";
 	private static final String PROB_CATCH = "probCatch";
-	
 	private static float probCatch;
 
 	public SpreadingFire(Map<String, Object> params) {
 		super(params);
+		myPossibleStates = new State[] {
+				new State("Tree", 0, Color.GREEN, null), // index 0
+				new State("Burning", 1, Color.ORANGERED, null) // index 1
+		};
 
 		myDescription = SPREADING_FIRE;
-		//TODO: Fix this stupid casting and parsing craziness
+		// TODO: Fix this stupid casting and parsing craziness
 		probCatch = Float.parseFloat((String) params.get(PROB_CATCH));
 
 		myPossibleStates = new State[] {
 				new State("Tree", 0, Color.GREEN, null), // index 0
 				new State("Burning", 1, Color.ORANGERED, null) // index 1
-		};	
+		};
 	}
 
 	@Override
@@ -32,11 +35,16 @@ public class SpreadingFire extends RuleSet {
 		if (curr.isEmpty){
 			return curr;
 		}
-		
-		for (Patch p : neighborhood) {
-			if ((p.myRow == curr.myRow || p.myCol == curr.myCol) && isBurning(p)) {
-				System.out.println(neighborhood.size());
 
+		// If it's already burning, it will be empty on the next iteration
+		if (curr.myCell.getState().equals(myPossibleStates[1])) {
+			curr.clear();
+		}
+		
+		// If it's already burning, it will be empty on the next iteration
+		for (Patch p : neighborhood) {
+			if ((p.myRow == curr.myRow || p.myCol == curr.myCol)
+					&& isBurning(p)) {
 				Random rand = new Random();
 				float randFloat = rand.nextFloat();
 				if (randFloat <= probCatch) {
@@ -45,18 +53,23 @@ public class SpreadingFire extends RuleSet {
 					curr.myCell.setState(myPossibleStates[0]);
 				}
 			}
-		}	
+		}
 
 		// If it's already burning, it will be empty on the next iteration
+
 		if (curr.myCell.getState().equals(myPossibleStates[1])) {
 			curr.clear();
 		}
-		
+
 		return curr;
 	}
-	
+
+	private boolean isBurning(Cell cell) {
+		return (myPossibleStates[1].equals(cell.getState()));
+	}
+
 	private boolean isBurning(Patch p) {
-		if(p.getCell()==null){
+		if (p.getCell() == null) {
 			return false;
 		}
 		//TODO: CHECK WHY THIS COMPARISON DOESNT FUCKING WORK

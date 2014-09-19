@@ -14,13 +14,13 @@ public class Segregation extends RuleSet {
 	private static double myMinSatA, myMinSatB;
 
 	public Segregation(Map<String, Object> params) {
-		super(params);
-
-		myPossibleStates = new State[] {
+		super(params);	myPossibleStates = new State[] {
 				new State("Agent A", 0, Color.BLUE, null), // index 0
 				new State("Agent B", 1, Color.RED, null) // index 1
 		};
-
+		
+		myDescription = SEGREGATION;
+		
 		myMinSatA = (double) myParams.get(MIN_SAT_A);
 		myMinSatB = (double) myParams.get(MIN_SAT_B);
 	}

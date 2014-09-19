@@ -19,7 +19,6 @@ public class SpreadingFire extends RuleSet {
 				new State("Burning", 1, Color.ORANGERED, null) // index 1
 		};
 
-		probCatch = (float) params.get(PROB_CATCH);
 		myDescription = SPREADING_FIRE;
 		// TODO: Fix this stupid casting and parsing craziness
 		probCatch = Float.parseFloat((String) params.get(PROB_CATCH));

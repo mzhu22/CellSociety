@@ -1,6 +1,7 @@
 package cellsociety_team08;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import javafx.scene.paint.Color;
@@ -9,15 +10,16 @@ import javafx.scene.paint.Color;
 public class SpreadingFire extends RuleSet {
 	
 	private static final String SPREADING_FIRE = "Spreading of Fire";
+	private static final String PROB_CATCH = "probCatch";
 	private static final State[] possibleStates = new State[] {
 		new State("Tree", 0, Color.GREEN, null), // index 0
 		new State("Burning", 1, Color.ORANGERED, null) // index 1
 	};	
 	private static float probCatch;
 
-	public SpreadingFire(Object[] params) {
+	public SpreadingFire(Map<String, Object> params) {
 		super(SPREADING_FIRE, possibleStates, params);
-		probCatch = (float) params[0];
+		probCatch = (float) params.get(PROB_CATCH);
 	}
 
 	@Override

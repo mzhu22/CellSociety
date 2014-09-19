@@ -3,6 +3,7 @@ package cellsociety_team08;
 public class Patch {
 	
 	public boolean isEmpty;
+	public boolean flagged;
 	public int myRow, myCol;
 	public static int[] myDimensions;
 	public Cell myCell;
@@ -12,11 +13,13 @@ public class Patch {
 		myRow = row;
 		myCol = col;
 		isEmpty = empty;
+		flagged = false;
 	}
 	
 	public void clear() {
 		isEmpty = true;
 		myCell.remove();
+		flagged = false;
 	}
 	
 	public void fill(Cell cell) {

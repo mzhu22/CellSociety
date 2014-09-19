@@ -42,8 +42,4 @@ public class GameOfLife extends RuleSet {
 
 	}
 
-	/*
-	 * private void revive(Cell cell) { cell.isEmpty = false; }
-	 */
-
 }

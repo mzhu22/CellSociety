@@ -39,7 +39,7 @@ public class Main extends Application {
 	
 	//All GUI parents
 	private Stage myStage;
-	private CALoop myLoop;
+	private AnimatorLoop myLoop;
 	private CASettings mySettings;
 	private VBox myRoot;
 	private HBox myControls;
@@ -60,7 +60,7 @@ public class Main extends Application {
 		myStage = new Stage();
 		myStage.setTitle("Visual Automata");
 		
-		myLoop = new CALoop(WIDTH, HEIGHT);
+		myLoop = new AnimatorLoop(WIDTH, HEIGHT);
 				
 		//Create a VBox to place the menu, then the grid in a vertical column. 
 		//Create the GridPane used to hold all rectangular cells
@@ -188,7 +188,7 @@ public class Main extends Application {
 
 	private void readXML() {
 		File XMLFile = fileChooser.showOpenDialog(myStage);
-		myGrid = myLoop.readXML(XMLFile);
+		myGrid = myLoop.readXMLAndInitializeGrid(XMLFile);
 		//Always remove the last element of myRoot's children (the grid). Then readd it. This means new grids are made when new XML files are loaded
 		myRoot.getChildren().remove(myRoot.getChildren().size()-1);
 		myRoot.getChildren().add(myGrid);

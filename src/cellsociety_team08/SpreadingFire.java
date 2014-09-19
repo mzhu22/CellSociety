@@ -6,7 +6,6 @@ import java.util.Random;
 
 import javafx.scene.paint.Color;
 
-
 public class SpreadingFire extends RuleSet {
 	
 	private static final String SPREADING_FIRE = "Spreading of Fire";

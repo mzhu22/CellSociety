@@ -48,7 +48,7 @@ public class Segregation extends RuleSet {
 		}
 	}
 	
-	public List<Patch> getAvaliableNeighbors(List<Patch> neighborhood) {
+	/*public List<Patch> getAvaliableNeighbors(List<Patch> neighborhood) {
 		List<Patch> availableNeighbors = new ArrayList<Patch>();
 		for (Patch patch: neighborhood) {
 			if (patch.isEmpty) {
@@ -56,7 +56,7 @@ public class Segregation extends RuleSet {
 			}
 		}
 		return availableNeighbors;
-	}
+	}*/
 	
 	public void move(Patch patch, List<Patch> neighborhood) {
 		
@@ -64,7 +64,7 @@ public class Segregation extends RuleSet {
 			int patchesLeft = 1;
 			for(Patch p: neighborhood) {
 				if (p.isEmpty && !patch.flagged) {
-					if (patchesLeft == 1) {
+					if (patchesLeft == 1) { //only move once
 						p.myCell = patch.myCell;
 						patch.clear();
 						p.flagged = true;

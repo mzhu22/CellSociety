@@ -25,8 +25,14 @@ public class Segregation extends RuleSet {
 
 	public Segregation(Map<String, Object> params) {
 		super(params);
-		myMinSatA = (double) myParams.get(MIN_SAT_A);
-		myMinSatB = (double) myParams.get(MIN_SAT_B);
+		
+		myDescription = SEGREGATION;
+		
+		myMinSatA = Float.parseFloat((String) params.get(MIN_SAT_A));
+		myMinSatB = Float.parseFloat((String) params.get(MIN_SAT_B));
+		
+		//myMinSatA = (double) myParams.get(MIN_SAT_A);
+		//myMinSatB = (double) myParams.get(MIN_SAT_B);
 	}
 
 	@Override

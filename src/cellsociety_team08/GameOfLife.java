@@ -24,7 +24,7 @@ public class GameOfLife extends RuleSet {
 		
 		List<Patch> directNeighbors = new ArrayList<Patch>();
 		for (Patch p : neighborhood) {
-			if (p.myRow == patch.myRow || p.myCol == patch.myCol) {
+			if (p.myRow == patch.myRow || p.myCol == patch.myCol && p.containsCell()) {
 				directNeighbors.add(p);
 			}
 		}

@@ -31,6 +31,6 @@ public class Patch {
 	}
 	
 	public boolean containsCell() {
-		return (isEmpty = false);
+		return (myCell!=null);
 	}
 }

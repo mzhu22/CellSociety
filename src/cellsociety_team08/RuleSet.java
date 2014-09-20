@@ -7,11 +7,9 @@ import java.util.Map;
 public abstract class  RuleSet {
 	
 	protected String myDescription;
-	protected static State[] myPossibleStates;
-	protected static Map<String, Object> myParams;
+	protected State[] myPossibleStates;
 	
 	public RuleSet(Map<String,Object> params) {
-		myParams = params;
 	}
 	
 	public State getDefaultState(){
@@ -20,11 +18,11 @@ public abstract class  RuleSet {
 	
 	public Patch initializePatch(int row, int column, String s){
 		Patch patch;
-		int choice = Integer.parseInt(s);
-		if(choice == 9){
+		if(".".equals(s)){
 			patch = new Patch(row, column, true);
 		}
 		else{
+			int choice = Integer.parseInt(s);
 			patch = new Patch(row, column, false);
 			patch.fill(new Cell(myPossibleStates[choice]));
 		}

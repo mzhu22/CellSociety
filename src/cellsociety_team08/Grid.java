@@ -42,14 +42,9 @@ public class Grid {
 	 */
 	private void makeMyPossibleRules(Map<String, Object> parametersMap) {
 		myImplementedRulesets = new HashMap<>();
-		// We need to implement passing parameters for the rulesets via the XML
-		// file
-		myImplementedRulesets.put("SpreadingFire", new SpreadingFire(
-				parametersMap));
-		// myImplementedRulesets
-		// .put("Segregation", new Segregation(parametersMap));
-		// myImplementedRulesets.put("PredatorPrey", new
-		// PredatorPrey(parametersMap)); // Still needs work
+		
+		myImplementedRulesets.put("SpreadingFire", new SpreadingFire(parametersMap));
+		myImplementedRulesets.put("GameOfLife", new GameOfLife(parametersMap));
 	}
 
 	public void initialize(String[][] grid) {

@@ -9,13 +9,14 @@ import javafx.scene.paint.Color;
 public class GameOfLife extends RuleSet {
 
 	private static final String GAME_OF_LIFE = "Game of Life";
-	private static final State[] possibleStates = new State[] { new State(
-			"Alive", 0, Color.GREEN, null) };
 	// No extra parameters!
 
 	public GameOfLife(Map<String, Object> params) {
 		super(params);
 		myDescription = GAME_OF_LIFE;
+		myPossibleStates = new State[] { new State(
+				"Alive", 0, Color.BLACK, null) };
+
 	}
 
 	@Override
@@ -36,7 +37,7 @@ public class GameOfLife extends RuleSet {
 
 		if (!patch.containsCell()) {
 			if (directNeighbors.size() == 3) {
-				patch.fill(new Cell(possibleStates[0]));
+				patch.fill(new Cell(myPossibleStates[0]));
 			}
 		}
 

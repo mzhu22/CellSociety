@@ -18,31 +18,31 @@ public class GameOfLife extends RuleSet {
 				"Alive", 0, Color.BLACK, null) };
 
 	}
-
+	
 	@Override
 	public Patch getNext(Patch patch, List<Patch> neighborhood) {
+		Patch newPatch = new Patch(patch);
 		
 		List<Patch> directNeighbors = new ArrayList<Patch>();
 		for (Patch p : neighborhood) {
-			if (p.myRow == patch.myRow || p.myCol == patch.myCol && p.containsCell()) {
+			if (p.containsCell()) {
 				directNeighbors.add(p);
 			}
 		}
 		
 		if (patch.containsCell()) {
 			if (directNeighbors.size() < 2 || directNeighbors.size() > 3) {
-				patch.clear();
+				newPatch.clear();
 			}
 		}
 
 		if (!patch.containsCell()) {
 			if (directNeighbors.size() == 3) {
-				patch.fill(new Cell(myPossibleStates[0]));
-			}
+				newPatch.fill(new Cell(myPossibleStates[0]));
+			}	
 		}
 
-		return patch;
-
+		return newPatch;
 	}
 
 }

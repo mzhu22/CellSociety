@@ -59,7 +59,7 @@ public class AnimatorLoop {
 	
 	private void updateCells(){
 		if(initialized){
-			myPatches = myGrid.update();
+			myPatches = myGrid.myRuleSet.update();
 			updateGUICells();
 		}
 	}

@@ -134,12 +134,12 @@ public class Main extends Application {
 		mySlider.setMajorTickUnit(10f);
 		mySlider.setBlockIncrement(10f);
 		mySlider.setPrefWidth(SLIDER_WIDTH);
-		Label sliderLabel = new Label(" Sim speed (rounds/second)");
+		Label sliderLabel = new Label(" Sim speed (ticks/second)");
 		
 		//Create textfield for jumping to a point
 		myField = new TextField();
 		myField.setPrefWidth(TEXTFIELD_WIDTH);
-		Label textfieldLabel = new Label("Jump to round: ");
+		Label textfieldLabel = new Label("Jump to tick: ");
 				
 		myControls.getChildren().add(myPauseButton);
 		myControls.getChildren().add(sliderLabel);

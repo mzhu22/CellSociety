@@ -5,13 +5,19 @@ public class Patch {
 	public boolean isEmpty;
 	public boolean flagged;
 	public int myRow, myCol;
-	public static int[] myDimensions;
 	public Cell myCell;
 	
 	public Patch(int row, int col, boolean empty) {
 		myRow = row;
 		myCol = col;
 		isEmpty = empty;
+		flagged = false;
+	}
+	
+	public Patch(Patch original){
+		myRow = original.myRow;
+		myCol = original.myCol;
+		myCell = original.getCell();
 		flagged = false;
 	}
 	public Cell getCell(){
@@ -21,7 +27,6 @@ public class Patch {
 	public void clear() {
 		isEmpty = true;
 		myCell = null;
-//		myCell.remove();
 		flagged = false;
 	}
 	

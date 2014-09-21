@@ -1,7 +1,10 @@
 package cellsociety_team08;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
+import java.util.Random;
 
 import javafx.scene.paint.Color;
 
@@ -12,9 +15,10 @@ public class Segregation extends RuleSet {
 	private static final String MIN_SAT_B = "minSatB";
 
 	private static float myMinSatA, myMinSatB;
+	
+	private Queue<Cell> toBeMovedHeap;
 
 	public Segregation(Map<String, Object> params) {
-		
 		super(params);
 		
 		myPossibleStates = new State[] {
@@ -23,50 +27,41 @@ public class Segregation extends RuleSet {
 		};
 
 		myDescription = SEGREGATION;
-
-		myMinSatA = Float.parseFloat((String) myParams.get(MIN_SAT_A));
-		myMinSatB = Float.parseFloat((String) myParams.get(MIN_SAT_B));
+		if(params.get(MIN_SAT_A)!=null && params.get(MIN_SAT_B)!=null){
+			myMinSatA = Float.parseFloat((String) params.get(MIN_SAT_A));
+			myMinSatB = Float.parseFloat((String) params.get(MIN_SAT_B));
+		}
+		
+		toBeMovedHeap = new LinkedList<>();
 	}
-
+	
 	@Override
 	public Patch getNext(Patch patch, List<Patch> neighborhood) {
-
-		// If the current cell is satisfied with its neighbors, return its
-		// current state!
-		if (patch.myCell == null || patch.isEmpty || isSatisfied(patch) || patch.flagged)
+		// If the current cell is satisfied with its neighbors, return its current state!
+		if (patch.myCell == null)
 			return patch;
 
 		float currSat = getSatisfaction(patch, neighborhood);
 
-		// check for empty patches!!!!!!!
-		if ((patch.myCell.getState().myIndex == 0 && currSat >= myMinSatA)
-				|| (patch.myCell.getState().myIndex == 1 && currSat >= myMinSatB)) {
-			return satisfiedPatch(patch);
-		} else {
-			move(patch, neighborhood);
-			return notSatisfiedPatch(patch);
+		if(currSat<myMinSatA){
+			moveCell(patch.getCell());
+			patch.clear();			
 		}
+		return patch;
 	}
-
-	/*
-	 * public List<Patch> getAvaliableNeighbors(List<Patch> neighborhood) {
-	 * List<Patch> availableNeighbors = new ArrayList<Patch>(); for (Patch
-	 * patch: neighborhood) { if (patch.isEmpty) {
-	 * availableNeighbors.add(patch); } } return availableNeighbors; }
-	 */
-
-	public void move(Patch patch, List<Patch> neighborhood) {
-
-		if (neighborhood.size() > 0) {
-			for (Patch p : neighborhood) {
-				if (p.isEmpty && !p.flagged) {
-					p.myCell = patch.myCell;
-					patch.clear();
-					p.flagged = true;
-					return;
-				}
+	
+	private void moveCell(Cell toBeMoved){
+		Random gridCoord = new Random();
+		boolean placed = false;
+		while(!placed){
+			int row = gridCoord.nextInt(myPatches.length);
+			int col = gridCoord.nextInt(myPatches[0].length);
+			if(!myPatches[row][col].containsCell()){
+				myPatches[row][col].fill(toBeMoved);
+				placed = true;
 			}
 		}
+		
 	}
 
 	private float getSatisfaction(Patch patch, List<Patch> neighborhood) {
@@ -82,38 +77,7 @@ public class Segregation extends RuleSet {
 				total++;
 			}
 		}
-		newSat = newSat / total;
 
-		return newSat;
+		return newSat/total;
 	}
-
-	private Patch satisfiedPatch(Patch p) {
-		State s = p.myCell.getState();
-		s.setParams(new Object[] { true });
-		p.myCell.setState(s);
-		return p;
-	}
-
-	private Patch notSatisfiedPatch(Patch p) {
-		State s = p.myCell.getState();
-		s.setParams(new Object[] { false });
-		p.myCell.setState(s);
-		return p;
-	}
-
-	private boolean isSatisfied(Patch p) {
-		Cell c = p.myCell;
-		State s = c.getState();
-		boolean b = (boolean) s.getParams()[0];
-		return b;
-	}
-
-	public int[] getNewLocation(Cell c) {
-		/*
-		 * Not sure how to implement this yet. May have to work with Justin to
-		 * do this
-		 */
-		return null;
-	}
-
 }

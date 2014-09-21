@@ -1,8 +1,6 @@
 package cellsociety_team08;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Grid {
@@ -10,7 +8,7 @@ public class Grid {
 	private Map<String, RuleSet> myImplementedRulesets;
 
 	private static int myRows, myCols;
-	private Patch[][] myPatches, nextPatches;
+	private Patch[][] myPatches;
 	public RuleSet myRuleSet;
 
 	public Grid(String type, Map<String, Object> parametersMap, int rows,
@@ -20,7 +18,6 @@ public class Grid {
 		myCols = cols;
 
 		myPatches = new Patch[myRows][myCols];
-		nextPatches = new Patch[myRows][myCols];
 
 		makeMyPossibleRules(parametersMap);
 		myRuleSet = myImplementedRulesets.get(type);
@@ -47,6 +44,7 @@ public class Grid {
 		
 		myImplementedRulesets.put("SpreadingFire", new SpreadingFire(parametersMap));
 		myImplementedRulesets.put("GameOfLife", new GameOfLife(parametersMap));
+		myImplementedRulesets.put("Segregation", new Segregation(parametersMap));
 	}
 
 	public void initialize(String[][] grid) {

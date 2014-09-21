@@ -13,19 +13,23 @@ public class Segregation extends RuleSet {
 
 	private static float myMinSatA, myMinSatB;
 
-	public Segregation(Map<String, Object> params) {
+	public Segregation() {
 		
-		super(params);
-		
+		super();
+	
 		myPossibleStates = new State[] {
 				new State("Agent A", 0, Color.BLUE, new Object[]{false}), // index 0
 				new State("Agent B", 1, Color.RED, new Object[]{false}) // index 1
 		};
 
 		myDescription = SEGREGATION;
-
+	}
+	
+	@Override
+	public void setParams(Map<String, Object> params) {
+		myParams = params;
 		myMinSatA = Float.parseFloat((String) myParams.get(MIN_SAT_A));
-		myMinSatB = Float.parseFloat((String) myParams.get(MIN_SAT_B));
+		myMinSatB = Float.parseFloat((String) myParams.get(MIN_SAT_B));	
 	}
 
 	@Override

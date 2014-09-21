@@ -1,8 +1,6 @@
 package cellsociety_team08;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Grid {
@@ -10,7 +8,7 @@ public class Grid {
 	private Map<String, RuleSet> myImplementedRulesets;
 
 	private static int myRows, myCols;
-	private Patch[][] myPatches, nextPatches;
+	private Patch[][] myPatches;
 	public RuleSet myRuleSet;
 
 	public Grid(String type, Map<String, Object> parametersMap, int rows,
@@ -20,10 +18,10 @@ public class Grid {
 		myCols = cols;
 
 		myPatches = new Patch[myRows][myCols];
-		nextPatches = new Patch[myRows][myCols];
 
-		makeMyPossibleRules(parametersMap);
+		makeMyPossibleRules();
 		myRuleSet = myImplementedRulesets.get(type);
+		myRuleSet.setParams(parametersMap);
 
 		initialize(grid);
 		myRuleSet.addGrid(myPatches);
@@ -42,11 +40,12 @@ public class Grid {
 	 * true, then calling on a parameter that doesn't exist would return null,
 	 * hopefully program just errors out then.
 	 */
-	private void makeMyPossibleRules(Map<String, Object> parametersMap) {
+	private void makeMyPossibleRules() {
 		myImplementedRulesets = new HashMap<>();
-		
-		myImplementedRulesets.put("SpreadingFire", new SpreadingFire(parametersMap));
-		myImplementedRulesets.put("GameOfLife", new GameOfLife(parametersMap));
+		myImplementedRulesets.put("PredatorPrey", new PredatorPrey());
+		myImplementedRulesets.put("SpreadingFire", new SpreadingFire());
+		myImplementedRulesets.put("GameOfLife", new GameOfLife());
+		myImplementedRulesets.put("Segregation", new Segregation());
 	}
 
 	public void initialize(String[][] grid) {

@@ -88,5 +88,8 @@ public abstract class  RuleSet {
 	}
 
 	public abstract Patch getNext(Patch curr, List<Patch> neighborhood);
-
+	
+	/**
+	 * Used to move cells around for those CA that need it. Not required by many
+	 */
 }

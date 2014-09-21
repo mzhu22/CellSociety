@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<cellularautomata type = "Segregation">
+	<parameters>
+		<parameter key="minSatA" value="0.9"/>
+		<parameter key="minSatB" value="0.8"/>
+	</parameters>
+	<grid rows="10" columns = "10">
+		. . . . . . . . 1 .
+		. . . . . . . . . .
+		. . . . . . . . . .
+		. . . . . . . . . .
+		0 0 0 1 1 0 0 0 1 1
+		. . . . . . . . . .
+		. . . . . . . . . .
+		. . . . . . . . . .
+		. . . . . . . . . .
+		. . . . . . . . . .
+	</grid>
+</cellularautomata>

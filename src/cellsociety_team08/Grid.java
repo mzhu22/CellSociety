@@ -42,10 +42,12 @@ public class Grid {
 	 */
 	private void makeMyPossibleRules() {
 		myImplementedRulesets = new HashMap<>();
+
 		myImplementedRulesets.put("PredatorPrey", new PredatorPrey());
 		myImplementedRulesets.put("SpreadingFire", new SpreadingFire());
 		myImplementedRulesets.put("GameOfLife", new GameOfLife());
 		myImplementedRulesets.put("Segregation", new Segregation());
+
 	}
 
 	public void initialize(String[][] grid) {

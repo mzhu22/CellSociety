@@ -14,6 +14,10 @@ public class Patch {
 		flagged = false;
 	}
 	
+	/**
+	 * Cloner constructor. Creates an exact copy of input Patch
+	 * @param original = Patch to be cloned
+	 */
 	public Patch(Patch original){
 		myRow = original.myRow;
 		myCol = original.myCol;

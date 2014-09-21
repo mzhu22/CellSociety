@@ -71,8 +71,7 @@ public class Segregation extends RuleSet {
 				myPatches[row][col].fill(toBeMoved);
 				placed = true;
 			}
-		}
-		
+		}		
 	}
 
 	private float getSatisfaction(Patch patch, List<Patch> neighborhood) {

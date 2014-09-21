@@ -53,7 +53,9 @@ public class Grid {
 	public void initialize(String[][] grid) {
 		for (int i = 0; i < myPatches.length; i++) {
 			for (int j = 0; j < myPatches[0].length; j++) {
-				myPatches[i][j] = myRuleSet.initializePatch(i, j, grid[i][j]);
+//				myPatches[i][j] = myRuleSet.initializePatch(i, j, grid[i][j]);
+				myPatches[i][j] = myRuleSet.initializeRandom(i, j);
+
 			}
 		}
 	}

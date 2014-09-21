@@ -34,6 +34,10 @@ public class Patch {
 		flagged = false;
 	}
 	
+	public void flag() {
+		flagged = true;
+	}
+	
 	public void fill(Cell cell) {
 		myCell = cell;
 		isEmpty = false;

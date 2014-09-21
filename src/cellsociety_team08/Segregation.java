@@ -18,15 +18,21 @@ public class Segregation extends RuleSet {
 	
 	private Queue<Cell> toBeMovedHeap;
 
-	public Segregation(Map<String, Object> params) {
-		super(params);
+	public Segregation() {
 		
+		super();
+	
 		myPossibleStates = new State[] {
 				new State("Agent A", 0, Color.BLUE, new Object[]{false}), // index 0
 				new State("Agent B", 1, Color.RED, new Object[]{false}) // index 1
 		};
 
 		myDescription = SEGREGATION;
+	}
+	
+	@Override
+	public void setParams(Map<String, Object> params) {
+
 		if(params.get(MIN_SAT_A)!=null && params.get(MIN_SAT_B)!=null){
 			myMinSatA = Float.parseFloat((String) params.get(MIN_SAT_A));
 			myMinSatB = Float.parseFloat((String) params.get(MIN_SAT_B));

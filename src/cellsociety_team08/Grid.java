@@ -19,8 +19,9 @@ public class Grid {
 
 		myPatches = new Patch[myRows][myCols];
 
-		makeMyPossibleRules(parametersMap);
+		makeMyPossibleRules();
 		myRuleSet = myImplementedRulesets.get(type);
+		myRuleSet.setParams(parametersMap);
 
 		initialize(grid);
 		myRuleSet.addGrid(myPatches);
@@ -39,12 +40,14 @@ public class Grid {
 	 * true, then calling on a parameter that doesn't exist would return null,
 	 * hopefully program just errors out then.
 	 */
-	private void makeMyPossibleRules(Map<String, Object> parametersMap) {
+	private void makeMyPossibleRules() {
 		myImplementedRulesets = new HashMap<>();
-		
-		myImplementedRulesets.put("SpreadingFire", new SpreadingFire(parametersMap));
-		myImplementedRulesets.put("GameOfLife", new GameOfLife(parametersMap));
-		myImplementedRulesets.put("Segregation", new Segregation(parametersMap));
+
+		myImplementedRulesets.put("PredatorPrey", new PredatorPrey());
+		myImplementedRulesets.put("SpreadingFire", new SpreadingFire());
+		myImplementedRulesets.put("GameOfLife", new GameOfLife());
+		myImplementedRulesets.put("Segregation", new Segregation());
+
 	}
 
 	public void initialize(String[][] grid) {

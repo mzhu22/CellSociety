@@ -12,8 +12,8 @@ public class SpreadingFire extends RuleSet {
 	private static final String PROB_CATCH = "probCatch";
 	private static float probCatch;
 
-	public SpreadingFire(Map<String, Object> params) {
-		super(params);
+	public SpreadingFire() {
+		super();
 		myPossibleStates = new State[] {
 				new State("Tree", 0, Color.GREEN, null), // index 0
 				new State("Burning", 1, Color.ORANGERED, null) // index 1
@@ -21,8 +21,13 @@ public class SpreadingFire extends RuleSet {
 
 		myDescription = SPREADING_FIRE;
 		// TODO: Fix this stupid casting and parsing craziness
-		if(params.containsKey(PROB_CATCH)){
-			probCatch = Float.parseFloat((String) params.get(PROB_CATCH));
+	}
+	
+	@Override
+	public void setParams(Map<String, Object> params) {
+		myParams = params;
+		if(myParams.containsKey(PROB_CATCH)){
+			probCatch = Float.parseFloat((String) myParams.get(PROB_CATCH));
 		}
 	}
 

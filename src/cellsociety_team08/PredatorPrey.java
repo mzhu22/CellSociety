@@ -1,7 +1,9 @@
 package cellsociety_team08;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import javafx.scene.paint.Color;
 
@@ -12,9 +14,14 @@ public class PredatorPrey extends RuleSet {
 	private static final String FISH_BREED_TIME = "fishBreedTime";
 	private static int sharkBreedTime, sharkStarveTime, fishBreedTime;
 
-	public PredatorPrey(Map<String, Object> params) {
-		super(params);
+	private List<Patch> patchesToMove = new ArrayList<Patch>();
 
+	public PredatorPrey() {
+		super();
+	}
+
+	@Override
+	public void setParams(Map<String, Object> params) {
 		sharkBreedTime = Integer
 				.parseInt((String) params.get(SHARK_BREED_TIME));
 		sharkStarveTime = Integer.parseInt((String) params
@@ -27,84 +34,196 @@ public class PredatorPrey extends RuleSet {
 				new State("Shark", 1, Color.GREY, new Object[] {
 						sharkBreedTime, sharkStarveTime }) // index 1
 		};
+	}
 
+	@Override
+	public Patch[][] update() {
+
+		patchesToMove.clear();
+
+		Patch[][] nextGrid = new Patch[myPatches.length][myPatches[0].length];
+		for (int i = 0; i < myPatches.length; i++) {
+			for (int j = 0; j < myPatches.length; j++) {
+				List<Patch> neighbors = getNeighborhood(myPatches[i][j]);
+				nextGrid[i][j] = getNext(myPatches[i][j], neighbors);
+			}
+		}
+		myPatches = nextGrid;
+		moveOrAddCells();
+
+		patchesToMove.clear();
+
+		// Breed if necessary
+		for (int i = 0; i < myPatches.length; i++) {
+			for (int j = 0; j < myPatches.length; j++) {
+				List<Patch> neighbors = getNeighborhood(myPatches[i][j]);
+				checkBreed(myPatches[i][j], neighbors);
+			}
+		}
+		moveOrAddCells();
+
+		// Clear all the flags
+		for (int i = 0; i < myPatches.length; i++) {
+			for (int j = 0; j < myPatches[0].length; j++) {
+				myPatches[i][j].flagged = false;
+			}
+		}
+
+		return myPatches;
 	}
 
 	@Override
 	public Patch getNext(Patch patch, List<Patch> neighborhood) {
 
-		if (patch.isEmpty || patch.flagged)
+		if (patch.isEmpty || patch.flagged || patch.myCell == null
+				|| patch.myCell.getState() == null) {
 			return patch;
+		}
 
 		if (patch.myCell.getState().equals(myPossibleStates[0])) { // FISH
-			checkBreed(patch, neighborhood);
-			move(patch, neighborhood);
+			
+			moveAdj(patch, neighborhood);
+			return patch;
+			
 		} else { // SHARK
 
-			int starveTime = ((int) patch.myCell.getState().myParams[1]);
-			if (starveTime == 0) {
-				patch.clear();
-				return patch;
-			}
-			starveTime--;
-			checkBreed(patch, neighborhood);
+			// See if I have starved
+			if (checkStarve(patch)) return patch;
+
+			// Still alive!
 			if (!checkForFishAndMove(patch, neighborhood))
-				move(patch, neighborhood);
-
+				moveAdj(patch, neighborhood);
 		}
 
-		return null;
+		return patch;
 	}
 
-	private boolean checkForFishAndMove(Patch patch, List<Patch> neighborhood) {
-
-		for (Patch p : neighborhood) {
-			if (!p.isEmpty && !p.flagged && p.getCell().getState().myIndex==0) {
-				eatFish(patch, p);
-				return true;
-			}
+	private boolean checkStarve(Patch patch) {
+		
+		State s = patch.getCell().getState();
+		s.myParams[1] = (int)s.myParams[1] - 1;
+		patch.myCell.setState(s);
+		
+		if ((int) patch.myCell.getState().myParams[1] == 0) {
+			patch.clear();
+			patch.flag();
+			return true;
 		}
+		
 		return false;
-	}
-	
-	private void eatFish(Patch shark, Patch fish) {
-		fish.myCell = shark.myCell;
-		fish.flagged = true;
-		shark.clear();
 	}
 
 	private void checkBreed(Patch patch, List<Patch> neighborhood) {
+
+		if (patch.isEmpty || patch.flagged || patch.myCell == null
+				|| patch.myCell.getState() == null)
+			return;
+
+		// decrement breed time
+		patch.myCell.getState().myParams[0] = ((int) patch.myCell.getState().myParams[0]) - 1;
 		int breedTime = ((int) patch.myCell.getState().myParams[0]);
+
 		if (breedTime == 0) {
 			breed(patch, neighborhood);
+
+			// Reset breed timers
 			if (patch.getCell().getState().myIndex == 0)
 				patch.myCell.getState().myParams[0] = fishBreedTime;
 			else
 				patch.myCell.getState().myParams[0] = sharkBreedTime;
 		}
-		breedTime--;
-		patch.myCell.getState().myParams[0] = breedTime;
 	}
 
-	private void move(Patch patch, List<Patch> neighborhood) {
+	private List<Patch> findEmpties(List<Patch> neighborhood) {
+
+		List<Patch> empties = new ArrayList<Patch>();
 		for (Patch p : neighborhood) {
 			if (p.isEmpty && !p.flagged) {
-				p.myCell = patch.myCell;
-				patch.clear();
-				p.flagged = true;
+				empties.add(p);
 			}
 		}
+		return empties;
+	}
+
+	private void moveAdj(Patch patch, List<Patch> neighborhood) {
+
+		List<Patch> empties = findEmpties(neighborhood);
+		if (empties.isEmpty())
+			return;
+		Random rand = new Random();
+		Patch newLocation = empties.get(rand.nextInt(empties.size()));
+
+		addCell(newLocation, patch.getCell());
+		patch.clear();
+		patch.flag();
+		newLocation.flagged = true;
+
+	}
+
+	private void addCell(Patch patch, Cell cell) {
+		Patch p = new Patch(patch);
+		p.myCell = cell;
+		patchesToMove.add(p);
+	}
+
+	private void moveOrAddCells() {
+		for (Patch p : patchesToMove) {
+			myPatches[p.myRow][p.myCol] = p;
+		}
+	}
+
+	private boolean checkForFishAndMove(Patch patch, List<Patch> neighborhood) {
+
+		List<Patch> fishFood = getPossibleFish(neighborhood);
+		if (fishFood.isEmpty())
+			return false;
+
+		// Eat a fish at random
+		Random rand = new Random();
+		eatFish(patch, fishFood.get(rand.nextInt(fishFood.size())));
+
+		return true;
+	}
+
+	private List<Patch> getPossibleFish(List<Patch> neighborhood) {
+
+		List<Patch> fish = new ArrayList<Patch>();
+		for (Patch p : neighborhood) {
+			if (!p.isEmpty && !p.flagged && p.myCell != null
+					&& p.getCell().getState().myIndex == 0) {
+				fish.add(p);
+			}
+		}
+		return fish;
+	}
+
+	private void eatFish(Patch shark, Patch fish) {
+		
+		// Reset starve timer
+		State s = shark.getCell().getState();
+		s.myParams[1] = sharkStarveTime;
+		shark.myCell.setState(s);
+		
+		fish.myCell = shark.myCell;
+		patchesToMove.add(fish);
+		fish.flagged = true;
+		shark.clear();
+		shark.flag();
 	}
 
 	private void breed(Patch patch, List<Patch> neighborhood) {
-		for (Patch p : neighborhood) {
-			if (p.isEmpty && !p.flagged) {
-				p.myCell = new Cell(
-						myPossibleStates[patch.getCell().getState().myIndex]);
-				p.flagged = true;
-				return;
-			}
-		}
+
+		List<Patch> empties = findEmpties(neighborhood);
+		if (empties.isEmpty())
+			return;
+
+		Random rand = new Random();
+		Patch newLocation = empties.get(rand.nextInt(empties.size()));
+
+		addCell(newLocation, new Cell(myPossibleStates[patch.getCell()
+				.getState().myIndex]));
+		newLocation.flag();
+
 	}
 
 }

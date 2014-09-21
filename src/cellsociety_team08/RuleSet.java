@@ -10,10 +10,15 @@ public abstract class  RuleSet {
 
 	protected String myDescription;
 	protected State[] myPossibleStates;
+	protected Map<String,Object> myParams;
 
 	protected Patch[][] myPatches;
 
-	public RuleSet(Map<String,Object> params) {
+	public RuleSet() {
+	}
+	
+	public void setParams(Map<String,Object> params) {
+		myParams = params;
 	}
 	
 	public void addGrid(Patch[][] grid){

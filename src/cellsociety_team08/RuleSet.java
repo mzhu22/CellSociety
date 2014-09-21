@@ -49,8 +49,7 @@ public abstract class  RuleSet {
 		Patch[][] nextGrid = new Patch[myPatches.length][myPatches[0].length];
 		for(int i=0; i<myPatches.length; i++){
 			for(int j=0; j<myPatches.length; j++){
-				List<Patch> neighbors = getNeighborhood(myPatches[i][j]);
-				Patch updatedPatch = getNext(myPatches[i][j], neighbors);
+				Patch updatedPatch = getNext(myPatches[i][j]);
 
 				nextGrid[i][j] = updatedPatch;
 			}
@@ -64,18 +63,69 @@ public abstract class  RuleSet {
 		return nextGrid;
 	}
 
-	public List<Patch> getNeighborhood(Patch p) {
+	public List<Patch> getNeighbors(Patch p) {
 
 		List<Patch> ret = new ArrayList<Patch>();
 		int row = p.myRow;
 		int col = p.myCol;
 
-		for (int i = row - 1; i < row + 2; i++) {
-			for (int j = col - 1; j < col + 2; j++) {
-				if (!isOutside(i, j) && !(i == row && j == col)) {
-					ret.add(myPatches[i][j]);
+		switch ((String) myParams.get("gridShape")) {
+		
+			case ("Hexagonal"):
+				for (int i = row; i < row + 2; i++) {
+					for (int j = col - 1; j < col + 2; j++) {
+						if (!isOutside(i, j) && !(i == row && j == col)) {
+							ret.add(myPatches[i][j]);
+						}
+					}
 				}
-			}
+				break;
+		
+			default : //Rectangular OR Triangular
+				for (int i = row - 1; i < row + 2; i++) {
+					for (int j = col - 1; j < col + 2; j++) {
+						if (!isOutside(i, j) && !(i == row && j == col)) {
+							ret.add(myPatches[i][j]);
+						}
+					}
+				}
+				break;
+		}
+
+		return ret;
+	}
+	
+	public List<Patch> getDirectNeighbors(Patch p) {
+
+		List<Patch> ret = new ArrayList<Patch>();
+		int row = p.myRow;
+		int col = p.myCol;
+
+		switch ((String) myParams.get("gridShape")) {
+		
+			case ("Hexagonal"):
+				for (int i = row; i < row + 2; i++) {
+					for (int j = col - 1; j < col + 2; j++) {
+						if (!isOutside(i, j) && !(i == row && j == col)) {
+							ret.add(myPatches[i][j]);
+						}
+					}
+				}
+				break;
+				
+			case ("Triangular"):
+				if (!isOutside(row, col-1)) ret.add(myPatches[row][col-1]);
+				if (!isOutside(row, col+1)) ret.add(myPatches[row][col+1]);
+				if (!isOutside(row-1, col) && col%2 == 0) ret.add(myPatches[row-1][col]);
+				if (!isOutside(row+1, col) && col%2 == 1) ret.add(myPatches[row+1][col]);
+				break;
+		
+			default : //Rectangular
+				if (!isOutside(row, col-1)) ret.add(myPatches[row][col-1]);
+				if (!isOutside(row, col+1)) ret.add(myPatches[row][col+1]);
+				if (!isOutside(row-1, col)) ret.add(myPatches[row-1][col]);
+				if (!isOutside(row+1, col)) ret.add(myPatches[row+1][col]);
+				break;
 		}
 
 		return ret;
@@ -87,7 +137,7 @@ public abstract class  RuleSet {
 		return (row >= rows || row < 0 || col >= cols || col < 0);
 	}
 
-	public abstract Patch getNext(Patch curr, List<Patch> neighborhood);
+	public abstract Patch getNext(Patch curr);
 	
 	/**
 	 * Used to move cells around for those CA that need it. Not required by many

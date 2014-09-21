@@ -42,13 +42,18 @@ public class Segregation extends RuleSet {
 	}
 	
 	@Override
-	public Patch getNext(Patch patch, List<Patch> neighborhood) {
+	public Patch getNext(Patch patch) {
+		
+		List<Patch> neighbors = getNeighbors(patch);
+		
 		// If the current cell is satisfied with its neighbors, return its current state!
 		if (patch.myCell == null)
 			return patch;
 
-		float currSat = getSatisfaction(patch, neighborhood);
+		float currSat = getSatisfaction(patch, neighbors);
 
+		// What about minSatB???
+		
 		if(currSat<myMinSatA){
 			moveCell(patch.getCell());
 			patch.clear();			

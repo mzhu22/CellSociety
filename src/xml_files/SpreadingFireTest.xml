@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<cellularautomata type = "S">
+<cellularautomata type = "SpreadingFire">
 	<parameters>
 		<parameter key="probCatch" value="0.7"/>
 	</parameters>

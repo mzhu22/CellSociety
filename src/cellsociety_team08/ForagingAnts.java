@@ -190,10 +190,16 @@ public class ForagingAnts extends RuleSet{
 			patch.foodPheromoneLevel = 10;
 		}
 		
-		if (nextPatch.myCell.getState().myIndex == 2) {
-			nextPatch.clear();
-		}
 		nextPatch.myCell = patch.myCell;
+		
+		if (nextPatch.myCell.getState().myIndex == 2) { //pick up food
+			nextPatch.myCell.hasFood = true;
+		}
+		
+		if (nextPatch.myRow == HOME_BASE.myRow && nextPatch.myCol == HOME_BASE.myCol) { //drop food off at home base
+			nextPatch.myCell.hasFood = false;
+		}
+		
 		patch.clear();
 		return nextPatch;
 	}

@@ -7,6 +7,8 @@ public class Patch {
 	public int myRow, myCol;
 	public Cell myCell;
 	public int numCells;
+	public double homePheromoneLevel;
+	public double foodPheromoneLevel;
 	
 	public Patch(int row, int col, boolean empty) {
 		myRow = row;

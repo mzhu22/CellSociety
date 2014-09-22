@@ -4,24 +4,32 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javafx.scene.paint.Color;
+
 public class ForagingAnts extends RuleSet{
 	
 	private static int xPos;
 	private static int yPos;
-	private static final Patch HOME_BASE = new Patch(xPos, yPos, false);
+	private static Patch HOME_BASE;// = new Patch(xPos, yPos, false);
 	private List<String> orientationList = Arrays.asList("N", "NE", "E", "SE", "S", "SW", "W", "NW");
 	private String myOrientation;
 	private double myHomeDesire;
 	private double myFoodDesire;
-	private Patch[][] myGrid;
 	private int antLimit = 10;
+	private State[] myPossibleStates = new State[] {
+			new State("Home", 0, Color.GREEN, null), // index 0
+			new State("Ant", 1, Color.ORANGERED, null), // index 1
+			new State("Food", 2, Color.GREEN, null) // index 2
+	};
 	
 			
-	public ForagingAnts(String orientation, double homeDesire, double foodDesire, Patch[][] grid) {
+	public ForagingAnts(String orientation, double homeDesire, double foodDesire, int x, int y) {
 		myOrientation = orientation;
 		myHomeDesire = homeDesire;
 		myFoodDesire = foodDesire;
-		
+		xPos = x;
+		yPos = y;
+		HOME_BASE = new Patch(xPos, yPos, false);
 	}
 	
 	public int getNumCells(Patch patch) {
@@ -32,7 +40,7 @@ public class ForagingAnts extends RuleSet{
 	public int getNumNeighbors(List<Patch> neighborhood) {
 		int numNeighbors = 0;
 		for (Patch patch: neighborhood) {
-			numNeighbors += patch.numCells;
+			numNeighbors += getNumCells(patch);
 		}
 		return numNeighbors;
 	}
@@ -114,7 +122,7 @@ public class ForagingAnts extends RuleSet{
 	
 	public List<Patch> getViableForwardNeighbors(List<Patch> forwardNeighbors) {
 		for (Patch patch: forwardNeighbors) {
-			if (patch.numCells > antLimit) {
+			if (getNumCells(patch) > antLimit) {
 				forwardNeighbors.remove(patch);
 			}
 		}
@@ -122,8 +130,9 @@ public class ForagingAnts extends RuleSet{
 	}
 
 	@Override
-	public Patch getNext(Patch curr) {
+	public Patch getNext(Patch patch) {
 		// TODO Auto-generated method stub
+		
 		return null;
 	}
 	

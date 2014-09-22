@@ -14,6 +14,7 @@ public class ForagingAnts extends RuleSet{
 	private double myHomeDesire;
 	private double myFoodDesire;
 	private Patch[][] myGrid;
+	private int antLimit = 10;
 	
 			
 	public ForagingAnts(String orientation, double homeDesire, double foodDesire, Patch[][] grid) {
@@ -106,6 +107,16 @@ public class ForagingAnts extends RuleSet{
 				forwardNeighbors.add(myPatches[row + 1][col - 1]); //NW
 			}
 		default: break;
+		}
+		forwardNeighbors = getViableForwardNeighbors(forwardNeighbors);
+		return forwardNeighbors;
+	}
+	
+	public List<Patch> getViableForwardNeighbors(List<Patch> forwardNeighbors) {
+		for (Patch patch: forwardNeighbors) {
+			if (patch.numCells > antLimit) {
+				forwardNeighbors.remove(patch);
+			}
 		}
 		return forwardNeighbors;
 	}

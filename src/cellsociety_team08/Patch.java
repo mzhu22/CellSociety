@@ -9,8 +9,8 @@ public class Patch extends Rectangle{
 	public int myRow, myCol;
 	public Cell myCell;
 	public int numCells;
-	public double homePheromoneLevel;
-	public double foodPheromoneLevel;
+	public double homePheromoneLevel = 0;
+	public double foodPheromoneLevel = 0;
 	
 	public Patch(int row, int col, boolean empty) {
 		myRow = row;

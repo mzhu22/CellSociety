@@ -3,6 +3,7 @@ package cellsociety_team08;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 import javafx.scene.paint.Color;
 
@@ -153,47 +154,48 @@ public class ForagingAnts extends RuleSet{
 		if (!patch.myCell.hasFood) {
 			//patch.myCell.foodDesire = 10;
 			if (forwardNeighbors.size() > 0) {
-				for (Patch p: forwardNeighbors) {
+				/*for (Patch p: forwardNeighbors) {
 					if (p.foodPheromoneLevel > highPheromones) {
 						highPheromones = p.foodPheromoneLevel;
 						nextPatch = p;
 					}
-				}
+				}*/
+				//if (nextPatch == patch) { //if we didn't find a new patch
+				Random rand = new Random();
+				nextPatch = forwardNeighbors.get(rand.nextInt(forwardNeighbors.size()));
+				//}
 			}
-			for (Patch p: backNeighbors) {
+			/*for (Patch p: backNeighbors) {
 				if (p.foodPheromoneLevel > highPheromones) {
 					highPheromones = p.foodPheromoneLevel;
 					nextPatch = p;
 				}
+			}*/
+			else {
+				Random rand = new Random();
+				nextPatch = backNeighbors.get(rand.nextInt(backNeighbors.size()));
 			}
-			
 			patch.homePheromoneLevel = 10;
-			
 		}
 		
-		else {
+		else { // cell has food
 			if (forwardNeighbors.size() > 0) {
-				for (Patch p: forwardNeighbors) {
-					if (p.homePheromoneLevel > highPheromones) {
-						highPheromones = p.homePheromoneLevel;
-						nextPatch = p;
-					}
-				}
+				Random rand = new Random();
+				nextPatch = forwardNeighbors.get(rand.nextInt(forwardNeighbors.size()));
 			}
-			for (Patch p: backNeighbors) {
-				if (p.homePheromoneLevel > highPheromones) {
-					highPheromones = p.homePheromoneLevel;
-					nextPatch = p;
-				}
+			else {
+				Random rand = new Random();
+				nextPatch = backNeighbors.get(rand.nextInt(backNeighbors.size()));
 			}
-			
 			patch.foodPheromoneLevel = 10;
-			
 		}
 		
+		if (nextPatch.myCell.getState().myIndex == 2) {
+			nextPatch.clear();
+		}
 		nextPatch.myCell = patch.myCell;
 		patch.clear();
-		
+		return nextPatch;
 	}
 	
 	

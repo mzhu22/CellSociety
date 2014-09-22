@@ -2,7 +2,6 @@ package cellsociety_team08;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import javafx.scene.paint.Color;
 
@@ -13,11 +12,11 @@ public class Segregation extends RuleSet {
 	private static final String MIN_SAT_B = "minSatB";
 
 	private static float myMinSatA, myMinSatB;
-	
+
 	public Segregation() {
-		
+
 		super();
-	
+
 		myPossibleStates = new State[] {
 				new State("Agent A", 0, Color.BLUE, new Object[]{false}), // index 0
 				new State("Agent B", 1, Color.RED, new Object[]{false}) // index 1
@@ -25,32 +24,38 @@ public class Segregation extends RuleSet {
 
 		myDescription = SEGREGATION;
 	}
-	
+
 	@Override
 	public void setParams(Map<String, Object> params) {
-
-		if(params.get(MIN_SAT_A)!=null && params.get(MIN_SAT_B)!=null){
+		super.setParams(params);
+		if (params.get(MIN_SAT_A) != null && params.get(MIN_SAT_B) != null) {
 			myMinSatA = Float.parseFloat((String) params.get(MIN_SAT_A));
 			myMinSatB = Float.parseFloat((String) params.get(MIN_SAT_B));
 		}
 	}
-	
+
 	@Override
-	public Patch getNext(Patch patch, List<Patch> neighborhood) {
-		// If the current cell is satisfied with its neighbors, return its current state!
+	public Patch getNext(Patch patch) {
+
+		List<Patch> neighbors = getNeighbors(patch);
+
+		// If the current cell is satisfied with its neighbors, return its
+		// current state!
 		if (patch.myCell == null)
 			return patch;
 
-		float currSat = getSatisfaction(patch, neighborhood);
+		float currSat = getSatisfaction(patch, neighbors);
 
-		if(currSat<myMinSatA){
+		// What about minSatB???
+
+		if (patch.getCell().getState().myIndex == 0 && currSat < myMinSatA
+				|| patch.getCell().getState().myIndex == 1
+				&& currSat < myMinSatB) {
 			moveCell(patch.getCell());
-			patch.clear();			
+			patch.clear();
 		}
 		return patch;
 	}
-	
-	
 
 	private float getSatisfaction(Patch patch, List<Patch> neighborhood) {
 
@@ -66,6 +71,6 @@ public class Segregation extends RuleSet {
 			}
 		}
 
-		return newSat/total;
+		return newSat / total;
 	}
 }

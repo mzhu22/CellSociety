@@ -14,6 +14,10 @@ import java.util.Map;
  *
  */
 public class CASettings {
+	
+	private static final String GRID_SHAPE = "gridShape";
+	
+	protected static String myGridShape;
 	private String myType;
 	private Integer myRows;
 	private Integer myColumns;
@@ -26,6 +30,11 @@ public class CASettings {
 		myGrid = grid;
 		myRows = row;
 		myColumns = column;
+		
+		if(myParameters.containsKey("gridShape")){
+			myGridShape = (String) myParameters.get(GRID_SHAPE);
+		}
+		
 	}
 	
 	public String getType(){

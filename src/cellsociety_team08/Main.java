@@ -10,6 +10,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -18,7 +19,6 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -28,7 +28,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
 	//GUI size constants
-	public static final int HEIGHT = 950;
+	public static final int HEIGHT = 700;
 	public static final int WIDTH = 950;
 	
 	public static final int SLIDER_MAX_VALUE = 100;
@@ -43,7 +43,7 @@ public class Main extends Application {
 	private VBox myRoot;
 	private HBox myControls;
 	private MenuBar myMenuBar;
-	private GridPane myGrid;
+	private Group myGrid;
 	
 	private Button myPauseButton;
 	private Slider mySlider;
@@ -73,7 +73,7 @@ public class Main extends Application {
 		makeControlBox();
 		
 		//Make a blank grid. Grid is created for real when XML files loaded
-		myGrid = new GridPane();
+		myGrid = new Group();
 						
 		myRoot.getChildren().add(myMenuBar);
 		myRoot.getChildren().add(myControls);

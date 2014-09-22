@@ -25,14 +25,16 @@ public class SpreadingFire extends RuleSet {
 	
 	@Override
 	public void setParams(Map<String, Object> params) {
-		myParams = params;
+		super.setParams(params);
 		if(myParams.containsKey(PROB_CATCH)){
 			probCatch = Float.parseFloat((String) myParams.get(PROB_CATCH));
 		}
 	}
 
 	@Override
-	public Patch getNext(Patch curr, List<Patch> neighborhood) {
+	public Patch getNext(Patch curr) {
+		
+		List<Patch> neighbors = getDirectNeighbors(curr);
 		
 		// If it's already empty, do nothing
 		if (curr.isEmpty || curr.myCell == null
@@ -55,7 +57,7 @@ public class SpreadingFire extends RuleSet {
 
 		
 		// If it's already burning, it will be empty on the next iteration
-		for (Patch p : neighborhood) {
+		for (Patch p : neighbors) {
 			if ((p.myRow == curr.myRow || p.myCol == curr.myCol)
 					&& isBurning(p)) {
 				Random rand = new Random();

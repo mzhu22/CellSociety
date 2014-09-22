@@ -19,7 +19,8 @@ public class GameOfLife extends RuleSet {
 	}
 	
 	@Override
-	public Patch getNext(Patch patch, List<Patch> neighborhood) {
+	public Patch getNext(Patch patch) {
+		List<Patch> neighborhood = getNeighbors(patch);
 		Patch newPatch = new Patch(patch);
 		
 		List<Patch> directNeighbors = new ArrayList<Patch>();

@@ -22,6 +22,7 @@ public class PredatorPrey extends RuleSet {
 
 	@Override
 	public void setParams(Map<String, Object> params) {
+		super.setParams(params);
 		sharkBreedTime = Integer
 				.parseInt((String) params.get(SHARK_BREED_TIME));
 		sharkStarveTime = Integer.parseInt((String) params
@@ -44,8 +45,7 @@ public class PredatorPrey extends RuleSet {
 		Patch[][] nextGrid = new Patch[myPatches.length][myPatches[0].length];
 		for (int i = 0; i < myPatches.length; i++) {
 			for (int j = 0; j < myPatches.length; j++) {
-				List<Patch> neighbors = getNeighborhood(myPatches[i][j]);
-				nextGrid[i][j] = getNext(myPatches[i][j], neighbors);
+				nextGrid[i][j] = getNext(myPatches[i][j]);
 			}
 		}
 		myPatches = nextGrid;
@@ -56,7 +56,7 @@ public class PredatorPrey extends RuleSet {
 		// Breed if necessary
 		for (int i = 0; i < myPatches.length; i++) {
 			for (int j = 0; j < myPatches.length; j++) {
-				List<Patch> neighbors = getNeighborhood(myPatches[i][j]);
+				List<Patch> neighbors = getNeighbors(myPatches[i][j]);
 				checkBreed(myPatches[i][j], neighbors);
 			}
 		}
@@ -73,7 +73,9 @@ public class PredatorPrey extends RuleSet {
 	}
 
 	@Override
-	public Patch getNext(Patch patch, List<Patch> neighborhood) {
+	public Patch getNext(Patch patch) {
+		
+		List<Patch> neighbors = getDirectNeighbors(patch);
 
 		if (patch.isEmpty || patch.flagged || patch.myCell == null
 				|| patch.myCell.getState() == null) {
@@ -82,7 +84,7 @@ public class PredatorPrey extends RuleSet {
 
 		if (patch.myCell.getState().equals(myPossibleStates[0])) { // FISH
 			
-			moveAdj(patch, neighborhood);
+			moveAdj(patch, neighbors);
 			return patch;
 			
 		} else { // SHARK
@@ -91,8 +93,8 @@ public class PredatorPrey extends RuleSet {
 			if (checkStarve(patch)) return patch;
 
 			// Still alive!
-			if (!checkForFishAndMove(patch, neighborhood))
-				moveAdj(patch, neighborhood);
+			if (!checkForFishAndMove(patch, neighbors))
+				moveAdj(patch, neighbors);
 		}
 
 		return patch;

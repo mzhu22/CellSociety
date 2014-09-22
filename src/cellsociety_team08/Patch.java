@@ -6,6 +6,7 @@ public class Patch {
 	public boolean flagged;
 	public int myRow, myCol;
 	public Cell myCell;
+	public int numCells;
 	
 	public Patch(int row, int col, boolean empty) {
 		myRow = row;

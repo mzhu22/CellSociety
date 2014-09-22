@@ -110,9 +110,17 @@ public class Main extends Application {
 				readXML();
 			}
 		});
+		
+		MenuItem save = new MenuItem("Save");
+		save.setOnAction(new EventHandler<ActionEvent>(){
+			@Override
+			public void handle(ActionEvent press) {
+				writeXML();
+			}
+		});
 				
 		MenuItem exit = new MenuItem("Exit");
-		menuFile.getItems().addAll(open, exit);
+		menuFile.getItems().addAll(open, save, exit);
 				
 		MenuItem help = new MenuItem("Help");
 		menuHelp.getItems().addAll(help);
@@ -191,5 +199,9 @@ public class Main extends Application {
 		//Always remove the last element of myRoot's children (the grid). Then readd it. This means new grids are made when new XML files are loaded
 		myRoot.getChildren().remove(myRoot.getChildren().size()-1);
 		myRoot.getChildren().add(myGrid);
+	}
+	
+	private void writeXML(){
+		myLoop.writeToXML();
 	}
 }

@@ -2,7 +2,6 @@ package cellsociety_team08;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import javafx.scene.paint.Color;
 
@@ -19,11 +18,9 @@ public class Segregation extends RuleSet {
 		super();
 
 		myPossibleStates = new State[] {
-				new State("Agent A", 0, Color.BLUE, new Object[] { false }), // index
-																				// 0
-				new State("Agent B", 1, Color.RED, new Object[] { false }) // index
-																			// 1
-		};
+				new State("Agent A", 0, Color.BLUE, new Object[]{false}), // index 0
+				new State("Agent B", 1, Color.RED, new Object[]{false}) // index 1
+		}; 	
 
 		myDescription = SEGREGATION;
 	}
@@ -58,19 +55,6 @@ public class Segregation extends RuleSet {
 			patch.clear();
 		}
 		return patch;
-	}
-
-	private void moveCell(Cell toBeMoved) {
-		Random gridCoord = new Random();
-		boolean placed = false;
-		while (!placed) {
-			int row = gridCoord.nextInt(myPatches.length);
-			int col = gridCoord.nextInt(myPatches[0].length);
-			if (!myPatches[row][col].containsCell()) {
-				myPatches[row][col].fill(toBeMoved);
-				placed = true;
-			}
-		}
 	}
 
 	private float getSatisfaction(Patch patch, List<Patch> neighborhood) {

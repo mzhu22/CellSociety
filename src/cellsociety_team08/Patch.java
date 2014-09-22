@@ -1,6 +1,8 @@
 package cellsociety_team08;
 
-public class Patch {
+import javafx.scene.shape.Rectangle;
+
+public class Patch extends Rectangle{
 	
 	public boolean isEmpty;
 	public boolean flagged;
@@ -27,6 +29,11 @@ public class Patch {
 		myCell = original.getCell();
 		flagged = false;
 	}
+	
+	public void changeColor(){
+		setFill(myCell.getState().getColor());
+	}
+	
 	public Cell getCell(){
 		return myCell;
 	}

@@ -6,6 +6,7 @@ import javafx.animation.KeyFrame;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
+import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.util.Duration;
@@ -20,6 +21,10 @@ public class AnimatorLoop {
 	public static final int HEIGHT_OFFSET = 112;
 	public static final int WIDTH_OFFSET = 40;
 	public static final int GRID_BORDER_WIDTH = 1;
+	
+	private GridPane myGridPane;
+	private CASettings mySettings;
+	
 	private static final double V_PAD = 5;
 	private static final double H_PAD = 5;
 	private double PADDED_WIDTH;
@@ -130,7 +135,16 @@ public class AnimatorLoop {
 
 		return myNodes;
 	}
-
+	
+//	public GridPane readXMLAndInitializeGrid(File XMLFile) {
+//		XMLHandler reader = new XMLHandler();
+//		mySettings = reader.read(XMLFile);
+//		myGUICells = new Rectangle[mySettings.getRows()][mySettings.getColumns()];
+//
+//		myGridPane = initGrid(mySettings.getRows(), mySettings.getColumns(), mySettings.getGrid());
+//		myGrid = new Grid(mySettings.getType(), mySettings.getParameters(), mySettings.getRows(), mySettings.getColumns(), mySettings.getGrid());
+//	}
+	
 	// EXTRACT into a ShapeBuilder Class
 	private void setShapeCoords(int row, int col, Polygon patch) {
 
@@ -240,7 +254,7 @@ public class AnimatorLoop {
 	}
 
 	public Group readXMLAndInitializeGrid(File XMLFile) {
-		XMLReader reader = new XMLReader();
+		XMLHandler reader = new XMLHandler();
 		CASettings settings = reader.read(XMLFile);
 		myGUICells = new Polygon[settings.getRows()][settings.getColumns()];
 		// myGUICells = new Polygon[settings.getRows()][settings.getColumns()];
@@ -251,6 +265,11 @@ public class AnimatorLoop {
 				settings.getRows(), settings.getColumns(), settings.getGrid());
 		initialized = true;
 		return myNodes;
+	}
+	
+	public void writeToXML(){
+		XMLHandler writer = new XMLHandler();
+		writer.write(mySettings);
 	}
 
 }

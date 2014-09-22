@@ -13,6 +13,8 @@ public abstract class RuleSet {
 	protected State[] myPossibleStates;
 	protected Map<String, Object> myParams;
 	protected String gridShape;
+	
+	private Random gridCoord = new Random();
 
 	protected Patch[][] myPatches;
 
@@ -80,6 +82,18 @@ public abstract class RuleSet {
 		}
 		myPatches = nextGrid;
 		return nextGrid;
+	}
+	
+	protected void moveCell(Cell toBeMoved){
+		boolean placed = false;
+		while(!placed){
+			int row = gridCoord.nextInt(myPatches.length);
+			int col = gridCoord.nextInt(myPatches[0].length);
+			if(!myPatches[row][col].containsCell()){
+				myPatches[row][col].fill(toBeMoved);
+				placed = true;
+			}
+		}		
 	}
 
 	public List<Patch> getNeighbors(Patch p) {

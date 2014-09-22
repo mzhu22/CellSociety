@@ -5,7 +5,7 @@
 		<parameter key="minSatB" value="0.8"/>
 	</parameters>
 	<grid rows="10" columns = "10">
-		. . . . . . . . 1 .
+		. . . . . . . . 1 . 
 		. . . . . . . . . .
 		. . . . . . . . . .
 		. . . . . . . . . .
@@ -15,5 +15,6 @@
 		. . . . . . . . . .
 		. . . . . . . . . .
 		. . . . . . . . . .
+		
 	</grid>
 </cellularautomata>

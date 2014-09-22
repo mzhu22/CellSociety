@@ -17,6 +17,7 @@ public class AnimatorLoop {
 	public static final int GRID_BORDER_WIDTH = 1;
 	
 	private GridPane myGridPane;
+	private CASettings mySettings;
 	
 	private boolean initialized = false;
 
@@ -122,16 +123,20 @@ public class AnimatorLoop {
 		return myGridPane;
 	}
 	
-	
 	public GridPane readXMLAndInitializeGrid(File XMLFile) {
-		XMLReader reader = new XMLReader();
-		CASettings settings = reader.read(XMLFile);
-		myGUICells = new Rectangle[settings.getRows()][settings.getColumns()];
+		XMLHandler reader = new XMLHandler();
+		mySettings = reader.read(XMLFile);
+		myGUICells = new Rectangle[mySettings.getRows()][mySettings.getColumns()];
 
-		myGridPane = initGrid(settings.getRows(), settings.getColumns(), settings.getGrid());
-		myGrid = new Grid(settings.getType(), settings.getParameters(), settings.getRows(), settings.getColumns(), settings.getGrid());
+		myGridPane = initGrid(mySettings.getRows(), mySettings.getColumns(), mySettings.getGrid());
+		myGrid = new Grid(mySettings.getType(), mySettings.getParameters(), mySettings.getRows(), mySettings.getColumns(), mySettings.getGrid());
 		initialized = true;
 		return myGridPane;
+	}
+	
+	public void writeToXML(){
+		XMLHandler writer = new XMLHandler();
+		writer.write(mySettings);
 	}
 
 }

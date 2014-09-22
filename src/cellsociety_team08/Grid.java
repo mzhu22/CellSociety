@@ -11,7 +11,7 @@ public class Grid {
 	private Patch[][] myPatches;
 	public RuleSet myRuleSet;
 
-	public Grid(String type, Map<String, Object> parametersMap, int rows,
+	public Grid(String type, Map<String, Object> map, int rows,
 			int cols, String[][] grid) {
 
 		myRows = rows;
@@ -21,7 +21,7 @@ public class Grid {
 
 		makeMyPossibleRules();
 		myRuleSet = myImplementedRulesets.get(type);
-		myRuleSet.setParams(parametersMap);
+		myRuleSet.setParams(map);
 
 		initialize(grid);
 		myRuleSet.addGrid(myPatches);

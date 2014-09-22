@@ -17,8 +17,8 @@ public abstract class  RuleSet {
 	public RuleSet() {
 	}
 	
-	public void setParams(Map<String,Object> params) {
-		myParams = params;
+	public void setParams(Map<String, Object> map) {
+		myParams = map;
 	}
 	
 	public void addGrid(Patch[][] grid){
@@ -76,6 +76,19 @@ public abstract class  RuleSet {
 		}
 		myPatches = nextGrid;
 		return nextGrid;
+	}
+	
+	protected void moveCell(Cell toBeMoved){
+		Random gridCoord = new Random();
+		boolean placed = false;
+		while(!placed){
+			int row = gridCoord.nextInt(myPatches.length);
+			int col = gridCoord.nextInt(myPatches[0].length);
+			if(!myPatches[row][col].containsCell()){
+				myPatches[row][col].fill(toBeMoved);
+				placed = true;
+			}
+		}		
 	}
 
 	public List<Patch> getNeighborhood(Patch p) {

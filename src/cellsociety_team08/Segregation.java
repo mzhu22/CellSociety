@@ -1,9 +1,7 @@
 package cellsociety_team08;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Queue;
 import java.util.Random;
 
 import javafx.scene.paint.Color;
@@ -16,8 +14,6 @@ public class Segregation extends RuleSet {
 
 	private static float myMinSatA, myMinSatB;
 	
-	private Queue<Cell> toBeMovedHeap;
-
 	public Segregation() {
 		
 		super();
@@ -25,7 +21,7 @@ public class Segregation extends RuleSet {
 		myPossibleStates = new State[] {
 				new State("Agent A", 0, Color.BLUE, new Object[]{false}), // index 0
 				new State("Agent B", 1, Color.RED, new Object[]{false}) // index 1
-		};
+		}; 	
 
 		myDescription = SEGREGATION;
 	}
@@ -37,8 +33,6 @@ public class Segregation extends RuleSet {
 			myMinSatA = Float.parseFloat((String) params.get(MIN_SAT_A));
 			myMinSatB = Float.parseFloat((String) params.get(MIN_SAT_B));
 		}
-		
-		toBeMovedHeap = new LinkedList<>();
 	}
 	
 	@Override
@@ -56,18 +50,7 @@ public class Segregation extends RuleSet {
 		return patch;
 	}
 	
-	private void moveCell(Cell toBeMoved){
-		Random gridCoord = new Random();
-		boolean placed = false;
-		while(!placed){
-			int row = gridCoord.nextInt(myPatches.length);
-			int col = gridCoord.nextInt(myPatches[0].length);
-			if(!myPatches[row][col].containsCell()){
-				myPatches[row][col].fill(toBeMoved);
-				placed = true;
-			}
-		}		
-	}
+	
 
 	private float getSatisfaction(Patch patch, List<Patch> neighborhood) {
 

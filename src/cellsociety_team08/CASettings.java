@@ -15,12 +15,12 @@ import java.util.Map;
  */
 public class CASettings {
 	private String myType;
-	private int myRows;
-	private int myColumns;
+	private Integer myRows;
+	private Integer myColumns;
 	private String[][] myGrid;
 	private Map<String, Object> myParameters;
 	
-	public CASettings(String type, Map<String, Object> parametersMap, int row, int column, String[][] grid){
+	public CASettings(String type, Map<String, Object> parametersMap, Integer row, Integer column, String[][] grid){
 		myParameters = parametersMap;
 		myType = type;
 		myGrid = grid;
@@ -36,11 +36,11 @@ public class CASettings {
 		return myParameters;
 	}
 	
-	public int getRows(){
+	public Integer getRows(){
 		return myRows;
 	}
 
-	public int getColumns(){
+	public Integer getColumns(){
 		return myColumns;
 	}
 	

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <cellularautomata type = "PredatorPrey">
 	<parameters>
-		<parameter key="gridShape" value="Rectangle"/>
+		<parameter key="gridShape" value="Triangular"/>
 		<parameter key="sharkBreedTime" value="20"/>
 		<parameter key="sharkStarveTime" value="5"/>
 		<parameter key="fishBreedTime" value="4"/>

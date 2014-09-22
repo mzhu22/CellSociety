@@ -5,55 +5,54 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-
-public abstract class  RuleSet {
+public abstract class RuleSet {
 
 	protected static final String GRID_SHAPE = "gridShape";
-	
+
 	protected String myDescription;
 	protected State[] myPossibleStates;
-	protected Map<String,Object> myParams;
+	protected Map<String, Object> myParams;
 	protected String gridShape;
 
 	protected Patch[][] myPatches;
 
 	public RuleSet() {
 	}
-	
-	public void setParams(Map<String,Object> params) {
+
+	public void setParams(Map<String, Object> params) {
 		myParams = params;
-		if(myParams.containsKey("gridShape")){
+		if (myParams.containsKey("gridShape")) {
 			gridShape = (String) myParams.get(GRID_SHAPE);
 		}
 	}
-	
-	public void addGrid(Patch[][] grid){
+
+	public void addGrid(Patch[][] grid) {
 		myPatches = grid;
 	}
 
-	public State getDefaultState(){
+	public State getDefaultState() {
 		return myPossibleStates[0];
 	}
 
-	public Patch initializeRandom(int row, int column){
+	public Patch initializeRandom(int row, int column) {
 		Random rand = new Random();
 		Patch patch = new Patch(row, column, true);
-		
-		//Generates a number from -1 to myPossibleStates.length. If -1, make an empty patch. If => 0, make a cell
-		int randomState = rand.nextInt(myPossibleStates.length+1) - 1;
-		
-		if(randomState>-1){
+
+		// Generates a number from -1 to myPossibleStates.length. If -1, make an
+		// empty patch. If => 0, make a cell
+		int randomState = rand.nextInt(myPossibleStates.length + 1) - 1;
+
+		if (randomState > -1) {
 			patch.fill(new Cell(myPossibleStates[randomState]));
 		}
 		return patch;
 	}
-	
-	public Patch initializePatch(int row, int column, String s){
+
+	public Patch initializePatch(int row, int column, String s) {
 		Patch patch;
-		if(".".equals(s)){
+		if (".".equals(s)) {
 			patch = new Patch(row, column, true);
-		}
-		else{
+		} else {
 			int choice = Integer.parseInt(s);
 			patch = new Patch(row, column, false);
 			patch.fill(new Cell(myPossibleStates[choice]));
@@ -65,10 +64,10 @@ public abstract class  RuleSet {
 		return myDescription;
 	}
 
-	public Patch[][] update(){
+	public Patch[][] update() {
 		Patch[][] nextGrid = new Patch[myPatches.length][myPatches[0].length];
-		for(int i=0; i<myPatches.length; i++){
-			for(int j=0; j<myPatches.length; j++){
+		for (int i = 0; i < myPatches.length; i++) {
+			for (int j = 0; j < myPatches.length; j++) {
 				Patch updatedPatch = getNext(myPatches[i][j]);
 
 				nextGrid[i][j] = updatedPatch;
@@ -90,8 +89,9 @@ public abstract class  RuleSet {
 		int col = p.myCol;
 
 		switch (gridShape) {
-		
-			case ("Hexagonal"):
+
+		case ("Hexagonal"):
+			if ((col + row) % 2 == 1) {
 				for (int i = row; i < row + 2; i++) {
 					for (int j = col - 1; j < col + 2; j++) {
 						if (!isOutside(i, j) && !(i == row && j == col)) {
@@ -99,22 +99,31 @@ public abstract class  RuleSet {
 						}
 					}
 				}
-				break;
-		
-			default : //Rectangular OR Triangular
-				for (int i = row - 1; i < row + 2; i++) {
+			} else {
+				for (int i = row-1; i < row + 1; i++) {
 					for (int j = col - 1; j < col + 2; j++) {
 						if (!isOutside(i, j) && !(i == row && j == col)) {
 							ret.add(myPatches[i][j]);
 						}
 					}
 				}
-				break;
+			}
+			break;
+
+		default: // Rectangular OR Triangular
+			for (int i = row - 1; i < row + 2; i++) {
+				for (int j = col - 1; j < col + 2; j++) {
+					if (!isOutside(i, j) && !(i == row && j == col)) {
+						ret.add(myPatches[i][j]);
+					}
+				}
+			}
+			break;
 		}
 
 		return ret;
 	}
-	
+
 	public List<Patch> getDirectNeighbors(Patch p) {
 
 		List<Patch> ret = new ArrayList<Patch>();
@@ -122,30 +131,31 @@ public abstract class  RuleSet {
 		int col = p.myCol;
 
 		switch ((String) myParams.get("gridShape")) {
-		
-			case ("Hexagonal"):
-				for (int i = row; i < row + 2; i++) {
-					for (int j = col - 1; j < col + 2; j++) {
-						if (!isOutside(i, j) && !(i == row && j == col)) {
-							ret.add(myPatches[i][j]);
-						}
-					}
-				}
-				break;
-				
-			case ("Triangular"):
-				if (!isOutside(row, col-1)) ret.add(myPatches[row][col-1]);
-				if (!isOutside(row, col+1)) ret.add(myPatches[row][col+1]);
-				if (!isOutside(row-1, col) && col%2 == 0) ret.add(myPatches[row-1][col]);
-				if (!isOutside(row+1, col) && col%2 == 1) ret.add(myPatches[row+1][col]);
-				break;
-		
-			default : //Rectangular
-				if (!isOutside(row, col-1)) ret.add(myPatches[row][col-1]);
-				if (!isOutside(row, col+1)) ret.add(myPatches[row][col+1]);
-				if (!isOutside(row-1, col)) ret.add(myPatches[row-1][col]);
-				if (!isOutside(row+1, col)) ret.add(myPatches[row+1][col]);
-				break;
+
+		case ("Hexagonal"):
+			return getNeighbors(p); // Same!
+
+		case ("Triangular"):
+			if (!isOutside(row, col - 1))
+				ret.add(myPatches[row][col - 1]);
+			if (!isOutside(row, col + 1))
+				ret.add(myPatches[row][col + 1]);
+			if (!isOutside(row - 1, col) && col % 2 == 0)
+				ret.add(myPatches[row - 1][col]);
+			if (!isOutside(row + 1, col) && col % 2 == 1)
+				ret.add(myPatches[row + 1][col]);
+			break;
+
+		default: // Rectangular
+			if (!isOutside(row, col - 1))
+				ret.add(myPatches[row][col - 1]);
+			if (!isOutside(row, col + 1))
+				ret.add(myPatches[row][col + 1]);
+			if (!isOutside(row - 1, col))
+				ret.add(myPatches[row - 1][col]);
+			if (!isOutside(row + 1, col))
+				ret.add(myPatches[row + 1][col]);
+			break;
 		}
 
 		return ret;
@@ -158,7 +168,7 @@ public abstract class  RuleSet {
 	}
 
 	public abstract Patch getNext(Patch curr);
-	
+
 	/**
 	 * Used to move cells around for those CA that need it. Not required by many
 	 */

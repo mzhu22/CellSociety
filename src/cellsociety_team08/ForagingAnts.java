@@ -1,9 +1,10 @@
 package cellsociety_team08;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class ForagingAnts {
+public class ForagingAnts extends RuleSet{
 	
 	private static int xPos;
 	private static int yPos;
@@ -33,6 +34,86 @@ public class ForagingAnts {
 			numNeighbors += patch.numCells;
 		}
 		return numNeighbors;
+	}
+	
+	public List<Patch> getForwardNeighbors(Patch patch) {
+		List<Patch> neighbors = getNeighbors(patch);
+		List<Patch> forwardNeighbors = new ArrayList<Patch>();
+
+		switch (myOrientation) {
+		case "N": 
+			for (Patch p: neighbors) {
+				int row = p.myRow;
+				int col = p.myCol;
+				forwardNeighbors.add(myPatches[row + 1][col]);
+				forwardNeighbors.add(myPatches[row + 1][col + 1]);
+				forwardNeighbors.add(myPatches[row + 1][col - 1]);
+			}
+		case "NE": 
+			for (Patch p: neighbors) {
+				int row = p.myRow;
+				int col = p.myCol;
+				forwardNeighbors.add(myPatches[row + 1][col + 1]);
+				forwardNeighbors.add(myPatches[row][col + 1]);
+				forwardNeighbors.add(myPatches[row + 1][col]);
+			}
+		case "E": 
+			for (Patch p: neighbors) {
+				int row = p.myRow;
+				int col = p.myCol;
+				forwardNeighbors.add(myPatches[row][col + 1]);
+				forwardNeighbors.add(myPatches[row + 1][col + 1]);
+				forwardNeighbors.add(myPatches[row - 1][col + 1]);
+			}
+		case "SE": 
+			for (Patch p: neighbors) {
+				int row = p.myRow;
+				int col = p.myCol;
+				forwardNeighbors.add(myPatches[row - 1][col + 1]);
+				forwardNeighbors.add(myPatches[row + 1][col]);
+				forwardNeighbors.add(myPatches[row - 1][col]);
+			}
+		case "S": 
+			for (Patch p: neighbors) {
+				int row = p.myRow;
+				int col = p.myCol;
+				forwardNeighbors.add(myPatches[row - 1][col]);
+				forwardNeighbors.add(myPatches[row - 1][col + 1]);
+				forwardNeighbors.add(myPatches[row - 1][col - 1]);
+			}
+		case "SW": 
+			for (Patch p: neighbors) {
+				int row = p.myRow;
+				int col = p.myCol;
+				forwardNeighbors.add(myPatches[row - 1][col - 1]);
+				forwardNeighbors.add(myPatches[row - 1][col]);
+				forwardNeighbors.add(myPatches[row][col - 1]);
+			}
+		case "W": 
+			for (Patch p: neighbors) {
+				int row = p.myRow;
+				int col = p.myCol;
+				forwardNeighbors.add(myPatches[row][col - 1]);
+				forwardNeighbors.add(myPatches[row + 1][col - 1]);
+				forwardNeighbors.add(myPatches[row - 1][col - 1]);
+			}
+		case "NW": 
+			for (Patch p: neighbors) {
+				int row = p.myRow;
+				int col = p.myCol;
+				forwardNeighbors.add(myPatches[row][col - 1]); //W
+				forwardNeighbors.add(myPatches[row + 1][col]); //N
+				forwardNeighbors.add(myPatches[row + 1][col - 1]); //NW
+			}
+		default: break;
+		}
+		return forwardNeighbors;
+	}
+
+	@Override
+	public Patch getNext(Patch curr) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

@@ -8,9 +8,12 @@ import java.util.Random;
 
 public abstract class  RuleSet {
 
+	protected static final String GRID_SHAPE = "gridShape";
+	
 	protected String myDescription;
 	protected State[] myPossibleStates;
 	protected Map<String,Object> myParams;
+	protected String gridShape;
 
 	protected Patch[][] myPatches;
 
@@ -19,6 +22,9 @@ public abstract class  RuleSet {
 	
 	public void setParams(Map<String,Object> params) {
 		myParams = params;
+		if(myParams.containsKey("gridShape")){
+			gridShape = (String) myParams.get(GRID_SHAPE);
+		}
 	}
 	
 	public void addGrid(Patch[][] grid){
@@ -83,7 +89,7 @@ public abstract class  RuleSet {
 		int row = p.myRow;
 		int col = p.myCol;
 
-		switch ((String) myParams.get("gridShape")) {
+		switch (gridShape) {
 		
 			case ("Hexagonal"):
 				for (int i = row; i < row + 2; i++) {

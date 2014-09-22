@@ -22,6 +22,7 @@ public class PredatorPrey extends RuleSet {
 
 	@Override
 	public void setParams(Map<String, Object> params) {
+		super.setParams(params);
 		sharkBreedTime = Integer
 				.parseInt((String) params.get(SHARK_BREED_TIME));
 		sharkStarveTime = Integer.parseInt((String) params

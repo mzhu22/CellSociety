@@ -1,9 +1,7 @@
 package cellsociety_team08;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Queue;
 import java.util.Random;
 
 import javafx.scene.paint.Color;
@@ -15,63 +13,64 @@ public class Segregation extends RuleSet {
 	private static final String MIN_SAT_B = "minSatB";
 
 	private static float myMinSatA, myMinSatB;
-	
-	private Queue<Cell> toBeMovedHeap;
 
 	public Segregation() {
-		
+
 		super();
-	
+
 		myPossibleStates = new State[] {
-				new State("Agent A", 0, Color.BLUE, new Object[]{false}), // index 0
-				new State("Agent B", 1, Color.RED, new Object[]{false}) // index 1
+				new State("Agent A", 0, Color.BLUE, new Object[] { false }), // index
+																				// 0
+				new State("Agent B", 1, Color.RED, new Object[] { false }) // index
+																			// 1
 		};
 
 		myDescription = SEGREGATION;
 	}
-	
+
 	@Override
 	public void setParams(Map<String, Object> params) {
-
-		if(params.get(MIN_SAT_A)!=null && params.get(MIN_SAT_B)!=null){
+		super.setParams(params);
+		if (params.get(MIN_SAT_A) != null && params.get(MIN_SAT_B) != null) {
 			myMinSatA = Float.parseFloat((String) params.get(MIN_SAT_A));
 			myMinSatB = Float.parseFloat((String) params.get(MIN_SAT_B));
 		}
-		
-		toBeMovedHeap = new LinkedList<>();
 	}
-	
+
 	@Override
 	public Patch getNext(Patch patch) {
-		
+
 		List<Patch> neighbors = getNeighbors(patch);
-		
-		// If the current cell is satisfied with its neighbors, return its current state!
+
+		// If the current cell is satisfied with its neighbors, return its
+		// current state!
 		if (patch.myCell == null)
 			return patch;
 
 		float currSat = getSatisfaction(patch, neighbors);
 
 		// What about minSatB???
-		
-		if(currSat<myMinSatA){
+
+		if (patch.getCell().getState().myIndex == 0 && currSat < myMinSatA
+				|| patch.getCell().getState().myIndex == 1
+				&& currSat < myMinSatB) {
 			moveCell(patch.getCell());
-			patch.clear();			
+			patch.clear();
 		}
 		return patch;
 	}
-	
-	private void moveCell(Cell toBeMoved){
+
+	private void moveCell(Cell toBeMoved) {
 		Random gridCoord = new Random();
 		boolean placed = false;
-		while(!placed){
+		while (!placed) {
 			int row = gridCoord.nextInt(myPatches.length);
 			int col = gridCoord.nextInt(myPatches[0].length);
-			if(!myPatches[row][col].containsCell()){
+			if (!myPatches[row][col].containsCell()) {
 				myPatches[row][col].fill(toBeMoved);
 				placed = true;
 			}
-		}		
+		}
 	}
 
 	private float getSatisfaction(Patch patch, List<Patch> neighborhood) {
@@ -88,6 +87,6 @@ public class Segregation extends RuleSet {
 			}
 		}
 
-		return newSat/total;
+		return newSat / total;
 	}
 }

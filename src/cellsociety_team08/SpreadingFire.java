@@ -25,7 +25,7 @@ public class SpreadingFire extends RuleSet {
 	
 	@Override
 	public void setParams(Map<String, Object> params) {
-		myParams = params;
+		super.setParams(params);
 		if(myParams.containsKey(PROB_CATCH)){
 			probCatch = Float.parseFloat((String) myParams.get(PROB_CATCH));
 		}

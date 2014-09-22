@@ -11,7 +11,7 @@ public class ForagingAnts extends RuleSet{
 	
 	private static int xPos;
 	private static int yPos;
-	private static Patch HOME_BASE;// = new Patch(xPos, yPos, false);
+	private static Patch HOME_BASE; // = new Patch(xPos, yPos, false);
 	private List<String> orientationList = Arrays.asList("N", "NE", "E", "SE", "S", "SW", "W", "NW");
 	private String myOrientation;
 	private int antLimit = 10;
@@ -154,39 +154,57 @@ public class ForagingAnts extends RuleSet{
 		if (!patch.myCell.hasFood) {
 			//patch.myCell.foodDesire = 10;
 			if (forwardNeighbors.size() > 0) {
-				/*for (Patch p: forwardNeighbors) {
+				for (Patch p: forwardNeighbors) {
 					if (p.foodPheromoneLevel > highPheromones) {
 						highPheromones = p.foodPheromoneLevel;
 						nextPatch = p;
 					}
-				}*/
-				//if (nextPatch == patch) { //if we didn't find a new patch
-				Random rand = new Random();
-				nextPatch = forwardNeighbors.get(rand.nextInt(forwardNeighbors.size()));
-				//}
-			}
-			/*for (Patch p: backNeighbors) {
-				if (p.foodPheromoneLevel > highPheromones) {
-					highPheromones = p.foodPheromoneLevel;
-					nextPatch = p;
 				}
-			}*/
+				if (nextPatch == patch) { //if we didn't find a new patch
+					Random rand = new Random();
+					nextPatch = forwardNeighbors.get(rand.nextInt(forwardNeighbors.size()));
+				}
+			}
 			else {
-				Random rand = new Random();
-				nextPatch = backNeighbors.get(rand.nextInt(backNeighbors.size()));
+				for (Patch p: backNeighbors) {
+					if (p.foodPheromoneLevel > highPheromones) {
+						highPheromones = p.foodPheromoneLevel;
+						nextPatch = p;
+					}
+				}
+				
+				if (nextPatch == patch) { //if we didn't find a new patch
+					Random rand = new Random();
+					nextPatch = backNeighbors.get(rand.nextInt(backNeighbors.size()));
+				}
 			}
 			patch.homePheromoneLevel = 10;
 		}
 		
 		else { // cell has food
 			if (forwardNeighbors.size() > 0) {
-				Random rand = new Random();
-				nextPatch = forwardNeighbors.get(rand.nextInt(forwardNeighbors.size()));
+				for (Patch p: forwardNeighbors) {
+					if (p.homePheromoneLevel > highPheromones) {
+						highPheromones = p.homePheromoneLevel;
+						nextPatch = p;
+					}
+				}
+				if (nextPatch == patch) { //if we didn't find a new patch
+					Random rand = new Random();
+					nextPatch = forwardNeighbors.get(rand.nextInt(forwardNeighbors.size()));
+				}
 			}
-			else {
+			for (Patch p: backNeighbors) {
+				if (p.homePheromoneLevel > highPheromones) {
+					highPheromones = p.homePheromoneLevel;
+					nextPatch = p;
+				}
+			}
+			if (nextPatch == patch) { //if we didn't find a new patch
 				Random rand = new Random();
 				nextPatch = backNeighbors.get(rand.nextInt(backNeighbors.size()));
 			}
+			
 			patch.foodPheromoneLevel = 10;
 		}
 		

@@ -13,20 +13,16 @@ public class ForagingAnts extends RuleSet{
 	private static Patch HOME_BASE;// = new Patch(xPos, yPos, false);
 	private List<String> orientationList = Arrays.asList("N", "NE", "E", "SE", "S", "SW", "W", "NW");
 	private String myOrientation;
-	private double myHomeDesire;
-	private double myFoodDesire;
 	private int antLimit = 10;
 	private State[] myPossibleStates = new State[] {
-			new State("Home", 0, Color.GREEN, null), // index 0
-			new State("Ant", 1, Color.ORANGERED, null), // index 1
+			new State("Home", 0, Color.BLUE, null), // index 0
+			new State("Ant", 1, Color.RED, null), // index 1
 			new State("Food", 2, Color.GREEN, null) // index 2
 	};
 	
 			
-	public ForagingAnts(String orientation, double homeDesire, double foodDesire, int x, int y) {
+	public ForagingAnts(String orientation, int x, int y) {
 		myOrientation = orientation;
-		myHomeDesire = homeDesire;
-		myFoodDesire = foodDesire;
 		xPos = x;
 		yPos = y;
 		HOME_BASE = new Patch(xPos, yPos, false);
@@ -43,6 +39,15 @@ public class ForagingAnts extends RuleSet{
 			numNeighbors += getNumCells(patch);
 		}
 		return numNeighbors;
+	}
+	
+	public List<Patch> getBackNeighbors(Patch patch) {
+		List<Patch> backNeighbors = getNeighbors(patch);
+		List<Patch> forwardNeighbors = getForwardNeighbors(patch);
+		for (Patch p: backNeighbors) {
+			if (forwardNeighbors.contains(p)) backNeighbors.remove(p);
+		}
+		return backNeighbors;
 	}
 	
 	public List<Patch> getForwardNeighbors(Patch patch) {
@@ -132,6 +137,16 @@ public class ForagingAnts extends RuleSet{
 	@Override
 	public Patch getNext(Patch patch) {
 		// TODO Auto-generated method stub
+		if (patch.myCell.getState() == myPossibleStates[0]) { //home base doesn't do anything
+			return patch;
+		}
+		if (patch.myCell.getState() == myPossibleStates[2]) { //neither does food
+			return patch;
+		}
+		List<Patch> forwardNeighbors = getForwardNeighbors(patch);
+		List<Patch> backNeighbors = getBackNeighbors(patch);
+		
+		
 		
 		return null;
 	}

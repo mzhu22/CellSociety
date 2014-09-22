@@ -137,18 +137,37 @@ public class ForagingAnts extends RuleSet{
 	@Override
 	public Patch getNext(Patch patch) {
 		// TODO Auto-generated method stub
+		List<Patch> forwardNeighbors = getForwardNeighbors(patch);
+		List<Patch> backNeighbors = getBackNeighbors(patch);
+		Patch nextPatch = patch;
+		double highPheromones = 0;
+		
 		if (patch.myCell.getState() == myPossibleStates[0]) { //home base doesn't do anything
 			return patch;
 		}
 		if (patch.myCell.getState() == myPossibleStates[2]) { //neither does food
 			return patch;
 		}
-		List<Patch> forwardNeighbors = getForwardNeighbors(patch);
-		List<Patch> backNeighbors = getBackNeighbors(patch);
+		if (!patch.myCell.hasFood) {
+			if (forwardNeighbors.size() > 0) {
+				for (Patch p: forwardNeighbors) {
+					if (p.foodPheromoneLevel > highPheromones) {
+						highPheromones = p.foodPheromoneLevel;
+						nextPatch = p;
+					}
+				}
+			}
+			for (Patch p: backNeighbors) {
+				if (p.foodPheromoneLevel > highPheromones) {
+					highPheromones = p.foodPheromoneLevel;
+					nextPatch = p;
+				}
+			}
+		}
 		
-		
-		
-		return null;
+		else {
+			
+		}
 	}
 	
 	

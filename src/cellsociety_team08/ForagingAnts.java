@@ -190,7 +190,7 @@ public class ForagingAnts extends RuleSet{
 					}
 				}
 				Random rand = new Random();
-				if (nextPatch == patch || rand.nextInt(3) == 0) { //if we didn't find a new patch
+				if (nextPatch == patch || rand.nextInt(3) == 0) { //if we didn't find a new patch 
 					nextPatch = forwardNeighbors.get(rand.nextInt(forwardNeighbors.size()));
 				}
 			}
@@ -204,7 +204,6 @@ public class ForagingAnts extends RuleSet{
 			if (nextPatch == patch || rand.nextInt(3) == 0) { //if we didn't find a new patch
 				nextPatch = backNeighbors.get(rand.nextInt(backNeighbors.size()));
 			}
-			
 			patch.foodPheromoneLevel = 10;
 		}
 		

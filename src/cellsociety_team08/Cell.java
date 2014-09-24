@@ -6,8 +6,8 @@ import java.util.Stack;
 public class Cell {
 
 	private List<State> myHistory = new Stack<State>();
-	public double homeDesire = 0;
-	public double foodDesire = 0;
+	//public double homeDesire = 0;
+	//public double foodDesire = 0;
 	public boolean hasFood = false;
 
 	public Cell(State s) { /* maybe add this too I'm not sure: int size */

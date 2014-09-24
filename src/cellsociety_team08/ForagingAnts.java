@@ -146,12 +146,7 @@ public class ForagingAnts extends RuleSet{
 		Patch nextPatch = patch;
 		double highPheromones = 0;
 		
-		if (patch.myCell.getState() == myPossibleStates[0]) { //home base doesn't do anything except depreciate pheromone values
-			patch.foodPheromoneLevel--;
-			patch.homePheromoneLevel--;
-			return patch;
-		}
-		if (patch.myCell.getState() == myPossibleStates[2]) { //neither does food 
+		if (patch.myCell.getState() == myPossibleStates[0] || patch.myCell.getState() == myPossibleStates[2]) { //home base doesn't do anything except depreciate pheromone values
 			patch.foodPheromoneLevel--;
 			patch.homePheromoneLevel--;
 			return patch;
@@ -166,8 +161,8 @@ public class ForagingAnts extends RuleSet{
 						nextPatch = p;
 					}
 				}
-				if (nextPatch == patch) { //if we didn't find a new patch
-					Random rand = new Random();
+				Random rand = new Random();
+				if (nextPatch == patch || rand.nextInt(3) == 0) { //if we didn't find a new patch
 					nextPatch = forwardNeighbors.get(rand.nextInt(forwardNeighbors.size()));
 				}
 			}
@@ -179,8 +174,8 @@ public class ForagingAnts extends RuleSet{
 					}
 				}
 				
-				if (nextPatch == patch) { //if we didn't find a new patch
-					Random rand = new Random();
+				Random rand = new Random();
+				if (nextPatch == patch || rand.nextInt(3) == 0) { //if we didn't find a new patch
 					nextPatch = backNeighbors.get(rand.nextInt(backNeighbors.size()));
 				}
 			}
@@ -195,8 +190,8 @@ public class ForagingAnts extends RuleSet{
 						nextPatch = p;
 					}
 				}
-				if (nextPatch == patch) { //if we didn't find a new patch
-					Random rand = new Random();
+				Random rand = new Random();
+				if (nextPatch == patch || rand.nextInt(3) == 0) { //if we didn't find a new patch 
 					nextPatch = forwardNeighbors.get(rand.nextInt(forwardNeighbors.size()));
 				}
 			}
@@ -206,11 +201,10 @@ public class ForagingAnts extends RuleSet{
 					nextPatch = p;
 				}
 			}
-			if (nextPatch == patch) { //if we didn't find a new patch
-				Random rand = new Random();
+			Random rand = new Random();
+			if (nextPatch == patch || rand.nextInt(3) == 0) { //if we didn't find a new patch
 				nextPatch = backNeighbors.get(rand.nextInt(backNeighbors.size()));
 			}
-			
 			patch.foodPheromoneLevel = 10;
 		}
 		

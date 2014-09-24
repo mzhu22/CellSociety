@@ -17,6 +17,7 @@ public class SugarScape extends RuleSet {
 		
 		if (curr.isEmpty && curr.sugarLevel < curr.maxSugar) { //grow the sugar back
 			curr.sugarLevel = curr.sugarLevel + sugarGrowBackRate;
+			return curr;
 		}
 		
 		int mostSugar = 0;
@@ -26,16 +27,16 @@ public class SugarScape extends RuleSet {
 				mostSugar = patch.sugarLevel;
 			}
 		}
-		//equalNeighbors.add(nextPatch);
 		for (Patch patch: neighbors) {
 			if (patch.sugarLevel == nextPatch.sugarLevel) {
 				equalNeighbors.add(patch);
 			}
 		}
-		if (equalNeighbors.size() > 0) {
+		if (equalNeighbors.size() > 1) {
 			nextPatch = getClosestNeighbor(curr, equalNeighbors);
 		}
-		
+		nextPatch.sugarLevel = nextPatch.sugarLevel -nextPatch.myCell.sugarMetabolism;
+
 		return nextPatch;
 	}
 	

@@ -12,7 +12,17 @@ public abstract class ShapeBuilder {
 		myDescription = description;
 	}
 	
-	public abstract Polygon makeShape(double paddedHeight, double paddedWidth, double rows, double cols);
+	public Polygon makeShape(double paddedHeight, double paddedWidth, double rows, double cols) {	
+		setDimensions(paddedHeight, paddedWidth, rows, cols);		
+		Polygon shape = new Polygon();
+		shape.getPoints().setAll(setCoords());
+		return shape;
+	}
+	
+	protected abstract void setDimensions(double paddedHeight, double paddedWidth,
+			double rows, double cols);
+
+	protected abstract Double[] setCoords();
 	
 	public abstract void move(Polygon shape, int row, int col, double vPad, double hPad);
 	

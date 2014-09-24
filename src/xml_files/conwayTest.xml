@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <cellularautomata type = "GameOfLife">
 	<parameters>
-		<parameter key="gridShape" value="Hexagonal"/>
+		<parameter key="gridShape" value="Triangular"/>
 	</parameters>
 	<grid rows="40" columns = "40">
 		. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 

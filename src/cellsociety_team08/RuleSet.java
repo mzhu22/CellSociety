@@ -69,7 +69,7 @@ public abstract class RuleSet {
 	public Patch[][] update() {
 		Patch[][] nextGrid = new Patch[myPatches.length][myPatches[0].length];
 		for (int i = 0; i < myPatches.length; i++) {
-			for (int j = 0; j < myPatches.length; j++) {
+			for (int j = 0; j < myPatches[0].length; j++) {
 				Patch updatedPatch = getNext(myPatches[i][j]);
 
 				nextGrid[i][j] = updatedPatch;

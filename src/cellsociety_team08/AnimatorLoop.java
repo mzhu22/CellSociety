@@ -1,6 +1,13 @@
 package cellsociety_team08;
 
+import guiElements.Hexagon;
+import guiElements.Rectangle;
+import guiElements.ShapeBuilder;
+import guiElements.Triangle;
+
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 import javafx.animation.KeyFrame;
 import javafx.event.ActionEvent;
@@ -35,6 +42,8 @@ public class AnimatorLoop {
 	private int NUM_COLS;
 
 	private Group myNodes;
+	private ShapeBuilder myShapeBuilder;
+	private static Map<String, ShapeBuilder> myPossibleShapeBuilders = new HashMap<String, ShapeBuilder>();
 
 	private boolean initialized = false;
 
@@ -61,6 +70,13 @@ public class AnimatorLoop {
 		HEIGHT = height - HEIGHT_OFFSET;
 		PADDED_WIDTH = WIDTH - 2 * H_PAD;
 		PADDED_HEIGHT = HEIGHT - 2 * V_PAD;
+		makePossibleBuilders();
+	}
+
+	private void makePossibleBuilders() {
+		myPossibleShapeBuilders.put("Rectangular", new Rectangle());
+		myPossibleShapeBuilders.put("Triangular", new Triangle());
+		myPossibleShapeBuilders.put("Hexagonal", new Hexagon());
 	}
 
 	/**
@@ -121,13 +137,14 @@ public class AnimatorLoop {
 	}
 
 	private Group addCellsToGridPane(String[][] gridArray) {
+		myShapeBuilder = myPossibleShapeBuilders.get(CASettings.myGridShape);
 
 		for (int row = 0; row < NUM_ROWS; row++) {
 			for (int col = 0; col < NUM_COLS; col++) {
-				Polygon patch = new Polygon();
+				Polygon patch = myShapeBuilder.makeShape(PADDED_HEIGHT, PADDED_WIDTH, NUM_ROWS, NUM_COLS);
+				myShapeBuilder.move(patch, row, col, V_PAD, H_PAD);
 				patch.setFill(Color.WHITE);
 				patch.setStroke(Color.GREY);
-				setShapeCoords(row, col, patch);
 				myNodes.getChildren().add(patch);
 				myGUICells[row][col] = patch;
 			}

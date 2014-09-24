@@ -57,6 +57,7 @@ public class ForagingAnts extends RuleSet{
 		List<Patch> neighbors = getNeighbors(patch);
 		List<Patch> forwardNeighbors = new ArrayList<Patch>();
 
+		// Tons of repeated code here. Could definitely shorten this with some if statements.
 		switch (myOrientation) {
 		case "N": 
 			for (Patch p: neighbors) {

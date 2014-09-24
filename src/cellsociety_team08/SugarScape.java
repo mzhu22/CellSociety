@@ -9,14 +9,65 @@ public class SugarScape extends RuleSet {
 	
 	@Override
 	public Patch getNext(Patch curr) {
+		int row = curr.myRow;
+		int col = curr.myCol;
+		List<Patch> neighbors = getNeighbors(curr);
+		List<Patch> equalNeighbors = new ArrayList<Patch>();
+		Patch nextPatch = new Patch(row, col, false);
 		
-		if (curr.isEmpty && curr.sugarLevel < curr.maxSugar) {
+		if (curr.isEmpty && curr.sugarLevel < curr.maxSugar) { //grow the sugar back
 			curr.sugarLevel = curr.sugarLevel + sugarGrowBackRate;
 		}
 		
+		int mostSugar = 0;
+		for (Patch patch: neighbors) {
+			if (patch.sugarLevel >= mostSugar) {
+				nextPatch = patch;
+				mostSugar = patch.sugarLevel;
+			}
+		}
+		//equalNeighbors.add(nextPatch);
+		for (Patch patch: neighbors) {
+			if (patch.sugarLevel == nextPatch.sugarLevel) {
+				equalNeighbors.add(patch);
+			}
+		}
+		if (equalNeighbors.size() > 0) {
+			nextPatch = getClosestNeighbor(curr, equalNeighbors);
+		}
 		
 		
-		return null;
+		return nextPatch;
+	}
+	
+	public Patch getClosestNeighbor(Patch patch, List<Patch> neighbors) {
+		int smallestDifference = 100000;
+		Patch retPatch = new Patch(0, 0, true);
+		
+		for (Patch p: neighbors) {
+			if (p.myCol == patch.myCol) {
+				int difference = p.myRow - patch.myRow;
+				if (difference < 0) {
+					difference = difference * (-1);
+				}
+				if (difference < smallestDifference) {
+					smallestDifference = difference;
+					retPatch = p;
+				}
+			}
+			if (p.myRow == patch.myRow) {
+				int difference = p.myCol - patch.myCol;
+				if (difference < 0) {
+					difference = difference * (-1);
+				}
+				if (difference < smallestDifference) {
+					smallestDifference = difference;
+					retPatch = p;
+				}
+			}
+		}
+		return retPatch;
+		
 	}
 	
 	@Override
@@ -62,5 +113,4 @@ public class SugarScape extends RuleSet {
 		}
 		return ret;
 	}
-	
 }

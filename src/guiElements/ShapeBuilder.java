@@ -2,6 +2,10 @@ package guiElements;
 
 import javafx.scene.shape.Polygon;
 
+/* 
+ * @author Brian Bolze
+ * Inheritance hierarchy used to build shapes for the grid to use
+ */
 public abstract class ShapeBuilder {
 	
 	private String myDescription;

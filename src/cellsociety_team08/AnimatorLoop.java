@@ -90,21 +90,21 @@ public class AnimatorLoop {
 	}
 
 	/**
-	 * Change the colors of the Rectangle representations of Cells to animate
+	 * Change the colors of the Polygon representations of Cells to animate
 	 * them
 	 */
 	private void updateGUICells() {
-		for (int i = 0; i < myPatches.length; i++) {
-			for (int j = 0; j < myPatches[i].length; j++) {
-				if (myPatches[i][j].getCell() == null) {
-					myGUICells[i][j].setFill(Color.WHITE);
-				} else {
-					Color color = myPatches[i][j].getCell().getState()
+		// For all patches, update their colors
+		for (Patch[] pArray:myPatches){
+			for (Patch p:pArray){
+				if (p.getCell() == null) p.setFill(Color.WHITE);
+				else {
+					Color color = p.getCell().getState()
 							.getColor(); // We should make this shorter one day
 											// @Mike Zhu
-					myGUICells[i][j].setFill(color);
+					p.setFill(color);
 				}
-			}
+			}		
 		}
 	}
 
@@ -124,12 +124,12 @@ public class AnimatorLoop {
 
 		myNodes = new Group();
 
-		addCellsToGridPane(gridArray);
+		addCellsToGrid(gridArray);
 
 		return myNodes;
 	}
 
-	private Group addCellsToGridPane(String[][] gridArray) {
+	private Group addCellsToGrid(String[][] gridArray) {
 		myShapeBuilder = myPossibleShapeBuilders.get(CASettings.myGridShape);
 
 		for (int row = 0; row < NUM_ROWS; row++) {
@@ -137,7 +137,12 @@ public class AnimatorLoop {
 				Polygon patch = myShapeBuilder.makeShape(PADDED_HEIGHT, PADDED_WIDTH, NUM_ROWS, NUM_COLS);
 				myShapeBuilder.move(patch, row, col, V_PAD, H_PAD);
 				patch.setFill(Color.WHITE);
+				
+				/*
+				 *  @TODO : Add in ability to turn on/off gridlines
+				 */
 				patch.setStroke(Color.GREY);
+				
 				myNodes.getChildren().add(patch);
 				myGUICells[row][col] = patch;
 			}
@@ -158,13 +163,15 @@ public class AnimatorLoop {
 	public Group readXMLAndInitializeGrid(File XMLFile) {
 		XMLHandler reader = new XMLHandler();
 		CASettings settings = reader.read(XMLFile);
+		
 		myGUICells = new Polygon[settings.getRows()][settings.getColumns()];
-		// myGUICells = new Polygon[settings.getRows()][settings.getColumns()];
 
 		myNodes = initGridPane(settings.getRows(), settings.getColumns(),
 				settings.getGrid());
+		
 		myGrid = new Grid(settings.getType(), settings.getParameters(),
 				settings.getRows(), settings.getColumns(), settings.getGrid());
+		
 		initialized = true;
 		return myNodes;
 	}

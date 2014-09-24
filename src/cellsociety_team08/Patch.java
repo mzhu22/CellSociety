@@ -11,6 +11,8 @@ public class Patch extends Rectangle{
 	public int numCells;
 	public double homePheromoneLevel = 0;
 	public double foodPheromoneLevel = 0;
+	public int maxSugar = 7;
+	public int sugarLevel = maxSugar;
 	
 	public Patch(int row, int col, boolean empty) {
 		myRow = row;

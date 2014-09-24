@@ -53,7 +53,7 @@ public class ForagingAnts extends RuleSet{
 		return backNeighbors;
 	}
 	
-	public List<Patch> getForwardNeighbors(Patch patch) {
+	public List<Patch> getForwardNeighbors(Patch patch) { //will need to implement myOrientation as a class i guess because of what he said in class
 		List<Patch> neighbors = getNeighbors(patch);
 		List<Patch> forwardNeighbors = new ArrayList<Patch>();
 

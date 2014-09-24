@@ -8,7 +8,7 @@ public class Cell {
 
 	
 	Random rand = new Random();
-	public int sugar = rand.nextInt(3);
+	public int sugar = rand.nextInt(25)+1;
 	public int sugarMetabolism = rand.nextInt(5);
 	public int vision = rand.nextInt(5) + 1;
 	

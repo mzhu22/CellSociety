@@ -36,7 +36,6 @@ public class SugarScape extends RuleSet {
 			nextPatch = getClosestNeighbor(curr, equalNeighbors);
 		}
 		
-		
 		return nextPatch;
 	}
 	
@@ -53,6 +52,7 @@ public class SugarScape extends RuleSet {
 				if (difference < smallestDifference) {
 					smallestDifference = difference;
 					retPatch = p;
+					p.clear();
 				}
 			}
 			if (p.myRow == patch.myRow) {
@@ -63,6 +63,7 @@ public class SugarScape extends RuleSet {
 				if (difference < smallestDifference) {
 					smallestDifference = difference;
 					retPatch = p;
+					p.clear();
 				}
 			}
 		}

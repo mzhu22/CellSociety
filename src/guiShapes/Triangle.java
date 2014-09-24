@@ -1,4 +1,4 @@
-package guiElements;
+package guiShapes;
 
 import javafx.scene.shape.Polygon;
 

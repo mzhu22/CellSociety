@@ -1,9 +1,9 @@
 package cellsociety_team08;
 
-import guiElements.Hexagon;
-import guiElements.Rectangle;
-import guiElements.ShapeBuilder;
-import guiElements.Triangle;
+import guiShapes.Hexagon;
+import guiShapes.Rectangle;
+import guiShapes.ShapeBuilder;
+import guiShapes.Triangle;
 
 import java.io.File;
 import java.util.HashMap;
@@ -25,8 +25,8 @@ public class AnimatorLoop {
 
 	private CASettings mySettings;
 	
-	private static final double V_PAD = 5;
-	private static final double H_PAD = 5;
+	private static final double V_PAD = 0;
+	private static final double H_PAD = 0;
 	private double PADDED_WIDTH;
 	private double PADDED_HEIGHT;
 	private int HEIGHT;
@@ -95,14 +95,14 @@ public class AnimatorLoop {
 	 */
 	private void updateGUICells() {
 		// For all patches, update their colors
-		for (Patch[] pArray:myPatches){
-			for (Patch p:pArray){
-				if (p.getCell() == null) p.setFill(Color.WHITE);
+		for (int i=0; i<myPatches.length; i++){
+			for (int j=0; j<myPatches[0].length; j++){
+				if (myPatches[i][j].getCell() == null) myGUICells[i][j].setFill(Color.WHITE);
 				else {
-					Color color = p.getCell().getState()
+					Color color = myPatches[i][j].getCell().getState()
 							.getColor(); // We should make this shorter one day
 											// @Mike Zhu
-					p.setFill(color);
+					myGUICells[i][j].setFill(color);
 				}
 			}		
 		}

@@ -36,7 +36,6 @@ public class SugarScape extends RuleSet {
 			nextPatch = getClosestNeighbor(curr, equalNeighbors);
 		}
 		nextPatch.sugarLevel = nextPatch.sugarLevel -nextPatch.myCell.sugarMetabolism;
-
 		return nextPatch;
 	}
 	

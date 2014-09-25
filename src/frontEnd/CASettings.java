@@ -1,4 +1,4 @@
-package cellsociety_team08;
+package frontEnd;
 
 import java.util.Map;
 

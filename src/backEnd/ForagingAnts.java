@@ -1,10 +1,12 @@
-package cellsociety_team08;
+package backEnd;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+import frontEnd.Patch;
+import frontEnd.State;
 import javafx.scene.paint.Color;
 
 /*

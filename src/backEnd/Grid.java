@@ -1,7 +1,9 @@
-package cellsociety_team08;
+package backEnd;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import frontEnd.Patch;
 
 public class Grid {
 

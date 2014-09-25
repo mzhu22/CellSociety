@@ -1,10 +1,13 @@
-package cellsociety_team08;
+package backEnd;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import frontEnd.Cell;
+import frontEnd.Patch;
+import frontEnd.State;
 import javafx.scene.paint.Color;
 
 public class PredatorPrey extends RuleSet {

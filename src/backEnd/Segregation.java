@@ -1,8 +1,10 @@
-package cellsociety_team08;
+package backEnd;
 
 import java.util.List;
 import java.util.Map;
 
+import frontEnd.Patch;
+import frontEnd.State;
 import javafx.scene.paint.Color;
 
 public class Segregation extends RuleSet {

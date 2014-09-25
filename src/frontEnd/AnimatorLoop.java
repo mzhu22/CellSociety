@@ -1,4 +1,4 @@
-package cellsociety_team08;
+package frontEnd;
 
 import guiShapes.Hexagon;
 import guiShapes.Rectangle;
@@ -9,6 +9,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
+import backEnd.Grid;
 import javafx.animation.KeyFrame;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

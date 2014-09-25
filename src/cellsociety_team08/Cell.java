@@ -1,10 +1,17 @@
 package cellsociety_team08;
 
 import java.util.List;
+import java.util.Random;
 import java.util.Stack;
 
 public class Cell {
 
+	
+	Random rand = new Random();
+	public int sugar = rand.nextInt(25)+1;
+	public int sugarMetabolism = rand.nextInt(5);
+	public int vision = rand.nextInt(5) + 1;
+	
 	private List<State> myHistory = new Stack<State>();
 	//public double homeDesire = 0;
 	//public double foodDesire = 0;

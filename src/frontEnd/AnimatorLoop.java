@@ -4,10 +4,6 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-import shapeFactories.Hexagon;
-import shapeFactories.Rectangle;
-import shapeFactories.ShapeFactory;
-import shapeFactories.Triangle;
 import javafx.animation.KeyFrame;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -15,7 +11,15 @@ import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.util.Duration;
-import backEnd.Grid;
+import shapeFactories.Hexagon;
+import shapeFactories.Rectangle;
+import shapeFactories.ShapeFactory;
+import shapeFactories.Triangle;
+import backEnd.GameOfLife;
+import backEnd.PredatorPrey;
+import backEnd.RuleSet;
+import backEnd.Segregation;
+import backEnd.SpreadingFire;
 
 public class AnimatorLoop {
 
@@ -38,13 +42,11 @@ public class AnimatorLoop {
 	private Group myNodes;
 	private ShapeFactory myShapeBuilder;
 	private static Map<String, ShapeFactory> myImplementedShapeFactories;
+	private static Map<String, RuleSet> myImplementedRulesets;
+	public RuleSet myRuleSet;
 
 	private boolean initialized = false;
 
-	/*
-	 * TODO : Can we consolidate these? Can we get rid of Grid?
-	 */
-	private Grid myGrid;
 	private Polygon[][] myGUICells;
 	private Patch[][] myPatches;
 
@@ -88,8 +90,7 @@ public class AnimatorLoop {
 
 	private void updateCells() {
 		if (initialized) {
-			// TODO : Reduce this layer of dynamic coupling - @Brian Bolze
-			myPatches = myGrid.myRuleSet.update();
+			myPatches = myRuleSet.update();
 			updateGUICells();
 		}
 	}
@@ -160,18 +161,33 @@ public class AnimatorLoop {
 
 	public Group readXMLAndInitializeGrid(File XMLFile) {
 		XMLHandler reader = new XMLHandler();
-		CASettings settings = reader.read(XMLFile);
+		mySettings = reader.read(XMLFile);
 
-		myGUICells = new Polygon[settings.getRows()][settings.getColumns()];
+		myGUICells = new Polygon[mySettings.getRows()][mySettings.getColumns()];
 
-		myNodes = initGridPane(settings.getRows(), settings.getColumns(),
-				settings.getGrid());
+		myNodes = initGridPane(mySettings.getRows(), mySettings.getColumns(),
+				mySettings.getGrid());
 
-		myGrid = new Grid(settings.getType(), settings.getParameters(),
-				settings.getRows(), settings.getColumns(), settings.getGrid());
+		myPatches = new Patch[NUM_ROWS][NUM_COLS];
+		makeMyPossibleRules();
+		myRuleSet = myImplementedRulesets.get(mySettings.getType());
+		myRuleSet.setParams(mySettings.getParameters());
+		
+		initGrid();
+		myRuleSet.addGrid(myPatches);
 
 		initialized = true;
 		return myNodes;
+	}
+	
+	private void initGrid() {
+		String[][] grid = mySettings.getGrid();
+		for (int i = 0; i < myPatches.length; i++) {
+			for (int j = 0; j < myPatches[0].length; j++) {
+				myPatches[i][j] = myRuleSet.initializePatch(i, j, grid[i][j]);
+				//myPatches[i][j] = myRuleSet.initializeRandom(i, j);
+			}
+		}
 	}
 
 	public void writeToXML() {
@@ -185,6 +201,16 @@ public class AnimatorLoop {
 		myImplementedShapeFactories.put("Rectangular", new Rectangle());
 		myImplementedShapeFactories.put("Triangular", new Triangle());
 		myImplementedShapeFactories.put("Hexagonal", new Hexagon());
+	}
+	
+	private void makeMyPossibleRules() {
+		myImplementedRulesets = new HashMap<>();
+
+		myImplementedRulesets.put("PredatorPrey", new PredatorPrey());
+		myImplementedRulesets.put("SpreadingFire", new SpreadingFire());
+		myImplementedRulesets.put("GameOfLife", new GameOfLife());
+		myImplementedRulesets.put("Segregation", new Segregation());
+
 	}
 
 }

@@ -8,12 +8,14 @@ import java.util.Random;
 public abstract class RuleSet {
 
 	protected static final String GRID_SHAPE = "gridShape";
+	protected static final String GRID_TYPE = "gridType";
 
 	protected String myDescription;
 	protected State[] myPossibleStates;
 	protected Map<String, Object> myParams;
 	protected String gridShape;
-	
+	protected String gridType;
+
 	private Random gridCoord = new Random();
 
 	protected Patch[][] myPatches;
@@ -23,8 +25,11 @@ public abstract class RuleSet {
 
 	public void setParams(Map<String, Object> params) {
 		myParams = params;
-		if (myParams.containsKey("gridShape")) {
+		if (myParams.containsKey(GRID_SHAPE)) {
 			gridShape = (String) myParams.get(GRID_SHAPE);
+		}
+		if (myParams.containsKey(GRID_TYPE)) {
+			gridType = (String) myParams.get(GRID_TYPE);
 		}
 	}
 
@@ -70,9 +75,7 @@ public abstract class RuleSet {
 		Patch[][] nextGrid = new Patch[myPatches.length][myPatches[0].length];
 		for (int i = 0; i < myPatches.length; i++) {
 			for (int j = 0; j < myPatches[0].length; j++) {
-				Patch updatedPatch = getNext(myPatches[i][j]);
-
-				nextGrid[i][j] = updatedPatch;
+				nextGrid[i][j] = getNext(myPatches[i][j]);
 			}
 		}
 		for (int i = 0; i < myPatches.length; i++) {
@@ -83,19 +86,22 @@ public abstract class RuleSet {
 		myPatches = nextGrid;
 		return nextGrid;
 	}
-	
-	protected void moveCell(Cell toBeMoved){
+
+	protected void moveCell(Cell toBeMoved) {
 		boolean placed = false;
-		while(!placed){
+		while (!placed) {
 			int row = gridCoord.nextInt(myPatches.length);
 			int col = gridCoord.nextInt(myPatches[0].length);
-			if(!myPatches[row][col].containsCell()){
+			if (!myPatches[row][col].containsCell()) {
 				myPatches[row][col].fill(toBeMoved);
 				placed = true;
 			}
-		}		
+		}
 	}
 
+	/*
+	 * @TODO : Re-factor this to hide the gridType cases
+	 */
 	public List<Patch> getNeighbors(Patch p) {
 
 		List<Patch> ret = new ArrayList<Patch>();
@@ -114,7 +120,7 @@ public abstract class RuleSet {
 					}
 				}
 			} else {
-				for (int i = row-1; i < row + 1; i++) {
+				for (int i = row - 1; i < row + 1; i++) {
 					for (int j = col - 1; j < col + 2; j++) {
 						if (!isOutside(i, j) && !(i == row && j == col)) {
 							ret.add(myPatches[i][j]);
@@ -127,8 +133,22 @@ public abstract class RuleSet {
 		default: // Rectangular OR Triangular
 			for (int i = row - 1; i < row + 2; i++) {
 				for (int j = col - 1; j < col + 2; j++) {
-					if (!isOutside(i, j) && !(i == row && j == col)) {
+					if (i == row && j == col)
+						continue;
+					if (!isOutside(i, j))
 						ret.add(myPatches[i][j]);
+					if (gridType.equals("Toroidal") && isOutside(i,j)) {
+						int addRow = row;
+						int addCol = col;
+						if (i > row)
+							addRow = 0;
+						if (i < 0)
+							addRow = myPatches.length - 1;
+						if (j > col)
+							addCol = 0;
+						if (j < 0)
+							addCol = myPatches[0].length - 1;
+						ret.add(myPatches[addRow][addCol]);
 					}
 				}
 			}
@@ -143,7 +163,6 @@ public abstract class RuleSet {
 		List<Patch> ret = new ArrayList<Patch>();
 		int row = p.myRow;
 		int col = p.myCol;
-
 		switch ((String) myParams.get("gridShape")) {
 
 		case ("Hexagonal"):
@@ -158,6 +177,7 @@ public abstract class RuleSet {
 				ret.add(myPatches[row - 1][col]);
 			if (!isOutside(row + 1, col) && col % 2 == 1)
 				ret.add(myPatches[row + 1][col]);
+			if ("Toroidal".equals(gridType)) ret = addDirectWrapArounds(ret,row,col);
 			break;
 
 		default: // Rectangular
@@ -169,16 +189,28 @@ public abstract class RuleSet {
 				ret.add(myPatches[row - 1][col]);
 			if (!isOutside(row + 1, col))
 				ret.add(myPatches[row + 1][col]);
+			if ("Toroidal".equals(gridType))
+				ret = addDirectWrapArounds(ret, row, col);
 			break;
 		}
 
 		return ret;
 	}
 
-	public boolean isOutside(int row, int col) {
+	private boolean isOutside(int row, int col) {
 		int rows = myPatches.length;
 		int cols = myPatches[0].length;
 		return (row >= rows || row < 0 || col >= cols || col < 0);
+	}
+
+	private List<Patch> addDirectWrapArounds(List<Patch> list, int row, int col) {
+		int rows = myPatches.length;
+		int cols = myPatches[0].length;
+		if (row+1 >= rows && !(gridShape.equals("Triangular") && col % 2 == 1)) list.add(myPatches[0][col]);
+		if (row-1 < 0 && !(gridShape.equals("Triangular") && col % 2 == 0)) list.add(myPatches[rows-1][col]);
+		if (col+1 >= cols) list.add(myPatches[row][0]);
+		if (col-1 < 0) list.add(myPatches[row][cols - 1]);
+		return list;
 	}
 
 	public abstract Patch getNext(Patch curr);

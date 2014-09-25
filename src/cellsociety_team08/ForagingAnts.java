@@ -7,6 +7,9 @@ import java.util.Random;
 
 import javafx.scene.paint.Color;
 
+/*
+ * @author Justin Carrao
+ */
 public class ForagingAnts extends RuleSet{
 	
 	private static int xPos;

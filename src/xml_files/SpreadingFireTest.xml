@@ -1,7 +1,8 @@
 <?xml version="1.0"?>
 <cellularautomata type = "SpreadingFire">
 	<parameters>
-		<parameter key="gridShape" value="Hexagonal"/>
+		<parameter key="gridShape" value="Triangular"/>
+		<parameter key="gridType" value="Toroidal"/>
 		<parameter key="probCatch" value="0.75"/>
 	</parameters>
 	<grid rows="20" columns = "40">

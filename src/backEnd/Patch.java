@@ -8,6 +8,7 @@ public class Patch extends Rectangle{
 	public boolean flagged;
 	public int myRow, myCol;
 	public Cell myCell;
+	public State myState;
 	public int numCells;
 	
 	// TODO : Make these parameters within their specific ruleset - Brian Bolze

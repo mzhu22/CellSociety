@@ -137,7 +137,7 @@ public abstract class RuleSet {
 						continue;
 					if (!isOutside(i, j))
 						ret.add(myPatches[i][j]);
-					if (gridType.equals("Toroidal") && isOutside(i,j)) {
+					if ("Toroidal".equals(gridType) && isOutside(i,j)) {
 						int addRow = row;
 						int addCol = col;
 						if (i > row)

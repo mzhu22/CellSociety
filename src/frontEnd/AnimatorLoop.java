@@ -1,15 +1,13 @@
 package frontEnd;
 
-import guiShapes.Hexagon;
-import guiShapes.Rectangle;
-import guiShapes.ShapeBuilder;
-import guiShapes.Triangle;
-
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-import backEnd.Grid;
+import shapeFactories.Hexagon;
+import shapeFactories.Rectangle;
+import shapeFactories.ShapeFactory;
+import shapeFactories.Triangle;
 import javafx.animation.KeyFrame;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -17,15 +15,17 @@ import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.util.Duration;
+import backEnd.Grid;
 
 public class AnimatorLoop {
 
+	// Used for menu bars
 	public static final int HEIGHT_OFFSET = 112;
 	public static final int WIDTH_OFFSET = 40;
 	public static final int GRID_BORDER_WIDTH = 1;
 
 	private CASettings mySettings;
-	
+
 	private static final double V_PAD = 0;
 	private static final double H_PAD = 0;
 	private double PADDED_WIDTH;
@@ -36,11 +36,14 @@ public class AnimatorLoop {
 	private int NUM_COLS;
 
 	private Group myNodes;
-	private ShapeBuilder myShapeBuilder;
-	private static Map<String, ShapeBuilder> myPossibleShapeBuilders = new HashMap<String, ShapeBuilder>();
+	private ShapeFactory myShapeBuilder;
+	private static Map<String, ShapeFactory> myImplementedShapeFactories;
 
 	private boolean initialized = false;
 
+	/*
+	 * TODO : Can we consolidate these? Can we get rid of Grid?
+	 */
 	private Grid myGrid;
 	private Polygon[][] myGUICells;
 	private Patch[][] myPatches;
@@ -50,7 +53,6 @@ public class AnimatorLoop {
 	 * the size of the CA sim board. They will be used to determine the size of
 	 * each Cell in the grid.
 	 */
-
 	/**
 	 * Constructor
 	 * 
@@ -64,13 +66,14 @@ public class AnimatorLoop {
 		HEIGHT = height - HEIGHT_OFFSET;
 		PADDED_WIDTH = WIDTH - 2 * H_PAD;
 		PADDED_HEIGHT = HEIGHT - 2 * V_PAD;
-		makePossibleBuilders();
+		makePossibleShapeFactories();
 	}
 
-	private void makePossibleBuilders() {
-		myPossibleShapeBuilders.put("Rectangular", new Rectangle());
-		myPossibleShapeBuilders.put("Triangular", new Triangle());
-		myPossibleShapeBuilders.put("Hexagonal", new Hexagon());
+	/**
+	 * Create the game's frame
+	 */
+	public KeyFrame start() {
+		return new KeyFrame(Duration.millis(1000), oneFrame);
 	}
 
 	/**
@@ -85,35 +88,36 @@ public class AnimatorLoop {
 
 	private void updateCells() {
 		if (initialized) {
+			// TODO : Reduce this layer of dynamic coupling - @Brian Bolze
 			myPatches = myGrid.myRuleSet.update();
 			updateGUICells();
 		}
 	}
 
 	/**
-	 * Change the colors of the Polygon representations of Cells to animate
-	 * them
+	 * Change the colors of the Polygon representations of Cells to animate them
 	 */
 	private void updateGUICells() {
-		// For all patches, update their colors
-		for (int i=0; i<myPatches.length; i++){
-			for (int j=0; j<myPatches[0].length; j++){
-				if (myPatches[i][j].getCell() == null) myGUICells[i][j].setFill(Color.WHITE);
+
+		for (int i = 0; i < myPatches.length; i++) {
+			for (int j = 0; j < myPatches[0].length; j++) {
+				/*
+				 * TODO Don't have this intentionally null. Make "Empty" state
+				 * instead @Brian Bolze
+				 */
+				if (myPatches[i][j].getCell() == null)
+					myGUICells[i][j].setFill(Color.WHITE);
 				else {
+					/*
+					 * TODO We should make this shorter... @Mike Zhu
+					 */
 					Color color = myPatches[i][j].getCell().getState()
-							.getColor(); // We should make this shorter one day
-											// @Mike Zhu
+							.getColor();
 					myGUICells[i][j].setFill(color);
 				}
-			}		
+			}
 		}
-	}
 
-	/**
-	 * Create the game's frame
-	 */
-	public KeyFrame start() {
-		return new KeyFrame(Duration.millis(1000), oneFrame);
 	}
 
 	/**
@@ -131,19 +135,21 @@ public class AnimatorLoop {
 	}
 
 	private Group addCellsToGrid(String[][] gridArray) {
-		myShapeBuilder = myPossibleShapeBuilders.get(CASettings.myGridShape);
+		myShapeBuilder = myImplementedShapeFactories
+				.get(mySettings.myGridShape);
 
 		for (int row = 0; row < NUM_ROWS; row++) {
 			for (int col = 0; col < NUM_COLS; col++) {
-				Polygon patch = myShapeBuilder.makeShape(PADDED_HEIGHT, PADDED_WIDTH, NUM_ROWS, NUM_COLS);
+				Polygon patch = myShapeBuilder.makeShape(PADDED_HEIGHT,
+						PADDED_WIDTH, NUM_ROWS, NUM_COLS);
 				myShapeBuilder.move(patch, row, col, V_PAD, H_PAD);
 				patch.setFill(Color.WHITE);
-				
+
 				/*
-				 *  @TODO : Add in ability to turn on/off gridlines
+				 * TODO : Add in ability to turn on/off gridlines
 				 */
 				patch.setStroke(Color.GREY);
-				
+
 				myNodes.getChildren().add(patch);
 				myGUICells[row][col] = patch;
 			}
@@ -151,35 +157,34 @@ public class AnimatorLoop {
 
 		return myNodes;
 	}
-	
-//	public GridPane readXMLAndInitializeGrid(File XMLFile) {
-//		XMLHandler reader = new XMLHandler();
-//		mySettings = reader.read(XMLFile);
-//		myGUICells = new Rectangle[mySettings.getRows()][mySettings.getColumns()];
-//
-//		myGridPane = initGrid(mySettings.getRows(), mySettings.getColumns(), mySettings.getGrid());
-//		myGrid = new Grid(mySettings.getType(), mySettings.getParameters(), mySettings.getRows(), mySettings.getColumns(), mySettings.getGrid());
-//	}
 
 	public Group readXMLAndInitializeGrid(File XMLFile) {
 		XMLHandler reader = new XMLHandler();
 		CASettings settings = reader.read(XMLFile);
-		
+
 		myGUICells = new Polygon[settings.getRows()][settings.getColumns()];
 
 		myNodes = initGridPane(settings.getRows(), settings.getColumns(),
 				settings.getGrid());
-		
+
 		myGrid = new Grid(settings.getType(), settings.getParameters(),
 				settings.getRows(), settings.getColumns(), settings.getGrid());
-		
+
 		initialized = true;
 		return myNodes;
 	}
-	
-	public void writeToXML(){
+
+	public void writeToXML() {
 		XMLHandler writer = new XMLHandler();
 		writer.write(mySettings);
+	}
+
+	private void makePossibleShapeFactories() {
+		myImplementedShapeFactories = new HashMap<String, ShapeFactory>();
+
+		myImplementedShapeFactories.put("Rectangular", new Rectangle());
+		myImplementedShapeFactories.put("Triangular", new Triangle());
+		myImplementedShapeFactories.put("Hexagonal", new Hexagon());
 	}
 
 }

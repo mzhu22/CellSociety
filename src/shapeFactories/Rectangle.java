@@ -1,8 +1,8 @@
-package guiShapes;
+package shapeFactories;
 
 import javafx.scene.shape.Polygon;
 
-public class Rectangle extends ShapeBuilder {
+public class Rectangle extends ShapeFactory {
 
 	private static final String RECTANGLE = "Rectangle";
 

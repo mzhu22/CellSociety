@@ -1,8 +1,8 @@
-package guiShapes;
+package shapeFactories;
 
 import javafx.scene.shape.Polygon;
 
-public class Hexagon extends ShapeBuilder {
+public class Hexagon extends ShapeFactory {
 
 	private static final String HEXAGON = "Hexagon";
 

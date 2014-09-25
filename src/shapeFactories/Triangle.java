@@ -1,8 +1,8 @@
-package guiShapes;
+package shapeFactories;
 
 import javafx.scene.shape.Polygon;
 
-public class Triangle extends ShapeBuilder {
+public class Triangle extends ShapeFactory {
 
 	private static final String TRIANGLE = "Triangle";
 

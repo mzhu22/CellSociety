@@ -1,4 +1,4 @@
-package frontEnd;
+package backEnd;
 
 import javafx.scene.shape.Rectangle;
 
@@ -9,6 +9,8 @@ public class Patch extends Rectangle{
 	public int myRow, myCol;
 	public Cell myCell;
 	public int numCells;
+	
+	// TODO : Make these parameters within their specific ruleset - Brian Bolze
 	public double homePheromoneLevel = 0;
 	public double foodPheromoneLevel = 0;
 	public int maxSugar = 25;
@@ -33,7 +35,7 @@ public class Patch extends Rectangle{
 	}
 	
 	public void changeColor(){
-		setFill(myCell.getState().getColor());
+		setFill(myCell.getState().myColor);
 	}
 	
 	public Cell getCell(){

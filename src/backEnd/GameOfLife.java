@@ -2,9 +2,6 @@ package backEnd;
 
 import java.util.List;
 
-import frontEnd.Cell;
-import frontEnd.Patch;
-import frontEnd.State;
 import javafx.scene.paint.Color;
 
 public class GameOfLife extends RuleSet {

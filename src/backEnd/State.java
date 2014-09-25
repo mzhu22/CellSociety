@@ -1,20 +1,18 @@
-package frontEnd;
+package backEnd;
 
 import javafx.scene.paint.Color;
 
 
 public class State {
-
-	public static String myName;
-	public int myIndex;
-	private Color myColor;
-	public Object[] myParams;
-
+	
 	/*
-	 * Bounds is the maximum size the shape can fit into For a rectangle, this
-	 * would simply coorespond to its length and width For a Circle, this would
-	 * indicate its diameter
+	 * TODO : This class doesn't have any real behavior!! - Brian Bolze
 	 */
+
+	protected String myName;
+	protected int myIndex;
+	protected Object[] myParams;
+	public Color myColor;
 
 	public State(String name, int index, Color color, Object[] params) {
 		myName = name;
@@ -27,16 +25,8 @@ public class State {
 		return (myIndex == other.myIndex);
 	}
 	
-	public Object[] getParams() {
-		return myParams;
-	}
-	
 	public void setParams(Object[] o) {
 		myParams = o;
-	}
-
-	public Color getColor() {
-		return myColor;
 	}
 
 	public void setColor(Color myColor) {

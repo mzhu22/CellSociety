@@ -5,9 +5,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import frontEnd.Cell;
-import frontEnd.Patch;
-import frontEnd.State;
 import javafx.scene.paint.Color;
 
 public class PredatorPrey extends RuleSet {
@@ -16,6 +13,8 @@ public class PredatorPrey extends RuleSet {
 	private static final String SHARK_STARVE_TIME = "sharkStarveTime";
 	private static final String FISH_BREED_TIME = "fishBreedTime";
 	private static int sharkBreedTime, sharkStarveTime, fishBreedTime;
+	
+	private Random rand = new Random();
 
 	private List<Patch> patchesToMove = new ArrayList<Patch>();
 
@@ -155,7 +154,6 @@ public class PredatorPrey extends RuleSet {
 		List<Patch> empties = findEmpties(neighborhood);
 		if (empties.isEmpty())
 			return;
-		Random rand = new Random();
 		Patch newLocation = empties.get(rand.nextInt(empties.size()));
 
 		addCell(newLocation, patch.getCell());
@@ -184,7 +182,6 @@ public class PredatorPrey extends RuleSet {
 			return false;
 
 		// Eat a fish at random
-		Random rand = new Random();
 		eatFish(patch, fishFood.get(rand.nextInt(fishFood.size())));
 
 		return true;
@@ -222,7 +219,6 @@ public class PredatorPrey extends RuleSet {
 		if (empties.isEmpty())
 			return;
 
-		Random rand = new Random();
 		Patch newLocation = empties.get(rand.nextInt(empties.size()));
 
 		addCell(newLocation, new Cell(myPossibleStates[patch.getCell()

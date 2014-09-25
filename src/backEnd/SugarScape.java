@@ -3,8 +3,6 @@ package backEnd;
 import java.util.ArrayList;
 import java.util.List;
 
-import frontEnd.Patch;
-
 public class SugarScape extends RuleSet {
 	
 	public int sugarGrowBackRate = 1;

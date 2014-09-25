@@ -16,6 +16,7 @@ import shapeFactories.Rectangle;
 import shapeFactories.ShapeFactory;
 import shapeFactories.Triangle;
 import backEnd.GameOfLife;
+import backEnd.Patch;
 import backEnd.PredatorPrey;
 import backEnd.RuleSet;
 import backEnd.Segregation;
@@ -69,6 +70,7 @@ public class AnimatorLoop {
 		PADDED_WIDTH = WIDTH - 2 * H_PAD;
 		PADDED_HEIGHT = HEIGHT - 2 * V_PAD;
 		makePossibleShapeFactories();
+		makePossibleRules();
 	}
 
 	/**
@@ -109,11 +111,7 @@ public class AnimatorLoop {
 				if (myPatches[i][j].getCell() == null)
 					myGUICells[i][j].setFill(Color.WHITE);
 				else {
-					/*
-					 * TODO We should make this shorter... @Mike Zhu
-					 */
-					Color color = myPatches[i][j].getCell().getState()
-							.getColor();
+					Color color = myPatches[i][j].getCell().getColor();
 					myGUICells[i][j].setFill(color);
 				}
 			}
@@ -169,7 +167,6 @@ public class AnimatorLoop {
 				mySettings.getGrid());
 
 		myPatches = new Patch[NUM_ROWS][NUM_COLS];
-		makeMyPossibleRules();
 		myRuleSet = myImplementedRulesets.get(mySettings.getType());
 		myRuleSet.setParams(mySettings.getParameters());
 		
@@ -203,7 +200,7 @@ public class AnimatorLoop {
 		myImplementedShapeFactories.put("Hexagonal", new Hexagon());
 	}
 	
-	private void makeMyPossibleRules() {
+	private void makePossibleRules() {
 		myImplementedRulesets = new HashMap<>();
 
 		myImplementedRulesets.put("PredatorPrey", new PredatorPrey());

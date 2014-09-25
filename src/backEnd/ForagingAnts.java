@@ -5,8 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import frontEnd.Patch;
-import frontEnd.State;
 import javafx.scene.paint.Color;
 
 /*
@@ -157,7 +155,7 @@ public class ForagingAnts extends RuleSet{
 			return patch;
 		}
 		
-		if (!patch.myCell.hasFood ) {
+		if (!patch.myCell.hasFood) {
 			//patch.myCell.foodDesire = 10;
 			if (forwardNeighbors.size() > 0) {
 				for (Patch p: forwardNeighbors) {

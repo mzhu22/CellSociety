@@ -5,10 +5,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import frontEnd.Cell;
-import frontEnd.Patch;
-import frontEnd.State;
-
 public abstract class RuleSet {
 
 	protected static final String GRID_SHAPE = "gridShape";

@@ -4,9 +4,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import frontEnd.Cell;
-import frontEnd.Patch;
-import frontEnd.State;
 import javafx.scene.paint.Color;
 
 public class SpreadingFire extends RuleSet {
@@ -14,6 +11,8 @@ public class SpreadingFire extends RuleSet {
 	private static final String SPREADING_FIRE = "Spreading of Fire";
 	private static final String PROB_CATCH = "probCatch";
 	private static float probCatch;
+	
+	private Random rand = new Random();
 
 	public SpreadingFire() {
 		super();
@@ -63,7 +62,6 @@ public class SpreadingFire extends RuleSet {
 		for (Patch p : neighbors) {
 			if ((p.myRow == curr.myRow || p.myCol == curr.myCol)
 					&& isBurning(p)) {
-				Random rand = new Random();
 				float randFloat = rand.nextFloat();
 				if (randFloat <= probCatch) {
 					// Start burning!!!

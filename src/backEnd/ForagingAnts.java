@@ -14,14 +14,15 @@ public class ForagingAnts extends RuleSet{
 	private static int yPos;
 	private static Patch HOME_BASE; // = new Patch(xPos, yPos, false);
 	private String myOrientation;
-	private int antLimit = 10;
+	//private int antLimit = 10;
 	private HashMap<Patch, Integer> homePheromoneLevels = new HashMap<Patch, Integer>();
 	private HashMap<Patch, Integer> foodPheromoneLevels = new HashMap<Patch, Integer>();
 
 	private State[] myPossibleStates = new State[] {
 			new State("Home", 0, Color.BLUE, null), // index 0
 			new State("Ant", 1, Color.RED, null), // index 1
-			new State("Food", 2, Color.GREEN, null) // index 2
+			new State("Food", 2, Color.GREEN, null), // index 2
+			new State("Empty", 3, Color.WHITE, null)
 	};
 	
 			

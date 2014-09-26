@@ -56,15 +56,24 @@ public class PredatorPrey extends RuleSet {
 		patchesToMove.clear();
 
 		// Breed if necessary
+		breedIfNecessary();
+		
+		moveOrAddCells();
+
+		// Clear all the flags
+		return clearAllFlags();
+	}
+
+	private void breedIfNecessary() {
 		for (int i = 0; i < myPatches.length; i++) {
 			for (int j = 0; j < myPatches.length; j++) {
 				List<Patch> neighbors = getNeighbors(myPatches[i][j]);
 				checkBreed(myPatches[i][j], neighbors);
 			}
 		}
-		moveOrAddCells();
+	}
 
-		// Clear all the flags
+	private Patch[][] clearAllFlags() {
 		for (int i = 0; i < myPatches.length; i++) {
 			for (int j = 0; j < myPatches[0].length; j++) {
 				myPatches[i][j].flagged = false;

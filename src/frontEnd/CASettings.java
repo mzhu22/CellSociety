@@ -17,7 +17,7 @@ public class CASettings {
 	
 	private static final String GRID_SHAPE = "gridShape";
 	
-	protected String myGridShape;
+	protected String myGridShape = "Rectangular"; //Default
 	private String myType;
 	private Integer myRows;
 	private Integer myColumns;

@@ -13,8 +13,8 @@ public abstract class RuleSet {
 	protected String myDescription;
 	protected State[] myPossibleStates;
 	protected Map<String, Object> myParams;
-	protected String gridShape;
-	protected String gridType;
+	protected String gridShape = "Rectangular"; //Default
+	protected String gridType = "Finite"; //Default
 
 	private Random gridCoord = new Random();
 

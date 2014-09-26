@@ -161,6 +161,8 @@ public class AnimatorLoop {
 	public Group readXMLAndInitializeGrid(File XMLFile) {
 		XMLHandler reader = new XMLHandler();
 		mySettings = reader.read(XMLFile);
+		
+		if (checkBadXMLFileData()) return null;
 
 		myGUICells = new Polygon[mySettings.getRows()][mySettings.getColumns()];
 
@@ -176,6 +178,14 @@ public class AnimatorLoop {
 
 		initialized = true;
 		return myNodes;
+	}
+	
+	private boolean checkBadXMLFileData() {
+		if (!myImplementedRulesets.containsKey(mySettings.getType())) {
+			Main.showPopupMessage("Invalid Simulation Type");
+			return true;
+		}
+		return false;
 	}
 	
 	private void initGrid() {

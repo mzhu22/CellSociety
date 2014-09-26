@@ -19,11 +19,14 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class Main extends Application {
 
@@ -38,7 +41,7 @@ public class Main extends Application {
 	public static final int CONTROL_BOX_SPACING = 5;
 	
 	//All GUI parents
-	private Stage myStage;
+	private static Stage myStage;
 	private AnimatorLoop myLoop;
 	private VBox myRoot;
 	private HBox myControls;
@@ -196,6 +199,7 @@ public class Main extends Application {
 	private void readXML() {
 		File XMLFile = fileChooser.showOpenDialog(myStage);
 		myGrid = myLoop.readXMLAndInitializeGrid(XMLFile);
+		if (myGrid==null) return;
 		//Always remove the last element of myRoot's children (the grid). Then readd it. This means new grids are made when new XML files are loaded
 		myRoot.getChildren().remove(myRoot.getChildren().size()-1);
 		myRoot.getChildren().add(myGrid);
@@ -203,5 +207,39 @@ public class Main extends Application {
 	
 	private void writeXML(){
 		myLoop.writeToXML();
+	}
+	
+	/*
+	 * Source code for Popup generator found on StackOverflow here:
+	 * http://stackoverflow.com/questions/18669209/javafx-what-is-the-best-way-to-display-a-simple-message
+	 */
+	public static Popup createPopup(final String message) {
+	    final Popup popup = new Popup();
+	    popup.setAutoFix(true);
+	    popup.setAutoHide(true);
+	    popup.setHideOnEscape(true);
+	    Label label = new Label(message);
+	    label.setOnMouseReleased(new EventHandler<MouseEvent>() {
+	        @Override
+	        public void handle(MouseEvent e) {
+	            popup.hide();
+	        }
+	    });
+	    label.getStylesheets().add("/css/popup.css");
+	    label.getStyleClass().add("popup");
+	    popup.getContent().add(label);
+	    return popup;
+	}
+
+	public static void showPopupMessage(final String message) {
+	    final Popup popup = createPopup(message);
+	    popup.setOnShown(new EventHandler<WindowEvent>() {
+	        @Override
+	        public void handle(WindowEvent e) {
+	            popup.setX(myStage.getX() + myStage.getWidth()/2 - popup.getWidth()/2);
+	            popup.setY(myStage.getY() + myStage.getHeight()/2 - popup.getHeight()/2);
+	        }
+	    });        
+	    popup.show(myStage);
 	}
 }

@@ -6,7 +6,7 @@ import java.util.Stack;
 import javafx.scene.paint.Color;
 
 public class Cell {
-		
+
 	protected List<State> myHistory = new Stack<State>(); // TODO : History not needed...
 
 	public Cell(State s) { /* maybe add this too I'm not sure: int size */

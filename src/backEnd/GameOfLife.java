@@ -22,12 +22,8 @@ public class GameOfLife extends RuleSet {
 	public Patch getNext(Patch patch) {
 		List<Patch> neighborhood = getNeighbors(patch);
 		Patch newPatch = new Patch(patch);
-		int liveNeighbors = 0;
-		if (neighborhood.size() != 8) System.out.println(neighborhood.size());
-		for (Patch p : neighborhood) {
-			if (p.containsCell())
-				liveNeighbors++;
-		}
+
+		int liveNeighbors = countLiveNeighbors(0, neighborhood);
 
 		if (patch.containsCell() && (liveNeighbors < 2 || liveNeighbors > 3)) {
 			newPatch.clear();
@@ -36,8 +32,16 @@ public class GameOfLife extends RuleSet {
 		if (!patch.containsCell() && liveNeighbors == 3) {
 			newPatch.fill(new Cell(myPossibleStates[0]));
 		}
-
+		
 		return newPatch;
+	}
+	
+	public int countLiveNeighbors(int liveOnes, List<Patch> theNeighborhood) {
+		for (Patch p : theNeighborhood) {
+			if (p.containsCell())
+				liveOnes++;
+		}
+		return liveOnes;
 	}
 
 }

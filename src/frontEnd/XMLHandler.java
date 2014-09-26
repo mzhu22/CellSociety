@@ -87,7 +87,8 @@ public class XMLHandler {
 			// The parameters themselves 
 			for(String s: outputSettings.getParameters().keySet()){
 				Element param = doc.createElement("parameter");
-				param.setAttribute(s, (String) outputSettings.getParameters().get(s));
+				param.setAttribute("key", s);
+				param.setAttribute("value", (String) outputSettings.getParameters().get(s));
 				paramsList.appendChild(param);
 			}
 			

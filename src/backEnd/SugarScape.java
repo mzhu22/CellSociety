@@ -26,7 +26,6 @@ public class SugarScape extends RuleSet {
 	public SugarScape() {
 		super();
 	}
-	
 	@Override
 	public Patch[][] update() {
 		ticks++;

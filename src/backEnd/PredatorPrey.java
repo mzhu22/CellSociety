@@ -41,38 +41,45 @@ public class PredatorPrey extends RuleSet {
 
 	@Override
 	public Patch[][] update() {
-
 		patchesToMove.clear();
+		Patch[][] nextGrid = makeNextGrid();
+		myPatches = nextGrid;
+		moveOrAddCells();
+		patchesToMove.clear();
+		breedIfNecessary();
+		moveOrAddCells();
+		clearAllFlags();
+		return myPatches;
+	}
 
+	private Patch[][] makeNextGrid() {
 		Patch[][] nextGrid = new Patch[myPatches.length][myPatches[0].length];
 		for (int i = 0; i < myPatches.length; i++) {
 			for (int j = 0; j < myPatches.length; j++) {
 				nextGrid[i][j] = getNext(myPatches[i][j]);
 			}
 		}
-		myPatches = nextGrid;
-		moveOrAddCells();
+		return nextGrid;
+	}
 
-		patchesToMove.clear();
-
-		// Breed if necessary
+	private void breedIfNecessary() {
 		for (int i = 0; i < myPatches.length; i++) {
 			for (int j = 0; j < myPatches.length; j++) {
 				List<Patch> neighbors = getNeighbors(myPatches[i][j]);
 				checkBreed(myPatches[i][j], neighbors);
 			}
 		}
-		moveOrAddCells();
+	}
 
-		// Clear all the flags
+	private void clearAllFlags() {
 		for (int i = 0; i < myPatches.length; i++) {
 			for (int j = 0; j < myPatches[0].length; j++) {
 				myPatches[i][j].flagged = false;
 			}
 		}
-
-		return myPatches;
 	}
+	
+	
 
 	@Override
 	public Patch getNext(Patch patch) {
@@ -80,11 +87,11 @@ public class PredatorPrey extends RuleSet {
 		List<Patch> neighbors = getDirectNeighbors(patch);
 
 		if (patch.isEmpty || patch.flagged || patch.myCell == null
-				|| patch.myCell.getState() == null) {
+				|| patch.getMyCellState() == null) {
 			return patch;
 		}
 
-		if (patch.myCell.getState().equals(myPossibleStates[0])) { // FISH
+		if (patch.myCellStateEquals(myPossibleStates[0])) { // FISH
 			
 			moveAdj(patch, neighbors);
 			return patch;
@@ -106,9 +113,9 @@ public class PredatorPrey extends RuleSet {
 		
 		State s = patch.getCell().getState();
 		s.myParams[1] = (int)s.myParams[1] - 1;
-		patch.myCell.setState(s);
+		patch.setMyCellState(s);
 		
-		if ((int) patch.myCell.getState().myParams[1] == 0) {
+		if ((int) patch.getMyCellState().myParams[1] == 0) {
 			patch.clear();
 			patch.flag();
 			return true;
@@ -120,21 +127,21 @@ public class PredatorPrey extends RuleSet {
 	private void checkBreed(Patch patch, List<Patch> neighborhood) {
 
 		if (patch.isEmpty || patch.flagged || patch.myCell == null
-				|| patch.myCell.getState() == null)
+				|| patch.getMyCellState() == null)
 			return;
 
 		// decrement breed time
-		patch.myCell.getState().myParams[0] = ((int) patch.myCell.getState().myParams[0]) - 1;
-		int breedTime = ((int) patch.myCell.getState().myParams[0]);
+		patch.getMyCellState().myParams[0] = ((int) patch.getMyCellState().myParams[0]) - 1;
+		int breedTime = ((int) patch.getMyCellState().myParams[0]);
 
 		if (breedTime == 0) {
 			breed(patch, neighborhood);
 
 			// Reset breed timers
 			if (patch.getCell().getState().myIndex == 0)
-				patch.myCell.getState().myParams[0] = fishBreedTime;
+				patch.getMyCellState().myParams[0] = fishBreedTime;
 			else
-				patch.myCell.getState().myParams[0] = sharkBreedTime;
+				patch.getMyCellState().myParams[0] = sharkBreedTime;
 		}
 	}
 
@@ -202,7 +209,7 @@ public class PredatorPrey extends RuleSet {
 	private void eatFish(Patch shark, Patch fish) {
 		
 		// Reset starve timer
-		State s = shark.getCell().getState();
+		State s = shark.getMyCellState();
 		s.myParams[1] = sharkStarveTime;
 		shark.myCell.setState(s);
 		

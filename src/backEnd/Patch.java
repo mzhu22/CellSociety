@@ -9,11 +9,7 @@ public class Patch extends Rectangle{
 	public int myRow, myCol;
 	public Cell myCell;
 	public int numCells;
-	
-	// TODO : Make these parameters within their specific ruleset - Brian Bolze
-	public double homePheromoneLevel = 0;
-	public double foodPheromoneLevel = 0;
-	
+		
 	public Patch(int row, int col, boolean empty) {
 		myRow = row;
 		myCol = col;
@@ -57,5 +53,17 @@ public class Patch extends Rectangle{
 	
 	public boolean containsCell() {
 		return (myCell!=null);
+	}
+	
+	public boolean myCellStateEquals(State state) {
+		return this.myCell.getState().equals(state);
+	}
+	
+	public void setMyCellState(State state) {
+		this.myCell.setState(state);
+	}
+	
+	public State getMyCellState() {
+		return this.myCell.getState();
 	}
 }

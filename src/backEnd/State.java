@@ -10,7 +10,7 @@ public class State {
 	 */
 
 	protected String myName;
-	protected int myIndex;
+	protected Integer myIndex;
 	protected Object[] myParams;
 	public Color myColor;
 
@@ -19,6 +19,9 @@ public class State {
 		myIndex = index;
 		setColor(color);
 		myParams = params;
+	}
+	public Integer getIndex(){
+		return myIndex;
 	}
 
 	public boolean equals(State other) {

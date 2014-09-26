@@ -2,6 +2,7 @@ package backEnd;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -9,11 +10,15 @@ import javafx.scene.paint.Color;
 
 public class ForagingAnts extends RuleSet{
 	
+	private Random rand = new Random();
 	private static int xPos;
 	private static int yPos;
 	private static Patch HOME_BASE; // = new Patch(xPos, yPos, false);
 	private String myOrientation;
 	private int antLimit = 10;
+	private HashMap<Patch, Integer> homePheromoneLevels = new HashMap<Patch, Integer>();
+	private HashMap<Patch, Integer> foodPheromoneLevels = new HashMap<Patch, Integer>();
+
 	private State[] myPossibleStates = new State[] {
 			new State("Home", 0, Color.BLUE, null), // index 0
 			new State("Ant", 1, Color.RED, null), // index 1
@@ -26,7 +31,17 @@ public class ForagingAnts extends RuleSet{
 		xPos = x;
 		yPos = y;
 		HOME_BASE = new Patch(xPos, yPos, false);
-		HOME_BASE.homePheromoneLevel = 100;
+		setPheromoneLevels(HOME_BASE, 10, 0);
+	}
+	
+	public void setPheromoneLevels(Patch patch, int homePheromone, int foodPheromone) {
+		homePheromoneLevels.put(patch, homePheromone);
+		foodPheromoneLevels.put(patch, foodPheromone);
+	}
+	
+	public void decrementPheromoneLevels(Patch patch) {
+		homePheromoneLevels.put(patch, homePheromoneLevels.get(patch) - 1);
+		foodPheromoneLevels.put(patch, foodPheromoneLevels.get(patch) - 1);
 	}
 	
 	public int getNumCells(Patch patch) {
@@ -138,94 +153,83 @@ public class ForagingAnts extends RuleSet{
 
 	@Override
 	public Patch getNext(Patch patch) {
-		// TODO Auto-generated method stub
+		
+		Patch nextPatch = patch;
+		Random rand = new Random();
 		List<Patch> forwardNeighbors = getForwardNeighbors(patch);
 		List<Patch> backNeighbors = getBackNeighbors(patch);
-		Patch nextPatch = patch;
-		double highPheromones = 0;
 		
-		if (patch.myCell.getState().equals(myPossibleStates[0]) || patch.myCell.getState().equals(myPossibleStates[2])) { //home base doesn't do anything except depreciate pheromone values
-			decrementPheromones(patch);
+		if (patch.myCell.getState().equals(myPossibleStates[0])) {
 			return patch;
 		}
+		else if (patch.myCell.getState().equals(myPossibleStates[2])) {
+			decrementPheromoneLevels(patch);
+		}
 		
-		if (!patch.myCell.hasFood) {
-			//patch.myCell.foodDesire = 10;
-			if (forwardNeighbors.size() > 0) {
-				for (Patch p: forwardNeighbors) {
-					if (p.foodPheromoneLevel > highPheromones) {
-						highPheromones = p.foodPheromoneLevel;
-						nextPatch = p;
+		else {
+			int maxHomePheromones = 0;
+			int maxFoodPheromones = 0;
+			if (patch.myCell.hasFood) { //we're heading home
+				if (forwardNeighbors.size() > 0) {
+					for (Patch p: forwardNeighbors) {
+						if (!homePheromoneLevels.containsKey(p)) {
+							homePheromoneLevels.put(p, 0);
+						}
+						if (homePheromoneLevels.get(p) > maxHomePheromones) {
+							maxHomePheromones = homePheromoneLevels.get(p);
+							nextPatch = p;
+						}
 					}
 				}
-				Random rand = new Random();
-				if (nextPatch == patch || rand.nextInt(3) == 0) { //if we didn't find a new patch
+				else {
+					if (backNeighbors.size() > 0) {
+						for (Patch p: backNeighbors) {
+							if (!homePheromoneLevels.containsKey(p)) {
+								homePheromoneLevels.put(p, 0);
+							}
+							if (homePheromoneLevels.get(p) > maxHomePheromones) {
+								maxHomePheromones = homePheromoneLevels.get(p);
+								nextPatch = p;
+							}
+						}
+					} 
+				}
+				if (nextPatch == patch) { //if we didn't find a forward neighbor with high homePhers, pick random
 					nextPatch = forwardNeighbors.get(rand.nextInt(forwardNeighbors.size()));
-				}
+				} 
+				foodPheromoneLevels.replace(patch, foodPheromoneLevels.get(patch), 10);
 			}
-			else {
-				for (Patch p: backNeighbors) {
-					if (p.foodPheromoneLevel > highPheromones) {
-						highPheromones = p.foodPheromoneLevel;
-						nextPatch = p;
+			if (!patch.myCell.hasFood) { //exploring for food
+				if (forwardNeighbors.size() > 0) {
+					for (Patch p: forwardNeighbors) {
+						if (!foodPheromoneLevels.containsKey(p)) {
+							foodPheromoneLevels.put(p, 0);
+						}
+						if (foodPheromoneLevels.get(p) > maxFoodPheromones) {
+							maxFoodPheromones = foodPheromoneLevels.get(p);
+							nextPatch = p;
+						}
 					}
 				}
-				
-				Random rand = new Random();
-				if (nextPatch == patch || rand.nextInt(3) == 0) { //if we didn't find a new patch
+				else {
+					for (Patch p: backNeighbors) {
+						if (!foodPheromoneLevels.containsKey(p)) {
+							foodPheromoneLevels.put(p, 0);
+						}
+						if (foodPheromoneLevels.get(p) > maxFoodPheromones) {
+							maxFoodPheromones = foodPheromoneLevels.get(p);
+							nextPatch = p;
+						}
+					}
+				}
+				if (nextPatch == patch) { //if we didn't find a forward neighbor with high Pheromones, pick random
 					nextPatch = backNeighbors.get(rand.nextInt(backNeighbors.size()));
 				}
+				homePheromoneLevels.replace(patch, homePheromoneLevels.get(patch), 10);
 			}
-			patch.homePheromoneLevel = 10;
 		}
-		
-		else { // cell has food
-			if (forwardNeighbors.size() > 0) {
-				for (Patch p: forwardNeighbors) {
-					if (p == HOME_BASE) {
-						nextPatch = p;
-						return nextPatch;
-					}
-					if (p.homePheromoneLevel > highPheromones) {
-						highPheromones = p.homePheromoneLevel;
-						nextPatch = p;
-					}
-				}
-				Random rand = new Random();
-				if (nextPatch == patch || rand.nextInt(3) == 0) { //if we didn't find a new patch 
-					nextPatch = forwardNeighbors.get(rand.nextInt(forwardNeighbors.size()));
-				}
-			}
-			for (Patch p: backNeighbors) {
-				if (p.homePheromoneLevel > highPheromones) {
-					highPheromones = p.homePheromoneLevel;
-					nextPatch = p;
-				}
-			}
-			Random rand = new Random();
-			if (nextPatch == patch || rand.nextInt(3) == 0) { //if we didn't find a new patch
-				nextPatch = backNeighbors.get(rand.nextInt(backNeighbors.size()));
-			}
-			patch.foodPheromoneLevel = 10;
-		}
-		
-		nextPatch.myCell = patch.myCell;
-		
-		if (nextPatch.myCell.getState().myIndex == 2) { //pick up food
-			nextPatch.myCell.hasFood = true;
-		}
-		
-		if (nextPatch.myRow == HOME_BASE.myRow && nextPatch.myCol == HOME_BASE.myCol) { //drop food off at home base
-			nextPatch.myCell.hasFood = false;
-		}
-		
-		patch.clear();
 		return nextPatch;
 	}
-
-	private void decrementPheromones(Patch patch) {
-		patch.foodPheromoneLevel--;
-		patch.homePheromoneLevel--;
-	}
-
+		
 }
+

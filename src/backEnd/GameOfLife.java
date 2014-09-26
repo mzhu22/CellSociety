@@ -36,7 +36,6 @@ public class GameOfLife extends RuleSet {
 		if (!patch.containsCell() && liveNeighbors == 3) {
 			newPatch.fill(new Cell(myPossibleStates[0]));
 		}
-
 		return newPatch;
 	}
 

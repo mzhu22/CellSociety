@@ -13,8 +13,7 @@ public class Patch extends Rectangle{
 	
 	
 	// TODO : Make these parameters within their specific ruleset - Brian Bolze
-	public double homePheromoneLevel = 0;
-	public double foodPheromoneLevel = 0;
+
 	public int maxSugar = 25;
 	public int sugarLevel = maxSugar;
 	
@@ -61,5 +60,17 @@ public class Patch extends Rectangle{
 	
 	public boolean containsCell() {
 		return (myCell!=null);
+	}
+	
+	public boolean myCellStateEquals(State state) {
+		return this.myCell.getState().equals(state);
+	}
+	
+	public void setMyCellState(State state) {
+		this.myCell.setState(state);
+	}
+	
+	public State getMyCellState() {
+		return this.myCell.getState();
 	}
 }

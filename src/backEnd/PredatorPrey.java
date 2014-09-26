@@ -73,6 +73,8 @@ public class PredatorPrey extends RuleSet {
 
 		return myPatches;
 	}
+	
+	
 
 	@Override
 	public Patch getNext(Patch patch) {
@@ -80,11 +82,11 @@ public class PredatorPrey extends RuleSet {
 		List<Patch> neighbors = getDirectNeighbors(patch);
 
 		if (patch.isEmpty || patch.flagged || patch.myCell == null
-				|| patch.myCell.getState() == null) {
+				|| patch.getMyCellState() == null) {
 			return patch;
 		}
 
-		if (patch.myCell.getState().equals(myPossibleStates[0])) { // FISH
+		if (patch.myCellStateEquals(myPossibleStates[0])) { // FISH
 			
 			moveAdj(patch, neighbors);
 			return patch;
@@ -106,9 +108,9 @@ public class PredatorPrey extends RuleSet {
 		
 		State s = patch.getCell().getState();
 		s.myParams[1] = (int)s.myParams[1] - 1;
-		patch.myCell.setState(s);
+		patch.setMyCellState(s);
 		
-		if ((int) patch.myCell.getState().myParams[1] == 0) {
+		if ((int) patch.getMyCellState().myParams[1] == 0) {
 			patch.clear();
 			patch.flag();
 			return true;
@@ -120,21 +122,21 @@ public class PredatorPrey extends RuleSet {
 	private void checkBreed(Patch patch, List<Patch> neighborhood) {
 
 		if (patch.isEmpty || patch.flagged || patch.myCell == null
-				|| patch.myCell.getState() == null)
+				|| patch.getMyCellState() == null)
 			return;
 
 		// decrement breed time
-		patch.myCell.getState().myParams[0] = ((int) patch.myCell.getState().myParams[0]) - 1;
-		int breedTime = ((int) patch.myCell.getState().myParams[0]);
+		patch.getMyCellState().myParams[0] = ((int) patch.getMyCellState().myParams[0]) - 1;
+		int breedTime = ((int) patch.getMyCellState().myParams[0]);
 
 		if (breedTime == 0) {
 			breed(patch, neighborhood);
 
 			// Reset breed timers
 			if (patch.getCell().getState().myIndex == 0)
-				patch.myCell.getState().myParams[0] = fishBreedTime;
+				patch.getMyCellState().myParams[0] = fishBreedTime;
 			else
-				patch.myCell.getState().myParams[0] = sharkBreedTime;
+				patch.getMyCellState().myParams[0] = sharkBreedTime;
 		}
 	}
 

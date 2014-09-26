@@ -144,7 +144,7 @@ public class ForagingAnts extends RuleSet{
 		Patch nextPatch = patch;
 		double highPheromones = 0;
 		
-		if (patch.myCell.getState() == myPossibleStates[0] || patch.myCell.getState() == myPossibleStates[2]) { //home base doesn't do anything except depreciate pheromone values
+		if (patch.myCell.getState().equals(myPossibleStates[0]) || patch.myCell.getState().equals(myPossibleStates[2])) { //home base doesn't do anything except depreciate pheromone values
 			decrementPheromones(patch);
 			return patch;
 		}

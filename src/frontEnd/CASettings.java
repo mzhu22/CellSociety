@@ -22,7 +22,7 @@ public class CASettings {
 	private Integer myRows;
 	private Integer myColumns;
 	private String[][] myGrid;
-	private Map<String, Object> myParameters;
+	protected static Map<String, Object> myParameters;
 	
 	public CASettings(String type, Map<String, Object> parametersMap, Integer row, Integer column, String[][] grid){
 		myParameters = parametersMap;

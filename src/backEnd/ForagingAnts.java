@@ -14,7 +14,7 @@ public class ForagingAnts extends RuleSet{
 	private static int yPos;
 	private static Patch HOME_BASE; // = new Patch(xPos, yPos, false);
 	private String myOrientation;
-	//private int antLimit = 10;
+	private int antLimit = 10;
 	private HashMap<Patch, Integer> homePheromoneLevels = new HashMap<Patch, Integer>();
 	private HashMap<Patch, Integer> foodPheromoneLevels = new HashMap<Patch, Integer>();
 

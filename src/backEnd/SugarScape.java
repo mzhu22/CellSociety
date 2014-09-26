@@ -3,9 +3,15 @@ package backEnd;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.scene.paint.Color;
+
 public class SugarScape extends RuleSet {
 	
 	public int sugarGrowBackRate = 1;
+	private State[] myPossibleStates = new State[] {
+			new State("Agent", 0, Color.GREEN, null), // index 0
+			new State("Sugar", 1, Color.ORANGERED, null) // index 1
+	};
 	
 	@Override
 	public Patch getNext(Patch curr) {
@@ -15,10 +21,13 @@ public class SugarScape extends RuleSet {
 		List<Patch> equalNeighbors = new ArrayList<Patch>();
 		Patch nextPatch = new Patch(row, col, false);
 		
-		if (curr.isEmpty && curr.sugarLevel < curr.maxSugar) { //grow the sugar back
-			curr.sugarLevel = curr.sugarLevel + sugarGrowBackRate;
+		if (curr.myCell.getState().equals(myPossibleStates[1])) { //if it's just sugar
+			if (curr.sugarLevel < curr.maxSugar) {
+				curr.sugarLevel = curr.sugarLevel + sugarGrowBackRate;
+			}
 			return curr;
 		}
+		//if it's an agent
 		
 		int mostSugar = 0;
 		for (Patch patch: neighbors) {

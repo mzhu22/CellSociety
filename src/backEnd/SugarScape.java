@@ -44,7 +44,7 @@ public class SugarScape extends RuleSet {
 		if (equalNeighbors.size() > 1) {
 			nextPatch = getClosestNeighbor(curr, equalNeighbors);
 		}
-		nextPatch.sugarLevel = nextPatch.sugarLevel -nextPatch.myCell.sugarMetabolism;
+		nextPatch.sugarLevel = nextPatch.sugarLevel - nextPatch.myCell.sugarMetabolism;
 		return nextPatch;
 	}
 	

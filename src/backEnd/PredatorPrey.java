@@ -219,8 +219,6 @@ public class PredatorPrey extends RuleSet {
 		shark.clear();
 		shark.flag();
 	}
-	
-	
 
 	private void breed(Patch patch, List<Patch> neighborhood) {
 

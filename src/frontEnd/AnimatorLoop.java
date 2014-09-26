@@ -189,9 +189,31 @@ public class AnimatorLoop {
 
 	public void writeToXML() {
 		XMLHandler writer = new XMLHandler();
-		writer.write(mySettings);
+		String type = mySettings.getType();
+		Map<String, Object> params = mySettings.getParameters();
+		Integer rows = mySettings.getRows();
+		Integer cols = mySettings.getColumns();
+		
+		String[][] gridString = gridPatchToString();
+		
+		CASettings currentSettings = new CASettings(type, params, rows, cols, gridString);
+		writer.write(currentSettings);
 	}
 
+	private String[][] gridPatchToString(){
+		String[][] gridString = new String[myPatches.length][myPatches[0].length];
+		for(int i=0; i<myPatches.length; i++){
+			for(int j=0; j<myPatches[0].length; j++){
+				if(!myPatches[i][j].containsCell()){
+					gridString[i][j] = ".";
+				}
+				else{
+					gridString[i][j] = myPatches[i][j].getCell().getState().getIndex().toString();
+				}
+			}
+		}
+		return gridString;
+	}
 	private void makePossibleShapeFactories() {
 		myImplementedShapeFactories = new HashMap<String, ShapeFactory>();
 

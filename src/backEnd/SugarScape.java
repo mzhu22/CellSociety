@@ -70,6 +70,7 @@ public class SugarScape extends RuleSet {
 		return retPatch;
 		
 	}
+
 	
 	@Override
 	public List<Patch> getNeighbors(Patch p) {

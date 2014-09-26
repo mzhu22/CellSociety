@@ -10,7 +10,6 @@ import javafx.scene.paint.Color;
 
 public class ForagingAnts extends RuleSet{
 	
-	private Random rand = new Random();
 	private static int xPos;
 	private static int yPos;
 	private static Patch HOME_BASE; // = new Patch(xPos, yPos, false);

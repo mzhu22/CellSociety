@@ -204,7 +204,7 @@ public class PredatorPrey extends RuleSet {
 	private void eatFish(Patch shark, Patch fish) {
 		
 		// Reset starve timer
-		State s = shark.getCell().getState();
+		State s = shark.getMyCellState();
 		s.myParams[1] = sharkStarveTime;
 		shark.myCell.setState(s);
 		

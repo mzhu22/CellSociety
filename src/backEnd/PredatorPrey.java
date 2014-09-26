@@ -43,25 +43,24 @@ public class PredatorPrey extends RuleSet {
 	public Patch[][] update() {
 
 		patchesToMove.clear();
+		Patch[][] nextGrid = makeNextGrid();
+		myPatches = nextGrid;
+		moveOrAddCells();
+		patchesToMove.clear();
+		breedIfNecessary();
+		moveOrAddCells();
+		clearAllFlags();
+		return myPatches;
+	}
 
+	private Patch[][] makeNextGrid() {
 		Patch[][] nextGrid = new Patch[myPatches.length][myPatches[0].length];
 		for (int i = 0; i < myPatches.length; i++) {
 			for (int j = 0; j < myPatches.length; j++) {
 				nextGrid[i][j] = getNext(myPatches[i][j]);
 			}
 		}
-		myPatches = nextGrid;
-		moveOrAddCells();
-
-		patchesToMove.clear();
-
-		// Breed if necessary
-		breedIfNecessary();
-		
-		moveOrAddCells();
-
-		// Clear all the flags
-		return clearAllFlags();
+		return nextGrid;
 	}
 
 	private void breedIfNecessary() {
@@ -73,14 +72,12 @@ public class PredatorPrey extends RuleSet {
 		}
 	}
 
-	private Patch[][] clearAllFlags() {
+	private void clearAllFlags() {
 		for (int i = 0; i < myPatches.length; i++) {
 			for (int j = 0; j < myPatches[0].length; j++) {
 				myPatches[i][j].flagged = false;
 			}
 		}
-
-		return myPatches;
 	}
 	
 	

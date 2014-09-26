@@ -12,7 +12,6 @@ public class ForagingAnts extends RuleSet{
 	private static int xPos;
 	private static int yPos;
 	private static Patch HOME_BASE; // = new Patch(xPos, yPos, false);
-	private List<String> orientationList = Arrays.asList("N", "NE", "E", "SE", "S", "SW", "W", "NW");
 	private String myOrientation;
 	private int antLimit = 10;
 	private int maxFoodPheromones = 10;
@@ -29,6 +28,7 @@ public class ForagingAnts extends RuleSet{
 		xPos = x;
 		yPos = y;
 		HOME_BASE = new Patch(xPos, yPos, false);
+		HOME_BASE.homePheromoneLevel = 100;
 	}
 	
 	public int getNumCells(Patch patch) {
@@ -184,6 +184,10 @@ public class ForagingAnts extends RuleSet{
 		else { // cell has food
 			if (forwardNeighbors.size() > 0) {
 				for (Patch p: forwardNeighbors) {
+					if (p == HOME_BASE) {
+						nextPatch = p;
+						return nextPatch;
+					}
 					if (p.homePheromoneLevel > highPheromones) {
 						highPheromones = p.homePheromoneLevel;
 						nextPatch = p;

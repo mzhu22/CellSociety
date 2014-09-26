@@ -51,11 +51,13 @@ public class Main extends Application {
 	private Button myPauseButton;
 	private Slider mySlider;
 	private TextField myField;
+	private Button myResetButton;
 	
 	private Timeline myAnimation;
 	
 	//All XML file reading components
 	private FileChooser fileChooser = new FileChooser();
+	private File XMLFile;
 	
 	@Override
 	public void start(Stage mainStage){
@@ -110,6 +112,7 @@ public class Main extends Application {
 		open.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
 			public void handle(ActionEvent press) {
+				XMLFile = fileChooser.showOpenDialog(myStage);
 				readXML();
 			}
 		});
@@ -136,6 +139,7 @@ public class Main extends Application {
 		myControls = new HBox();
 		myControls.setSpacing(CONTROL_BOX_SPACING);
 		myPauseButton = new Button("Play/Pause");
+		myResetButton = new Button("Reset");
 		
 		//Create slider with values from 1 to 20, default == 1, 
 		mySlider = new Slider(0, SLIDER_MAX_VALUE, SLIDER_DEFAULT_VALUE);
@@ -157,6 +161,7 @@ public class Main extends Application {
 		myControls.getChildren().add(mySlider);
 		myControls.getChildren().add(textfieldLabel);
 		myControls.getChildren().add(myField);
+		myControls.getChildren().add(myResetButton);
 	}
 	
 	/**
@@ -178,6 +183,12 @@ public class Main extends Application {
 				myAnimation.setRate((double)newVal);
 			}
 	      });
+		myResetButton.setOnAction(new EventHandler<ActionEvent>(){
+			@Override
+			public void handle(ActionEvent e){
+				resetSim();
+			}
+		});
 	}
 	
 	/**
@@ -192,12 +203,15 @@ public class Main extends Application {
 		}
 	}
 	
+	public void resetSim(){
+		readXML();
+	}
+	
 	public static void main(String[] args) {
 		launch(args);
 	}
 
 	private void readXML() {
-		File XMLFile = fileChooser.showOpenDialog(myStage);
 		myGrid = myLoop.readXMLAndInitializeGrid(XMLFile);
 		if (myGrid==null) return;
 		//Always remove the last element of myRoot's children (the grid). Then readd it. This means new grids are made when new XML files are loaded

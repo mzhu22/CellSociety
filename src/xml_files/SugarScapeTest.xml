@@ -2,7 +2,7 @@
 <cellularautomata type = "SugarScape">
 	<parameters>
 		<parameter key="gridType" value="Finite"/>
-		<parameter key="gridShape" value="Rectangular"/>
+		<parameter key="gridShape" value="Triangular"/>
 		<parameter key="sugarGrowBackRate" value="1"/>
 		<parameter key="sugarGrowBackInterval" value="2"/>
 		<parameter key="maxSugar" value="10"/>

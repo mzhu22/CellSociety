@@ -21,6 +21,7 @@ import backEnd.PredatorPrey;
 import backEnd.RuleSet;
 import backEnd.Segregation;
 import backEnd.SpreadingFire;
+import backEnd.SugarScape;
 
 public class AnimatorLoop {
 
@@ -207,6 +208,7 @@ public class AnimatorLoop {
 		myImplementedRulesets.put("SpreadingFire", new SpreadingFire());
 		myImplementedRulesets.put("GameOfLife", new GameOfLife());
 		myImplementedRulesets.put("Segregation", new Segregation());
+		myImplementedRulesets.put("SugarScape", new SugarScape());
 
 	}
 

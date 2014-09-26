@@ -2,7 +2,7 @@
 <cellularautomata type = "GameOfLife">
 	<parameters>
 		<parameter key="gridShape" value="Rectangular"/>
-		<parameter key="gridType" value="Finite"/>
+		<parameter key="gridType" value="Toroidal"/>
 	</parameters>
 	<grid rows="20" columns = "20">
 		. . . . . . . . . . . . . . . . . . . .

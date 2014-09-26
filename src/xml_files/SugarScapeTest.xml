@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<cellularautomata type = "SugarScape">
+	<parameters>
+		<parameter key="gridType" value="Finite"/>
+		<parameter key="gridShape" value="Rectangular"/>
+		<parameter key="sugarGrowBackRate" value="1"/>
+		<parameter key="sugarGrowBackInterval" value="2"/>
+		<parameter key="maxSugar" value="10"/>
+		<parameter key="initialSugar" value="20"/>
+		<parameter key="sugarMetabolism" value="3"/>
+		<parameter key="vision" value="3"/>
+	</parameters>
+	<grid rows="20" columns = "20">
+		1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+		1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+		1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+		1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+		1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+		1 1 1 1 1 1 1 1 1 1 1 1 0 1 1 1 1 1 1 1 
+		1 1 1 0 1 1 1 1 1 1 1 1 0 0 1 1 1 1 1 1 
+		1 1 1 1 1 1 1 1 1 1 1 0 0 0 1 1 1 1 1 1 	
+		1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+		1 1 1 1 1 1 1 1 0 1 1 1 1 1 1 1 1 1 1 1 
+		1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+		1 1 1 1 1 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+		1 1 1 1 1 1 1 0 1 1 1 1 1 1 1 1 1 1 1 1 
+		1 1 1 1 0 0 1 1 0 0 0 1 1 1 1 1 1 1 1 1 
+		1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+		1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+		1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+		1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+		1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 
+		1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+	</grid>
+</cellularautomata>

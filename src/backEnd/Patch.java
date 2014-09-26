@@ -8,14 +8,11 @@ public class Patch extends Rectangle{
 	public boolean flagged;
 	public int myRow, myCol;
 	public Cell myCell;
-	public State myState;
 	public int numCells;
 	
 	// TODO : Make these parameters within their specific ruleset - Brian Bolze
 	public double homePheromoneLevel = 0;
 	public double foodPheromoneLevel = 0;
-	public int maxSugar = 25;
-	public int sugarLevel = maxSugar;
 	
 	public Patch(int row, int col, boolean empty) {
 		myRow = row;

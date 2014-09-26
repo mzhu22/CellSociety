@@ -137,18 +137,8 @@ public abstract class RuleSet {
 						continue;
 					if (!isOutside(i, j))
 						ret.add(myPatches[i][j]);
-					if ("Toroidal".equals(gridType) && isOutside(i,j)) {
-						int addRow = row;
-						int addCol = col;
-						if (i > row)
-							addRow = 0;
-						if (i < 0)
-							addRow = myPatches.length - 1;
-						if (j > col)
-							addCol = 0;
-						if (j < 0)
-							addCol = myPatches[0].length - 1;
-						ret.add(myPatches[addRow][addCol]);
+					else if ("Toroidal".equals(gridType) && isOutside(i,j)) {
+						ret = addWrapArounds(ret,row,col);
 					}
 				}
 			}
@@ -163,7 +153,8 @@ public abstract class RuleSet {
 		List<Patch> ret = new ArrayList<Patch>();
 		int row = p.myRow;
 		int col = p.myCol;
-		switch ((String) myParams.get("gridShape")) {
+		
+		switch (gridType) {
 
 		case ("Hexagonal"):
 			return getNeighbors(p); // Same!
@@ -197,7 +188,7 @@ public abstract class RuleSet {
 		return ret;
 	}
 
-	private boolean isOutside(int row, int col) {
+	protected boolean isOutside(int row, int col) {
 		int rows = myPatches.length;
 		int cols = myPatches[0].length;
 		return (row >= rows || row < 0 || col >= cols || col < 0);
@@ -210,6 +201,17 @@ public abstract class RuleSet {
 		if (row-1 < 0 && !(gridShape.equals("Triangular") && col % 2 == 0)) list.add(myPatches[rows-1][col]);
 		if (col+1 >= cols) list.add(myPatches[row][0]);
 		if (col-1 < 0) list.add(myPatches[row][cols - 1]);
+		return list;
+	}
+	
+	private List<Patch> addWrapArounds(List<Patch> list, int row, int col) {
+		int numRows = myPatches.length;
+		int numCols = myPatches[0].length;
+		if (row >= numRows) row = 0;
+		if (row < 0) row = numRows-1;
+		if (col >= numCols) col = 0;
+		if (col < 0) col = numCols-1;
+		list.add(myPatches[row][col]);
 		return list;
 	}
 

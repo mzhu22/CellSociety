@@ -23,7 +23,7 @@ public class GameOfLife extends RuleSet {
 		List<Patch> neighborhood = getNeighbors(patch);
 		Patch newPatch = new Patch(patch);
 		int liveNeighbors = 0;
-
+		if (neighborhood.size() != 8) System.out.println(neighborhood.size());
 		for (Patch p : neighborhood) {
 			if (p.containsCell())
 				liveNeighbors++;

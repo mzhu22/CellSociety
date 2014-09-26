@@ -27,7 +27,7 @@ public class AnimatorLoop {
 
 	// Used for menu bars
 	public static final int HEIGHT_OFFSET = 112;
-	public static final int WIDTH_OFFSET = 40;
+	public static final int WIDTH_OFFSET = 190;
 	public static final int GRID_BORDER_WIDTH = 1;
 
 	private CASettings mySettings;

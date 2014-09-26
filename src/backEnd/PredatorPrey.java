@@ -212,7 +212,6 @@ public class PredatorPrey extends RuleSet {
 		State s = shark.getMyCellState();
 		s.myParams[1] = sharkStarveTime;
 		shark.myCell.setState(s);
-		
 		fish.myCell = shark.myCell;
 		patchesToMove.add(fish);
 		fish.flagged = true;

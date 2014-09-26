@@ -41,7 +41,6 @@ public class PredatorPrey extends RuleSet {
 
 	@Override
 	public Patch[][] update() {
-
 		patchesToMove.clear();
 		Patch[][] nextGrid = makeNextGrid();
 		myPatches = nextGrid;
@@ -220,6 +219,8 @@ public class PredatorPrey extends RuleSet {
 		shark.clear();
 		shark.flag();
 	}
+	
+	
 
 	private void breed(Patch patch, List<Patch> neighborhood) {
 

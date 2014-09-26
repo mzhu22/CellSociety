@@ -150,8 +150,7 @@ public class ForagingAnts extends RuleSet{
 		double highPheromones = 0;
 		
 		if (patch.myCell.getState() == myPossibleStates[0] || patch.myCell.getState() == myPossibleStates[2]) { //home base doesn't do anything except depreciate pheromone values
-			patch.foodPheromoneLevel--;
-			patch.homePheromoneLevel--;
+			decrementPheromones(patch);
 			return patch;
 		}
 		
@@ -223,6 +222,11 @@ public class ForagingAnts extends RuleSet{
 		
 		patch.clear();
 		return nextPatch;
+	}
+
+	private void decrementPheromones(Patch patch) {
+		patch.foodPheromoneLevel--;
+		patch.homePheromoneLevel--;
 	}
 
 }

@@ -11,6 +11,7 @@ public class Patch extends Rectangle{
 	public State myState;
 	public int numCells;
 	
+	
 	// TODO : Make these parameters within their specific ruleset - Brian Bolze
 	public double homePheromoneLevel = 0;
 	public double foodPheromoneLevel = 0;

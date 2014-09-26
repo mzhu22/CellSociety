@@ -14,8 +14,6 @@ public class ForagingAnts extends RuleSet{
 	private static Patch HOME_BASE; // = new Patch(xPos, yPos, false);
 	private String myOrientation;
 	private int antLimit = 10;
-	private int maxFoodPheromones = 10;
-	private int maxHomePheromones = 10;
 	private State[] myPossibleStates = new State[] {
 			new State("Home", 0, Color.BLUE, null), // index 0
 			new State("Ant", 1, Color.RED, null), // index 1

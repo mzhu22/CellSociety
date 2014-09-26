@@ -197,7 +197,7 @@ public abstract class RuleSet {
 		return ret;
 	}
 
-	private boolean isOutside(int row, int col) {
+	protected boolean isOutside(int row, int col) {
 		int rows = myPatches.length;
 		int cols = myPatches[0].length;
 		return (row >= rows || row < 0 || col >= cols || col < 0);

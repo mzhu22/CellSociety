@@ -228,6 +228,9 @@ public class ForagingAnts extends RuleSet{
 				homePheromoneLevels.replace(patch, homePheromoneLevels.get(patch), 10);
 			}
 		}
+		if (nextPatch.equals(HOME_BASE) && nextPatch.myCell.hasFood) { //leave food at base and go back
+			nextPatch.myCell.hasFood = false;
+		}
 		return nextPatch;
 	}
 		

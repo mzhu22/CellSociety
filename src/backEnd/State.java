@@ -28,8 +28,8 @@ public class State {
 		return (myIndex == other.myIndex);
 	}
 	
-	public void setParams(Object[] o) {
-		myParams = o;
+	public void setParams(Object[] obj) {
+		myParams = obj;
 	}
 
 	public void setColor(Color myColor) {

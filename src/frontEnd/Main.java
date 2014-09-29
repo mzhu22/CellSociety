@@ -1,3 +1,5 @@
+// This entire file is part of my masterpiece.
+// Justin Carrao
 package frontEnd;
 
 import java.io.File;
@@ -82,27 +84,33 @@ public class Main extends Application {
 		// Initialize the menu and control box
 		makeMenu();
 		makeControlBox();
-
-		VBox menuBars = new VBox();
-		menuBars.getChildren().add(myMenuBar);
-		menuBars.getChildren().add(myControls);
-		myRoot.setTop(menuBars);
+		makeMenuBars();
 
 		// Make a blank grid. Grid is created for real when XML files loaded
 		myGrid = new Group();
 		myRoot.setCenter(myGrid);
-
 		myStage.setScene(scene);
 		myStage.show();
 
 		// Initialize animations
 		KeyFrame frame = myLoop.start();
-		myAnimation = new Timeline();
-		myAnimation.setCycleCount(Timeline.INDEFINITE);
-		myAnimation.getKeyFrames().add(frame);
-		myAnimation.play();
+		beginAnimation(frame);
 
 		useControls();
+	}
+	
+	public void makeMenuBars() {
+		VBox menuBars = new VBox();
+		menuBars.getChildren().add(myMenuBar);
+		menuBars.getChildren().add(myControls);
+		myRoot.setTop(menuBars);
+	}
+	
+	public void beginAnimation(KeyFrame kF) {
+		myAnimation = new Timeline();
+		myAnimation.setCycleCount(Timeline.INDEFINITE);
+		myAnimation.getKeyFrames().add(kF);
+		myAnimation.play();
 	}
 
 	/**
@@ -152,13 +160,7 @@ public class Main extends Application {
 		myResetButton = new Button("Reset");
 
 		// Create slider with values from 1 to 20, default == 1,
-		mySlider = new Slider(0, SLIDER_MAX_VALUE, SLIDER_DEFAULT_VALUE);
-		mySlider.setShowTickMarks(true);
-		mySlider.setShowTickLabels(true);
-		mySlider.setSnapToTicks(true);
-		mySlider.setMajorTickUnit(10f);
-		mySlider.setBlockIncrement(10f);
-		mySlider.setPrefWidth(SLIDER_WIDTH);
+		makeSlider();
 		Label sliderLabel = new Label(" Sim speed (ticks/second)");
 
 		// Create textfield for jumping to a point
@@ -166,12 +168,28 @@ public class Main extends Application {
 		myField.setPrefWidth(TEXTFIELD_WIDTH);
 		Label textfieldLabel = new Label("Jump to tick: ");
 
+		addControlElements(sliderLabel, textfieldLabel);
+		
+		
+	}
+	
+	public void addControlElements(Label label1, Label label2) {
 		myControls.getChildren().add(myPauseButton);
-		myControls.getChildren().add(sliderLabel);
+		myControls.getChildren().add(label1);
 		myControls.getChildren().add(mySlider);
-		myControls.getChildren().add(textfieldLabel);
+		myControls.getChildren().add(label2);
 		myControls.getChildren().add(myField);
 		myControls.getChildren().add(myResetButton);
+	}
+
+	public void makeSlider() {
+		mySlider = new Slider(0, SLIDER_MAX_VALUE, SLIDER_DEFAULT_VALUE);
+		mySlider.setShowTickMarks(true);
+		mySlider.setShowTickLabels(true);
+		mySlider.setSnapToTicks(true);
+		mySlider.setMajorTickUnit(10f);
+		mySlider.setBlockIncrement(10f);
+		mySlider.setPrefWidth(SLIDER_WIDTH);
 	}
 
 	private void makeParamControls() {

@@ -75,7 +75,7 @@ public class SpreadingFire extends RuleSet {
 		return ret;
 	}
 
-	private boolean isBurning(Patch p) {
+	public boolean isBurning(Patch p) {
 		// If it just burnt down...
 		if (p.flagged && p.isEmpty) return true;
 		

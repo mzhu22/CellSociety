@@ -33,26 +33,31 @@ public class SugarScape extends RuleSet {
 		if (ticks%sugarGrowBackInterval == 0) growSugar();
 		Patch[][] nextGrid = new Patch[myPatches.length][myPatches[0].length];
 		
-		for (int i = 0; i < myPatches.length; i++) {
-			for (int j = 0; j < myPatches[0].length; j++) {
-				nextGrid[i][j] = getNext(myPatches[i][j]);
-			}
-		}
-		
+		getNextInGrid(nextGrid);
 		movePatches(nextGrid);
-
 		patchesToMove.clear();
-		
-		for (int i = 0; i < myPatches.length; i++) {
-			for (int j = 0; j < myPatches[0].length; j++) {
-				nextGrid[i][j].flagged = false;
-			}
-		}
+		flagPatchesInGrid(nextGrid);
 		
 		myPatches = nextGrid;
 //		randomizeSugar();
 //		testRandomness();
 		return myPatches;
+	}
+
+	public void flagPatchesInGrid(Patch[][] nextGrid) {
+		for (int i = 0; i < myPatches.length; i++) {
+			for (int j = 0; j < myPatches[0].length; j++) {
+				nextGrid[i][j].flagged = false;
+			}
+		}
+	}
+
+	public void getNextInGrid(Patch[][] nextGrid) {
+		for (int i = 0; i < myPatches.length; i++) {
+			for (int j = 0; j < myPatches[0].length; j++) {
+				nextGrid[i][j] = getNext(myPatches[i][j]);
+			}
+		}
 	}
 
 	@Override
@@ -126,11 +131,11 @@ public class SugarScape extends RuleSet {
 		return curr;
 	}
 	
-	private boolean isSugar(Patch p) {
+	public boolean isSugar(Patch p) {
 		return p.getCell().getState().myIndex == 1;
 	}
 	
-	private int getSugarLevel(Patch p) {	
+	public int getSugarLevel(Patch p) {	
 		return (int)p.myCell.getState().myParams[0];
 	}
 	

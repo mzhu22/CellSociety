@@ -46,6 +46,7 @@ public class Patch extends Rectangle{
 		flagged = true;
 	}
 	
+	
 	public void fill(Cell cell) {
 		myCell = cell;
 		isEmpty = false;

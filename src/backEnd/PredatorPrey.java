@@ -116,12 +116,16 @@ public class PredatorPrey extends RuleSet {
 		patch.setMyCellState(s);
 		
 		if ((int) patch.getMyCellState().myParams[1] == 0) {
-			patch.clear();
-			patch.flag();
+			clearAndFlagPatch(patch);
 			return true;
 		}
 		
 		return false;
+	}
+	
+	private void clearAndFlagPatch(Patch p) {
+		p.clear();
+		p.flag();
 	}
 
 	private void checkBreed(Patch patch, List<Patch> neighborhood) {
@@ -164,8 +168,7 @@ public class PredatorPrey extends RuleSet {
 		Patch newLocation = empties.get(rand.nextInt(empties.size()));
 
 		addCell(newLocation, patch.getCell());
-		patch.clear();
-		patch.flag();
+		clearAndFlagPatch(patch);
 		newLocation.flagged = true;
 
 	}
@@ -215,8 +218,7 @@ public class PredatorPrey extends RuleSet {
 		fish.myCell = shark.myCell;
 		patchesToMove.add(fish);
 		fish.flagged = true;
-		shark.clear();
-		shark.flag();
+		clearAndFlagPatch(shark);
 	}
 
 	private void breed(Patch patch, List<Patch> neighborhood) {

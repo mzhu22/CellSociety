@@ -1,8 +1,7 @@
 package backEnd;
 
-import javafx.scene.shape.Rectangle;
 
-public class Patch extends Rectangle{
+public class Patch {
 	
 	public boolean isEmpty;
 	public boolean flagged;
@@ -26,10 +25,6 @@ public class Patch extends Rectangle{
 		myCol = original.myCol;
 		myCell = original.getCell();
 		flagged = false;
-	}
-	
-	public void changeColor(){
-		setFill(myCell.getState().myColor);
 	}
 	
 	public Cell getCell(){

@@ -1,3 +1,6 @@
+// This entire file is part of my masterpiece.
+// Brian Bolze
+
 package shapeFactories;
 
 import javafx.scene.shape.Polygon;

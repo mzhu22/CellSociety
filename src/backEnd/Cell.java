@@ -1,39 +1,44 @@
+/*
+ * This entire file is part of my masterpiece
+ * @MIKE ZHU
+ */
+
 package backEnd;
 
-import java.util.List;
-import java.util.Stack;
+import java.util.Map;
 
 import javafx.scene.paint.Color;
 
 public class Cell {
+	
+	private static final Color DEFAULT_COLOR = Color.BLACK;
 
-	protected List<State> myHistory = new Stack<State>(); // TODO : History not needed...
-
-	public Cell(State s) { /* maybe add this too I'm not sure: int size */
-
-		((Stack<State>) myHistory).push(s);
-
+	protected String myState;
+	protected Color myColor;
+	
+	public Cell(){
+		myState = null;
+		myColor = DEFAULT_COLOR; 
+	}
+	public Cell(String state) { 
+		myState = state;
+		myColor = DEFAULT_COLOR; 
 	}
 	
-	public Color getColor() {
-		State state = getState();
-		//if (state == null) System.out.println("Tried to get color from NULL cell");
-		return state.myColor;
+	/**
+	 * Changes Cell color based on state and state-to-color mapping specified in XML file
+	 * @param colorParams = specific map of state-to-color
+	 */
+	public void changeColor(Map<String, Color> colorParams){
+		myColor = colorParams.get(myState);
 	}
-
-	public void remove() {
-		myHistory.clear();
+	
+	public Color getColor(){
+		return myColor;
 	}
-
-	public State getState() {
-		return ((Stack<State>) myHistory).peek();
-	}
-
-	public void setState(State s) {
-		if (s == null) { // empty...
-			remove();
-		}
-		((Stack<State>) myHistory).push(s);
+	
+	public void setState(String state){
+		myState = state;
 	}
 
 }

@@ -1,6 +1,13 @@
+/*
+ * This entire file is part of my masterpiece
+ * @MIKE ZHU
+ */
+
 package backEnd;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javafx.scene.paint.Color;
 
@@ -8,14 +15,11 @@ public class GameOfLife extends RuleSet {
 
 	private static final String GAME_OF_LIFE = "Game of Life";
 
-	// No extra parameters!
-
-	public GameOfLife() {
-		super();
+	public GameOfLife(List<ArrayList<Patch>> grid, Map<String, Object> params, Map<String, Color> colorParams) {
+		super(grid, params, colorParams);
 
 		myDescription = GAME_OF_LIFE;
-		myPossibleStates = new State[] { new State("Alive", 0, Color.BLACK,
-				null) };
+		myPossibleStates = new String[] {"Alive"};
 	}
 
 	@Override
@@ -31,6 +35,7 @@ public class GameOfLife extends RuleSet {
 
 		if (!patch.containsCell() && liveNeighbors == 3) {
 			newPatch.fill(new Cell(myPossibleStates[0]));
+			newPatch.getCell().changeColor(myColorParams);
 		}
 		
 		return newPatch;

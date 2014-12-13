@@ -1,0 +1,10 @@
+<map id="backEnd.GameOfLife.getNext" name="backEnd.GameOfLife.getNext">
+<area shape="rect" id="node2" href="$db/d5e/classback_end_1_1_patch.html#ae544417dcc2d70361cb77d46dd63c60b" title="backEnd.Patch.clear" alt="" coords="298,5,449,32"/>
+<area shape="rect" id="node3" href="$db/d5e/classback_end_1_1_patch.html#a04e1b0dd4e2f8ff26d8fd31dc09954fa" title="backEnd.Patch.containsCell" alt="" coords="275,56,471,83"/>
+<area shape="rect" id="node4" href="$d5/dcb/classback_end_1_1_game_of_life.html#aebb3b607ec62b9ae836ba4a2a9776cee" title="backEnd.GameOfLife.count\lLiveNeighbors" alt="" coords="276,107,471,149"/>
+<area shape="rect" id="node6" href="$db/d5e/classback_end_1_1_patch.html#ac9c7bf582f9e7aec34492785fea4cf68" title="backEnd.Patch.fill" alt="" coords="307,173,439,200"/>
+<area shape="rect" id="node7" href="$d1/dfc/classback_end_1_1_rule_set.html#ac09e709af5a347c28f6cafb0aa4f0d34" title="backEnd.RuleSet.getNeighbors" alt="" coords="264,224,483,251"/>
+<area shape="rect" id="node5" href="$d5/de7/jquery_8js.html#a2335e57f79b6acfb6de59c235dc8a83e" title="p" alt="" coords="631,115,670,141"/>
+<area shape="rect" id="node8" href="$d1/dfc/classback_end_1_1_rule_set.html#ace087d13be0cf3e1f723a663d0e06d8b" title="backEnd.RuleSet.isOutside" alt="" coords="555,199,746,225"/>
+<area shape="rect" id="node9" href="$d1/dfc/classback_end_1_1_rule_set.html#a625f1cd5d7e0e5d6acf7d47e28beb41e" title="backEnd.RuleSet.addWrapArounds" alt="" coords="531,249,771,276"/>
+</map>

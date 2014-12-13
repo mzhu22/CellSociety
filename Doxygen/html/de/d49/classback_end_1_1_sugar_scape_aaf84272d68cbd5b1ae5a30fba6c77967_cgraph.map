@@ -1,0 +1,4 @@
+<map id="backEnd.SugarScape.isSugar" name="backEnd.SugarScape.isSugar">
+<area shape="rect" id="node2" href="$db/d5e/classback_end_1_1_patch.html#a8d97ca84fd6d69378e9fc0b96eff7cb9" title="backEnd.Patch.getCell" alt="" coords="264,5,427,32"/>
+<area shape="rect" id="node3" href="$d0/d08/classback_end_1_1_cell.html#a780d63fdf3ec4f64bd01f9c1c01f54e9" title="backEnd.Cell.getState" alt="" coords="264,56,427,83"/>
+</map>

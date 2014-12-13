@@ -1,0 +1,6 @@
+<map id="frontEnd.AnimatorLoop.addCellsToGrid" name="frontEnd.AnimatorLoop.addCellsToGrid">
+<area shape="rect" id="node2" href="$d4/d6c/classshape_factories_1_1_shape_factory.html#a7a14b33c28eb5951679f13f21633bdf4" title="shapeFactories.ShapeFactory.make\lShape" alt="" coords="254,38,501,79"/>
+<area shape="rect" id="node5" href="$d4/d6c/classshape_factories_1_1_shape_factory.html#a6dbdc6b9de19c9685fc9c2361d982b2f" title="shapeFactories.ShapeFactory.move" alt="" coords="254,104,501,131"/>
+<area shape="rect" id="node3" href="$d4/d6c/classshape_factories_1_1_shape_factory.html#adcf2f7637e2a6ed76a74dceaf986f8a5" title="shapeFactories.ShapeFactory.set\lDimensions" alt="" coords="550,5,781,46"/>
+<area shape="rect" id="node4" href="$d4/d6c/classshape_factories_1_1_shape_factory.html#a02796a37b5651bf8fe6dc075f5e6e444" title="shapeFactories.ShapeFactory.set\lCoords" alt="" coords="550,70,781,111"/>
+</map>

@@ -1,0 +1,9 @@
+<map id="backEnd.PredatorPrey.checkStarve" name="backEnd.PredatorPrey.checkStarve">
+<area shape="rect" id="node2" href="$db/d5e/classback_end_1_1_patch.html#ae544417dcc2d70361cb77d46dd63c60b" title="backEnd.Patch.clear" alt="" coords="289,5,439,32"/>
+<area shape="rect" id="node3" href="$db/d5e/classback_end_1_1_patch.html#a3c6c0521d023d1883b92717afa1340f0" title="backEnd.Patch.flag" alt="" coords="293,56,435,83"/>
+<area shape="rect" id="node4" href="$db/d5e/classback_end_1_1_patch.html#a8d97ca84fd6d69378e9fc0b96eff7cb9" title="backEnd.Patch.getCell" alt="" coords="283,107,445,133"/>
+<area shape="rect" id="node5" href="$db/d5e/classback_end_1_1_patch.html#a3ff9ee1d7f36a53d2fb9011411fa58c5" title="backEnd.Patch.getMyCellState" alt="" coords="256,157,472,184"/>
+<area shape="rect" id="node6" href="$d0/d08/classback_end_1_1_cell.html#a780d63fdf3ec4f64bd01f9c1c01f54e9" title="backEnd.Cell.getState" alt="" coords="520,183,683,209"/>
+<area shape="rect" id="node7" href="$db/d5e/classback_end_1_1_patch.html#a59b689bcfb17aa8603d5e3278521174b" title="backEnd.Patch.setMyCellState" alt="" coords="257,259,471,285"/>
+<area shape="rect" id="node8" href="$d0/d08/classback_end_1_1_cell.html#a1f5840c8483f25559567cbf9c6f1eef4" title="backEnd.Cell.setState" alt="" coords="520,259,683,285"/>
+</map>

@@ -1,0 +1,11 @@
+<map id="frontEnd.Main.createPopup" name="frontEnd.Main.createPopup">
+<area shape="rect" id="node2" href="$dd/dbe/classfront_end_1_1_main.html#a1c9672872cb8b8f6efe2d1ddce9a6b61" title="frontEnd.Main.showPopupMessage" alt="" coords="248,56,491,83"/>
+<area shape="rect" id="node3" href="$dc/da1/classfront_end_1_1_animator_loop.html#a467af791b6cbba9bb796678842386ca2" title="frontEnd.AnimatorLoop.check\lBadXMLFileData" alt="" coords="539,49,749,90"/>
+<area shape="rect" id="node4" href="$dc/da1/classfront_end_1_1_animator_loop.html#a1f378b18807af5386266685e907aa8c7" title="frontEnd.AnimatorLoop.read\lXMLAndInitializeGrid" alt="" coords="797,49,1000,90"/>
+<area shape="rect" id="node5" href="$dd/dbe/classfront_end_1_1_main.html#a7bae3127415fb2ae80975ebc95057e3f" title="frontEnd.Main.readXML" alt="" coords="1049,56,1218,83"/>
+<area shape="rect" id="node6" href="$dd/dbe/classfront_end_1_1_main.html#a55d59b110825a1cc153a0091a6e5cb99" title="frontEnd.Main.makeMenu" alt="" coords="1267,5,1453,32"/>
+<area shape="rect" id="node8" href="$dd/dbe/classfront_end_1_1_main.html#a8e2e836903a64069e4283fa66309c704" title="frontEnd.Main.resetSim" alt="" coords="1274,107,1446,133"/>
+<area shape="rect" id="node7" href="$dd/dbe/classfront_end_1_1_main.html#ae53f892716dcc60f3f49714496e30c91" title="frontEnd.Main.start" alt="" coords="1795,56,1939,83"/>
+<area shape="rect" id="node9" href="$dd/dbe/classfront_end_1_1_main.html#a0ff8a007311f8ecce84d4203dc85d669" title="frontEnd.Main.makeParamControls" alt="" coords="1502,56,1746,83"/>
+<area shape="rect" id="node10" href="$dd/dbe/classfront_end_1_1_main.html#a1f4c19654fe78e5ebca54fc26bf43c94" title="frontEnd.Main.useControls" alt="" coords="1529,107,1719,133"/>
+</map>

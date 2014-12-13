@@ -1,0 +1,13 @@
+<map id="backEnd.SpreadingFire.getNext" name="backEnd.SpreadingFire.getNext">
+<area shape="rect" id="node2" href="$d3/dea/classback_end_1_1_state.html#a5e12a9ec49bc055f98f47974b0334a6d" title="backEnd.State.equals" alt="" coords="293,5,454,32"/>
+<area shape="rect" id="node3" href="$db/d5e/classback_end_1_1_patch.html#ac9c7bf582f9e7aec34492785fea4cf68" title="backEnd.Patch.fill" alt="" coords="307,56,439,83"/>
+<area shape="rect" id="node4" href="$d1/dfc/classback_end_1_1_rule_set.html#ae5129c070ec6dac5e9d135b8d4ecb521" title="backEnd.RuleSet.getDirect\lNeighbors" alt="" coords="278,107,469,149"/>
+<area shape="rect" id="node9" href="$d0/d08/classback_end_1_1_cell.html#a780d63fdf3ec4f64bd01f9c1c01f54e9" title="backEnd.Cell.getState" alt="" coords="545,199,708,225"/>
+<area shape="rect" id="node10" href="$de/d5a/classback_end_1_1_spreading_fire.html#a83460ccc721b0c3c4bdd2f89d8ecf218" title="backEnd.SpreadingFire.is\lBurning" alt="" coords="283,225,464,266"/>
+<area shape="rect" id="node12" href="$d5/de7/jquery_8js.html#a2335e57f79b6acfb6de59c235dc8a83e" title="p" alt="" coords="354,291,393,317"/>
+<area shape="rect" id="node5" href="$d1/dfc/classback_end_1_1_rule_set.html#a4cf4a92c89c23ea81b43ca8fadb46975" title="backEnd.RuleSet.addDirect\lWrapArounds" alt="" coords="529,31,724,73"/>
+<area shape="rect" id="node6" href="$d1/dfc/classback_end_1_1_rule_set.html#ac09e709af5a347c28f6cafb0aa4f0d34" title="backEnd.RuleSet.getNeighbors" alt="" coords="517,97,736,124"/>
+<area shape="rect" id="node8" href="$d1/dfc/classback_end_1_1_rule_set.html#ace087d13be0cf3e1f723a663d0e06d8b" title="backEnd.RuleSet.isOutside" alt="" coords="809,148,999,175"/>
+<area shape="rect" id="node7" href="$d1/dfc/classback_end_1_1_rule_set.html#a625f1cd5d7e0e5d6acf7d47e28beb41e" title="backEnd.RuleSet.addWrapArounds" alt="" coords="784,97,1024,124"/>
+<area shape="rect" id="node11" href="$db/d5e/classback_end_1_1_patch.html#a8d97ca84fd6d69378e9fc0b96eff7cb9" title="backEnd.Patch.getCell" alt="" coords="545,249,708,276"/>
+</map>

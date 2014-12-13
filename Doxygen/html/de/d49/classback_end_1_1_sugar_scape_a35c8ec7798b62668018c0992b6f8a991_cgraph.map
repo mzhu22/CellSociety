@@ -1,0 +1,6 @@
+<map id="backEnd.SugarScape.growSugar" name="backEnd.SugarScape.growSugar">
+<area shape="rect" id="node2" href="$d0/d08/classback_end_1_1_cell.html#a780d63fdf3ec4f64bd01f9c1c01f54e9" title="backEnd.Cell.getState" alt="" coords="555,32,717,59"/>
+<area shape="rect" id="node3" href="$de/d49/classback_end_1_1_sugar_scape.html#aaf84272d68cbd5b1ae5a30fba6c77967" title="backEnd.SugarScape.isSugar" alt="" coords="291,91,501,118"/>
+<area shape="rect" id="node5" href="$de/d49/classback_end_1_1_sugar_scape.html#ac39421d9c6ae9dea8c02c724fdd0c395" title="backEnd.SugarScape.setSugar\lLevel" alt="" coords="286,25,506,66"/>
+<area shape="rect" id="node4" href="$db/d5e/classback_end_1_1_patch.html#a8d97ca84fd6d69378e9fc0b96eff7cb9" title="backEnd.Patch.getCell" alt="" coords="555,91,717,118"/>
+</map>

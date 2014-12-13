@@ -1,0 +1,25 @@
+var searchData=
+[
+  ['gameoflife',['GameOfLife',['../d5/dcb/classback_end_1_1_game_of_life.html#acbfb3ae261efe89c51bab68d28ab30d4',1,'backEnd::GameOfLife']]],
+  ['getcell',['getCell',['../db/d5e/classback_end_1_1_patch.html#a8d97ca84fd6d69378e9fc0b96eff7cb9',1,'backEnd::Patch']]],
+  ['getclosestneighbor',['getClosestNeighbor',['../de/d49/classback_end_1_1_sugar_scape.html#a960fa32657cb19f50dd7446619fe93e9',1,'backEnd::SugarScape']]],
+  ['getcolor',['getColor',['../d0/d08/classback_end_1_1_cell.html#a9eb4afaad28f514cef9159dc5945313b',1,'backEnd::Cell']]],
+  ['getcolumns',['getColumns',['../d5/d51/classfront_end_1_1_c_a_settings.html#ad1a35159c9a3b860bd4af0d12e40b169',1,'frontEnd::CASettings']]],
+  ['getdefaultstate',['getDefaultState',['../d1/dfc/classback_end_1_1_rule_set.html#a0f8215e35df3e68dd82269ba28d2fd75',1,'backEnd::RuleSet']]],
+  ['getdescription',['getDescription',['../d1/dfc/classback_end_1_1_rule_set.html#a13e09c312e20cb1f78921d8e3d4d98b4',1,'backEnd.RuleSet.getDescription()'],['../d4/d6c/classshape_factories_1_1_shape_factory.html#ae6d6b6fd10ca1f68c14c6dd1ec7b87b0',1,'shapeFactories.ShapeFactory.getDescription()']]],
+  ['getdirectneighbors',['getDirectNeighbors',['../d1/dfc/classback_end_1_1_rule_set.html#ae5129c070ec6dac5e9d135b8d4ecb521',1,'backEnd::RuleSet']]],
+  ['getgrid',['getGrid',['../d5/d51/classfront_end_1_1_c_a_settings.html#a9b6c355e48adf9a7db04c30c74aac53f',1,'frontEnd::CASettings']]],
+  ['getindex',['getIndex',['../d3/dea/classback_end_1_1_state.html#afa7224e53c368c4a83bf2af5b5e0c11f',1,'backEnd::State']]],
+  ['getmycellstate',['getMyCellState',['../db/d5e/classback_end_1_1_patch.html#a3ff9ee1d7f36a53d2fb9011411fa58c5',1,'backEnd::Patch']]],
+  ['getneighbors',['getNeighbors',['../d1/dfc/classback_end_1_1_rule_set.html#ac09e709af5a347c28f6cafb0aa4f0d34',1,'backEnd.RuleSet.getNeighbors()'],['../de/d49/classback_end_1_1_sugar_scape.html#aef8d78e2988a976344c3b83a9259d519',1,'backEnd.SugarScape.getNeighbors()']]],
+  ['getnext',['getNext',['../d5/dcb/classback_end_1_1_game_of_life.html#af98fae7f8d156a65231b2d63bf5e27fb',1,'backEnd.GameOfLife.getNext()'],['../d0/d96/classback_end_1_1_predator_prey.html#aecfa40f92acce8997492d12cefd08b48',1,'backEnd.PredatorPrey.getNext()'],['../d1/dfc/classback_end_1_1_rule_set.html#aa123734a8de5c94cef0589bd13a43a9f',1,'backEnd.RuleSet.getNext()'],['../d9/d2e/classback_end_1_1_segregation.html#a306bcff5f217b04d83849a3cc77bddfb',1,'backEnd.Segregation.getNext()'],['../de/d5a/classback_end_1_1_spreading_fire.html#a14b959c163a3a935ef7856c045b13eeb',1,'backEnd.SpreadingFire.getNext()'],['../de/d49/classback_end_1_1_sugar_scape.html#a13186ddb64e70b5941d0cd12163c3e84',1,'backEnd.SugarScape.getNext()']]],
+  ['getparameters',['getParameters',['../d5/d51/classfront_end_1_1_c_a_settings.html#a560c336f7aed8050af9a606949926548',1,'frontEnd::CASettings']]],
+  ['getpossiblefish',['getPossibleFish',['../d0/d96/classback_end_1_1_predator_prey.html#acad085d5842f415749231d940982ab57',1,'backEnd::PredatorPrey']]],
+  ['getrows',['getRows',['../d5/d51/classfront_end_1_1_c_a_settings.html#aef613fb5595d20d85dad92cf5f5efad9',1,'frontEnd::CASettings']]],
+  ['getsatisfaction',['getSatisfaction',['../d9/d2e/classback_end_1_1_segregation.html#a3cfddc34f7afe36f208eb6470d6e0f7d',1,'backEnd::Segregation']]],
+  ['getstate',['getState',['../d0/d08/classback_end_1_1_cell.html#a780d63fdf3ec4f64bd01f9c1c01f54e9',1,'backEnd::Cell']]],
+  ['getsugarlevel',['getSugarLevel',['../de/d49/classback_end_1_1_sugar_scape.html#a6eca38a51f9c17bf46e8137754c5e513',1,'backEnd::SugarScape']]],
+  ['gettype',['getType',['../d5/d51/classfront_end_1_1_c_a_settings.html#a5c62b367ceda95101ac5ff5c3048cf1c',1,'frontEnd::CASettings']]],
+  ['gridpatchtostring',['gridPatchToString',['../dc/da1/classfront_end_1_1_animator_loop.html#a49bb0767763415d97458827801531bc6',1,'frontEnd::AnimatorLoop']]],
+  ['growsugar',['growSugar',['../de/d49/classback_end_1_1_sugar_scape.html#a35c8ec7798b62668018c0992b6f8a991',1,'backEnd::SugarScape']]]
+];

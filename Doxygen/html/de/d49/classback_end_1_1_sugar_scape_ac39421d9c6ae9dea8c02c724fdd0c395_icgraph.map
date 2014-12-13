@@ -1,0 +1,9 @@
+<map id="backEnd.SugarScape.setSugarLevel" name="backEnd.SugarScape.setSugarLevel">
+<area shape="rect" id="node2" href="$de/d49/classback_end_1_1_sugar_scape.html#a4b3bd085af29e9071f8b19c9a271fa23" title="backEnd.SugarScape.clear\lPatch" alt="" coords="297,122,490,163"/>
+<area shape="rect" id="node5" href="$de/d49/classback_end_1_1_sugar_scape.html#a35c8ec7798b62668018c0992b6f8a991" title="backEnd.SugarScape.growSugar" alt="" coords="561,223,791,249"/>
+<area shape="rect" id="node6" href="$de/d49/classback_end_1_1_sugar_scape.html#a96fcf395199ef2ca7af1e01d2ec362bf" title="backEnd.SugarScape.moveAgent" alt="" coords="275,5,511,32"/>
+<area shape="rect" id="node7" href="$de/d49/classback_end_1_1_sugar_scape.html#a9be1da134b1e998ed27dba1b82b1a4f4" title="backEnd.SugarScape.randomize\lSugar" alt="" coords="278,187,509,229"/>
+<area shape="rect" id="node8" href="$de/d49/classback_end_1_1_sugar_scape.html#a9e07dd6e4d60049bb525ee8032b5f0a8" title="backEnd.SugarScape.subtract\lMetabolism" alt="" coords="286,57,501,98"/>
+<area shape="rect" id="node3" href="$de/d49/classback_end_1_1_sugar_scape.html#a13186ddb64e70b5941d0cd12163c3e84" title="backEnd.SugarScape.getNext" alt="" coords="569,97,783,124"/>
+<area shape="rect" id="node4" href="$de/d49/classback_end_1_1_sugar_scape.html#ab0c2eb832afef056e0a72aea2bf8ddc1" title="backEnd.SugarScape.update" alt="" coords="841,161,1047,188"/>
+</map>

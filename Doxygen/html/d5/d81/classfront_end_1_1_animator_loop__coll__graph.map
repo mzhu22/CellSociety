@@ -1,0 +1,8 @@
+<map id="frontEnd.AnimatorLoop" name="frontEnd.AnimatorLoop">
+<area shape="rect" id="node2" href="$d4/d6c/classshape_factories_1_1_shape_factory.html" title="shapeFactories.ShapeFactory" alt="" coords="841,57,1050,84"/>
+<area shape="rect" id="node3" href="$db/d5e/classback_end_1_1_patch.html" title="backEnd.Patch" alt="" coords="528,213,643,240"/>
+<area shape="rect" id="node11" href="$d1/dfc/classback_end_1_1_rule_set.html" title="backEnd.RuleSet" alt="" coords="881,159,1009,185"/>
+<area shape="rect" id="node5" href="$d0/d08/classback_end_1_1_cell.html" title="backEnd.Cell" alt="" coords="291,255,394,281"/>
+<area shape="rect" id="node8" href="$d5/d51/classfront_end_1_1_c_a_settings.html" title="frontEnd.CASettings" alt="" coords="870,108,1021,135"/>
+<area shape="rect" id="node13" href="$d3/dea/classback_end_1_1_state.html" title="backEnd.State" alt="" coords="528,145,643,172"/>
+</map>

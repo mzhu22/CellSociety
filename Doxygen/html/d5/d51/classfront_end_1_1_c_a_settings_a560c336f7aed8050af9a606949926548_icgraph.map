@@ -1,0 +1,12 @@
+<map id="frontEnd.CASettings.getParameters" name="frontEnd.CASettings.getParameters">
+<area shape="rect" id="node2" href="$dc/da1/classfront_end_1_1_animator_loop.html#a1f378b18807af5386266685e907aa8c7" title="frontEnd.AnimatorLoop.read\lXMLAndInitializeGrid" alt="" coords="304,49,507,90"/>
+<area shape="rect" id="node9" href="$d0/d87/classfront_end_1_1_x_m_l_handler.html#a8b7864cb0ca3ba8aad07a5b093145861" title="frontEnd.XMLHandler.write" alt="" coords="311,115,500,141"/>
+<area shape="rect" id="node10" href="$dc/da1/classfront_end_1_1_animator_loop.html#abeeeb7294620845e96455930decbd7bf" title="frontEnd.AnimatorLoop.write\lToXML" alt="" coords="555,150,759,191"/>
+<area shape="rect" id="node3" href="$dd/dbe/classfront_end_1_1_main.html#a7bae3127415fb2ae80975ebc95057e3f" title="frontEnd.Main.readXML" alt="" coords="573,56,742,83"/>
+<area shape="rect" id="node4" href="$dd/dbe/classfront_end_1_1_main.html#a55d59b110825a1cc153a0091a6e5cb99" title="frontEnd.Main.makeMenu" alt="" coords="1059,107,1245,133"/>
+<area shape="rect" id="node6" href="$dd/dbe/classfront_end_1_1_main.html#a8e2e836903a64069e4283fa66309c704" title="frontEnd.Main.resetSim" alt="" coords="809,5,981,32"/>
+<area shape="rect" id="node5" href="$dd/dbe/classfront_end_1_1_main.html#ae53f892716dcc60f3f49714496e30c91" title="frontEnd.Main.start" alt="" coords="1323,56,1467,83"/>
+<area shape="rect" id="node7" href="$dd/dbe/classfront_end_1_1_main.html#a0ff8a007311f8ecce84d4203dc85d669" title="frontEnd.Main.makeParamControls" alt="" coords="1030,56,1274,83"/>
+<area shape="rect" id="node8" href="$dd/dbe/classfront_end_1_1_main.html#a1f4c19654fe78e5ebca54fc26bf43c94" title="frontEnd.Main.useControls" alt="" coords="1057,5,1247,32"/>
+<area shape="rect" id="node11" href="$dd/dbe/classfront_end_1_1_main.html#ae2ce98421793cead4539f6a0e9e63160" title="frontEnd.Main.writeXML" alt="" coords="809,157,980,184"/>
+</map>

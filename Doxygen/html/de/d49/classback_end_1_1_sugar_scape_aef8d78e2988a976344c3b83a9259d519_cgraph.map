@@ -1,0 +1,6 @@
+<map id="backEnd.SugarScape.getNeighbors" name="backEnd.SugarScape.getNeighbors">
+<area shape="rect" id="node2" href="$d1/dfc/classback_end_1_1_rule_set.html#ace087d13be0cf3e1f723a663d0e06d8b" title="backEnd.RuleSet.isOutside" alt="" coords="311,5,502,32"/>
+<area shape="rect" id="node3" href="$de/d49/classback_end_1_1_sugar_scape.html#aaf84272d68cbd5b1ae5a30fba6c77967" title="backEnd.SugarScape.isSugar" alt="" coords="301,56,512,83"/>
+<area shape="rect" id="node4" href="$db/d5e/classback_end_1_1_patch.html#a8d97ca84fd6d69378e9fc0b96eff7cb9" title="backEnd.Patch.getCell" alt="" coords="560,31,723,57"/>
+<area shape="rect" id="node5" href="$d0/d08/classback_end_1_1_cell.html#a780d63fdf3ec4f64bd01f9c1c01f54e9" title="backEnd.Cell.getState" alt="" coords="560,81,723,108"/>
+</map>

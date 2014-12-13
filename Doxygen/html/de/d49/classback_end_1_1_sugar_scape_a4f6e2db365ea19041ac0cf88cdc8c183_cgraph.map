@@ -1,0 +1,6 @@
+<map id="backEnd.SugarScape.testRandomness" name="backEnd.SugarScape.testRandomness">
+<area shape="rect" id="node2" href="$d0/d08/classback_end_1_1_cell.html#a9eb4afaad28f514cef9159dc5945313b" title="backEnd.Cell.getColor" alt="" coords="350,5,511,32"/>
+<area shape="rect" id="node4" href="$de/d49/classback_end_1_1_sugar_scape.html#aaf84272d68cbd5b1ae5a30fba6c77967" title="backEnd.SugarScape.isSugar" alt="" coords="325,56,536,83"/>
+<area shape="rect" id="node3" href="$d0/d08/classback_end_1_1_cell.html#a780d63fdf3ec4f64bd01f9c1c01f54e9" title="backEnd.Cell.getState" alt="" coords="584,5,747,32"/>
+<area shape="rect" id="node5" href="$db/d5e/classback_end_1_1_patch.html#a8d97ca84fd6d69378e9fc0b96eff7cb9" title="backEnd.Patch.getCell" alt="" coords="584,56,747,83"/>
+</map>

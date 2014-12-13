@@ -1,0 +1,5 @@
+<map id="frontEnd.AnimatorLoop.updateGUICells" name="frontEnd.AnimatorLoop.updateGUICells">
+<area shape="rect" id="node2" href="$db/d5e/classback_end_1_1_patch.html#a8d97ca84fd6d69378e9fc0b96eff7cb9" title="backEnd.Patch.getCell" alt="" coords="272,5,435,32"/>
+<area shape="rect" id="node3" href="$d0/d08/classback_end_1_1_cell.html#a9eb4afaad28f514cef9159dc5945313b" title="backEnd.Cell.getColor" alt="" coords="273,56,434,83"/>
+<area shape="rect" id="node4" href="$d0/d08/classback_end_1_1_cell.html#a780d63fdf3ec4f64bd01f9c1c01f54e9" title="backEnd.Cell.getState" alt="" coords="483,56,645,83"/>
+</map>

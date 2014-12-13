@@ -1,0 +1,33 @@
+<map id="backEnd.Cell.getState" name="backEnd.Cell.getState">
+<area shape="rect" id="node2" href="$d0/d96/classback_end_1_1_predator_prey.html#a5a08efbe832d34c3c5f9bd15cf376f73" title="backEnd.PredatorPrey.breed" alt="" coords="244,79,447,106"/>
+<area shape="rect" id="node3" href="$d0/d96/classback_end_1_1_predator_prey.html#acb81c56992e5c1bc58a34daa5b04e9aa" title="backEnd.PredatorPrey.check\lBreed" alt="" coords="557,21,760,62"/>
+<area shape="rect" id="node6" href="$db/d5e/classback_end_1_1_patch.html#a35a66d67eff8b0d183f4b0dd9d8aaf98" title="backEnd.Patch.changeColor" alt="" coords="246,346,445,372"/>
+<area shape="rect" id="node7" href="$d0/d96/classback_end_1_1_predator_prey.html#ab8aeaa141af352c221182d3b427cc492" title="backEnd.PredatorPrey.check\lStarve" alt="" coords="557,86,760,128"/>
+<area shape="rect" id="node10" href="$d0/d08/classback_end_1_1_cell.html#a9eb4afaad28f514cef9159dc5945313b" title="backEnd.Cell.getColor" alt="" coords="265,396,426,423"/>
+<area shape="rect" id="node14" href="$db/d5e/classback_end_1_1_patch.html#a3ff9ee1d7f36a53d2fb9011411fa58c5" title="backEnd.Patch.getMyCellState" alt="" coords="237,180,453,207"/>
+<area shape="rect" id="node17" href="$de/d5a/classback_end_1_1_spreading_fire.html#a14b959c163a3a935ef7856c045b13eeb" title="backEnd.SpreadingFire.getNext" alt="" coords="547,872,770,899"/>
+<area shape="rect" id="node18" href="$d9/d2e/classback_end_1_1_segregation.html#a306bcff5f217b04d83849a3cc77bddfb" title="backEnd.Segregation.getNext" alt="" coords="552,927,765,954"/>
+<area shape="rect" id="node19" href="$d9/d2e/classback_end_1_1_segregation.html#a3cfddc34f7afe36f208eb6470d6e0f7d" title="backEnd.Segregation.getSatisfaction" alt="" coords="216,935,475,962"/>
+<area shape="rect" id="node20" href="$de/d49/classback_end_1_1_sugar_scape.html#a6eca38a51f9c17bf46e8137754c5e513" title="backEnd.SugarScape.getSugar\lLevel" alt="" coords="235,701,456,742"/>
+<area shape="rect" id="node25" href="$de/d49/classback_end_1_1_sugar_scape.html#a35c8ec7798b62668018c0992b6f8a991" title="backEnd.SugarScape.growSugar" alt="" coords="543,523,774,550"/>
+<area shape="rect" id="node26" href="$de/d5a/classback_end_1_1_spreading_fire.html#a83460ccc721b0c3c4bdd2f89d8ecf218" title="backEnd.SpreadingFire.is\lBurning" alt="" coords="255,818,436,860"/>
+<area shape="rect" id="node27" href="$de/d49/classback_end_1_1_sugar_scape.html#aaf84272d68cbd5b1ae5a30fba6c77967" title="backEnd.SugarScape.isSugar" alt="" coords="240,472,451,499"/>
+<area shape="rect" id="node30" href="$db/d5e/classback_end_1_1_patch.html#a9efa671e6b11dc96a024a5df769b7546" title="backEnd.Patch.myCellState\lEquals" alt="" coords="853,254,1051,296"/>
+<area shape="rect" id="node31" href="$de/d49/classback_end_1_1_sugar_scape.html#ac39421d9c6ae9dea8c02c724fdd0c395" title="backEnd.SugarScape.setSugar\lLevel" alt="" coords="235,598,455,640"/>
+<area shape="rect" id="node4" href="$d0/d96/classback_end_1_1_predator_prey.html#ac9689f0a85de526bd6d2f1e23657dfe8" title="backEnd.PredatorPrey.breed\lIfNecessary" alt="" coords="1373,37,1576,78"/>
+<area shape="rect" id="node5" href="$d0/d96/classback_end_1_1_predator_prey.html#acf219a8748ddb0ed02c2202a3b3d6b37" title="backEnd.PredatorPrey.update" alt="" coords="1624,83,1835,110"/>
+<area shape="rect" id="node8" href="$d0/d96/classback_end_1_1_predator_prey.html#aecfa40f92acce8997492d12cefd08b48" title="backEnd.PredatorPrey.getNext" alt="" coords="1109,144,1325,171"/>
+<area shape="rect" id="node9" href="$d0/d96/classback_end_1_1_predator_prey.html#aa032c15c617e2da8e1ab1a065413fb06" title="backEnd.PredatorPrey.make\lNextGrid" alt="" coords="1374,114,1575,156"/>
+<area shape="rect" id="node11" href="$de/d49/classback_end_1_1_sugar_scape.html#a4f6e2db365ea19041ac0cf88cdc8c183" title="backEnd.SugarScape.testRandomness" alt="" coords="523,371,794,398"/>
+<area shape="rect" id="node12" href="$dc/da1/classfront_end_1_1_animator_loop.html#a3d3ba37be380538b0fdfaada6256a125" title="frontEnd.AnimatorLoop.update\lGUICells" alt="" coords="549,305,768,346"/>
+<area shape="rect" id="node13" href="$dc/da1/classfront_end_1_1_animator_loop.html#abadf9135a2378edada1bde19397c3c76" title="frontEnd.AnimatorLoop.update\lCells" alt="" coords="843,320,1061,361"/>
+<area shape="rect" id="node15" href="$d0/d96/classback_end_1_1_predator_prey.html#ae2c9b91296f82e101e9dd0ea350d3f62" title="backEnd.PredatorPrey.eatFish" alt="" coords="553,152,764,179"/>
+<area shape="rect" id="node16" href="$d0/d96/classback_end_1_1_predator_prey.html#afbf1847ebcb9a605eec41be73dec7c8c" title="backEnd.PredatorPrey.check\lForFishAndMove" alt="" coords="851,137,1053,178"/>
+<area shape="rect" id="node21" href="$de/d49/classback_end_1_1_sugar_scape.html#a13186ddb64e70b5941d0cd12163c3e84" title="backEnd.SugarScape.getNext" alt="" coords="845,647,1059,674"/>
+<area shape="rect" id="node23" href="$de/d49/classback_end_1_1_sugar_scape.html#a96fcf395199ef2ca7af1e01d2ec362bf" title="backEnd.SugarScape.moveAgent" alt="" coords="541,771,777,798"/>
+<area shape="rect" id="node24" href="$de/d49/classback_end_1_1_sugar_scape.html#a9e07dd6e4d60049bb525ee8032b5f0a8" title="backEnd.SugarScape.subtract\lMetabolism" alt="" coords="551,705,766,746"/>
+<area shape="rect" id="node22" href="$de/d49/classback_end_1_1_sugar_scape.html#ab0c2eb832afef056e0a72aea2bf8ddc1" title="backEnd.SugarScape.update" alt="" coords="1114,603,1321,630"/>
+<area shape="rect" id="node28" href="$de/d49/classback_end_1_1_sugar_scape.html#aef8d78e2988a976344c3b83a9259d519" title="backEnd.SugarScape.getNeighbors" alt="" coords="535,422,783,448"/>
+<area shape="rect" id="node29" href="$de/d49/classback_end_1_1_sugar_scape.html#a9be1da134b1e998ed27dba1b82b1a4f4" title="backEnd.SugarScape.randomize\lSugar" alt="" coords="543,574,774,616"/>
+<area shape="rect" id="node32" href="$de/d49/classback_end_1_1_sugar_scape.html#a4b3bd085af29e9071f8b19c9a271fa23" title="backEnd.SugarScape.clear\lPatch" alt="" coords="562,640,755,681"/>
+</map>

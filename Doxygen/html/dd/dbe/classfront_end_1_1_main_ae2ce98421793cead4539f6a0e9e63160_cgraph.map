@@ -1,0 +1,11 @@
+<map id="frontEnd.Main.writeXML" name="frontEnd.Main.writeXML">
+<area shape="rect" id="node2" href="$dc/da1/classfront_end_1_1_animator_loop.html#abeeeb7294620845e96455930decbd7bf" title="frontEnd.AnimatorLoop.write\lToXML" alt="" coords="225,169,429,210"/>
+<area shape="rect" id="node3" href="$d5/d51/classfront_end_1_1_c_a_settings.html#ad1a35159c9a3b860bd4af0d12e40b169" title="frontEnd.CASettings.getColumns" alt="" coords="735,5,967,32"/>
+<area shape="rect" id="node4" href="$d5/d51/classfront_end_1_1_c_a_settings.html#a560c336f7aed8050af9a606949926548" title="frontEnd.CASettings.getParameters" alt="" coords="725,56,976,83"/>
+<area shape="rect" id="node5" href="$d5/d51/classfront_end_1_1_c_a_settings.html#aef613fb5595d20d85dad92cf5f5efad9" title="frontEnd.CASettings.getRows" alt="" coords="747,208,954,235"/>
+<area shape="rect" id="node6" href="$d5/d51/classfront_end_1_1_c_a_settings.html#a5c62b367ceda95101ac5ff5c3048cf1c" title="frontEnd.CASettings.getType" alt="" coords="749,259,953,285"/>
+<area shape="rect" id="node7" href="$dc/da1/classfront_end_1_1_animator_loop.html#a49bb0767763415d97458827801531bc6" title="frontEnd.AnimatorLoop.grid\lPatchToString" alt="" coords="478,303,677,345"/>
+<area shape="rect" id="node8" href="$d0/d87/classfront_end_1_1_x_m_l_handler.html#a8b7864cb0ca3ba8aad07a5b093145861" title="frontEnd.XMLHandler.write" alt="" coords="483,151,672,177"/>
+<area shape="rect" id="node9" href="$d0/d87/classfront_end_1_1_x_m_l_handler.html#a28556434b6cf7a6f8a8505c03aca8336" title="frontEnd.XMLHandler.writeGrid" alt="" coords="743,107,958,133"/>
+<area shape="rect" id="node10" href="$d5/d51/classfront_end_1_1_c_a_settings.html#a9b6c355e48adf9a7db04c30c74aac53f" title="frontEnd.CASettings.getGrid" alt="" coords="749,157,952,184"/>
+</map>

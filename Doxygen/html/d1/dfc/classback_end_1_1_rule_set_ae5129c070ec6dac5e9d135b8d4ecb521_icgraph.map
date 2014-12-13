@@ -1,0 +1,6 @@
+<map id="backEnd.RuleSet.getDirectNeighbors" name="backEnd.RuleSet.getDirectNeighbors">
+<area shape="rect" id="node2" href="$de/d5a/classback_end_1_1_spreading_fire.html#a14b959c163a3a935ef7856c045b13eeb" title="backEnd.SpreadingFire.getNext" alt="" coords="246,5,469,32"/>
+<area shape="rect" id="node3" href="$d0/d96/classback_end_1_1_predator_prey.html#aecfa40f92acce8997492d12cefd08b48" title="backEnd.PredatorPrey.getNext" alt="" coords="249,56,465,83"/>
+<area shape="rect" id="node4" href="$d0/d96/classback_end_1_1_predator_prey.html#aa032c15c617e2da8e1ab1a065413fb06" title="backEnd.PredatorPrey.make\lNextGrid" alt="" coords="518,49,719,90"/>
+<area shape="rect" id="node5" href="$d0/d96/classback_end_1_1_predator_prey.html#acf219a8748ddb0ed02c2202a3b3d6b37" title="backEnd.PredatorPrey.update" alt="" coords="768,56,979,83"/>
+</map>
